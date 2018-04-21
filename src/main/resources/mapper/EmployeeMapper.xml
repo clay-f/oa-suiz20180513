@@ -6,4 +6,38 @@
     <select id="getAllEmployee" resultType="Employee">
         select * from employee;
     </select>
+
+    <select id="getUserByCondition" resultType="Integer" parameterType="Map">
+        select count(1) from employee e where 1 = 1
+        <choose>
+            <when test="name != null">
+                and e.name = ${name}
+            </when>
+            <otherwise>
+                and e.name = "error"
+            </otherwise>
+        </choose>
+        <choose>
+            <when test="passwd != null">
+                and e.passwd = ${passwd}
+            </when>
+            <otherwise>
+                and e.passwd = "error"
+            </otherwise>
+        </choose>
+    </select>
+
+    <insert id="saveEmployee" parameterType="Employee">
+        insert into employee(name, passwd, department_id, oa_position_id)
+        values (
+        "${name}", "${passwd}",
+        <if test="departmentId != null">
+            ${departmentId}
+        </if>
+        ,
+        <if test="oaPositionId != null">
+            ${oaPositionId}
+        </if>
+        );
+    </insert>
 </mapper>
