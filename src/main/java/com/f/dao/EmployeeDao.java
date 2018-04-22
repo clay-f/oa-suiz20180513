@@ -9,7 +9,7 @@ import java.util.Map;
 public interface EmployeeDao {
     List<Employee> getAllEmployee();
 
-    Integer getUserByCondition(Map<String, Object> map);
+    List<Employee> getUserByCondition(Map<String, Object> map);
 
     void saveEmployee(Employee employee);
 }

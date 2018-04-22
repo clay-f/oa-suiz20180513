@@ -7,11 +7,19 @@
         select * from employee;
     </select>
 
-    <select id="getUserByCondition" resultType="Integer" parameterType="Map">
-        select count(1) from employee e where 1 = 1
+    <resultMap type="Employee" id="getUserByConditionResult">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result column="passwd" property="passwd"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <select id="getUserByCondition" resultMap="getUserByConditionResult" parameterType="Map">
+        select id, name, created_at, updated_at, passwd from employee e where 1 = 1
         <choose>
             <when test="name != null">
-                and e.name = ${name}
+                and e.name = "${name}"
             </when>
             <otherwise>
                 and e.name = "error"
@@ -19,7 +27,7 @@
         </choose>
         <choose>
             <when test="passwd != null">
-                and e.passwd = ${passwd}
+                and e.passwd = "${passwd}"
             </when>
             <otherwise>
                 and e.passwd = "error"

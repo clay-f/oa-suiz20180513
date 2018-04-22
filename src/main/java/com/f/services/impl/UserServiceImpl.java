@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service(value = "userService")
@@ -19,13 +21,14 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public boolean login(Map<String, Object> map) {
+    public List<Employee> login(Map<String, Object> map) {
+        List<Employee> employeeList = new ArrayList<Employee>();
         try {
-            return userDao.getUserByCondition(map) > 0;
+            employeeList = userDao.getUserByCondition(map);
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
+        return employeeList;
     }
 
     @Transactional
@@ -44,7 +47,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean getUserByName(Map<String, Object> map) {
         try {
-            return userDao.getUserByCondition(map) > 0;
+            return userDao.getUserByCondition(map).size() > 0;
         } catch (Exception e) {
             e.printStackTrace();
             return false;

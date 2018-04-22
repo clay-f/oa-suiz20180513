@@ -24,7 +24,7 @@ public class EmployeeTest {
     @Test
     public void testLogin() {
         Map<String, Object> map = new HashMap<String, Object>();
-        assertFalse(userService.login(map));
+        assertFalse(userService.login(map).size() > 0);
     }
 
     @Test

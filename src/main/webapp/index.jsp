@@ -12,5 +12,6 @@
 </head>
 <body>
 <p>welcome index jsp</p>
+${message}
 </body>
 </html>

@@ -11,10 +11,9 @@
     <form:input path="name" id="name" />
     <br>
     <form:label path="passwd">Password</form:label>
-    <form:input path="passwd" id="passwd"/>
+    <form:password path="passwd" id="passwd"/>
     <br>
     <form:select path="oaPositionId">
-        <form:option value="0" label="Select an Option" />
         <form:options items="${oaList}" itemValue="id" itemLabel="name" />
     </form:select>
     <br>

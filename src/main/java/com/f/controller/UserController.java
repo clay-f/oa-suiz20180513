@@ -4,16 +4,12 @@ import com.f.pojo.Employee;
 import com.f.services.DepartmentService;
 import com.f.services.OaPositionService;
 import com.f.services.UserService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Map;
 
 @CrossOrigin
 @RequestMapping(value = "/users")
@@ -39,14 +35,17 @@ public class UserController {
     }
 
     @RequestMapping(value = "/doRegister", method = {RequestMethod.POST})
-    public String doRegister(@ModelAttribute("user") Employee user) {
+    public String doRegister(@ModelAttribute("user") Employee user, Model model) {
         try {
-            userService.saveUser(user);
-            System.out.println("register success");
+            if (userService.saveUser(user)) {
+                model.addAttribute("message", "register success");
+            } else {
+                model.addAttribute("message", "false");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:/";
+        return "index";
     }
 
     @RequestMapping("/info")

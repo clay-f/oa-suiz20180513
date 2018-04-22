@@ -12,7 +12,8 @@
 </head>
 <body>
 <h1>show user info</h1>
-<p>${user.name}</p>
-<p>${user.passwd}</p>
+<p>
+    ${user.id}
+</p>
 </body>
 </html>
