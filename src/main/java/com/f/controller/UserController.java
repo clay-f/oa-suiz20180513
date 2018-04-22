@@ -1,5 +1,6 @@
 package com.f.controller;
 
+import com.f.pojo.Employee;
 import com.f.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +15,17 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
-    ObjectMapper objectMapper = new ObjectMapper();
+    private ObjectMapper objectMapper = new ObjectMapper();
 
-    @ResponseBody
-    @RequestMapping(value = "/login", produces = "text/plain;charset=utf-8", method = {RequestMethod.POST})
-    public String login(@RequestParam Map<String, Object> map) {
-        if (userService.login(map)) {
-            return "";
-        }
-        return "/users/index";
+    @RequestMapping(value = "/register")
+    public String register(@RequestParam Map<String, Object> map) {
+        return "/users/register";
     }
+
+    @RequestMapping("/info")
+    public String userInfo(@SessionAttribute("user")Employee user) {
+        System.out.println("name: " +user.getName());
+        return "/users/show";
+    }
+
 }

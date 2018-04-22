@@ -28,11 +28,23 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Transactional
     @Override
     public boolean saveUser(Employee employee) {
         try {
             userDao.saveEmployee(employee);
             return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Transactional
+    @Override
+    public boolean getUserByName(Map<String, Object> map) {
+        try {
+            return userDao.getUserByCondition(map) > 0;
         } catch (Exception e) {
             e.printStackTrace();
             return false;

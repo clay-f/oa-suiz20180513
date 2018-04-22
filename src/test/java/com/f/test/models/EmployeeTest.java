@@ -7,8 +7,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class EmployeeTest {
     private TestHelper testHelper = TestHelper.getInstance();
@@ -27,7 +29,8 @@ public class EmployeeTest {
 
     @Test
     public void addEmployee() {
-        Employee e = new Employee("foo", "123456");
+        String foo = Objects.toString(System.currentTimeMillis(), "error");
+        Employee e = new Employee("t" + foo.substring(0, 9), "123456");
         e.setDepartmentId(1);
         e.setOaPositionId(1);
         assert userService.saveUser(e);
