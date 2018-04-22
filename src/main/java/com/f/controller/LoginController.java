@@ -29,7 +29,7 @@ public class LoginController {
 
     @RequestMapping("/users/login")
     public String login(@ModelAttribute("user") Employee user) {
-        return "/users/register";
+        return "/users/login";
     }
 
     @PostMapping("/users/doLogin")

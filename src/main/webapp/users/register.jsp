@@ -1,11 +1,4 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: f
-  Date: 4/21/18
-  Time: 16:14
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,9 +6,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 </head>
 <body>
-<form:form method="post" action="/users/doLogin" modelAttribute="user">
-    Name:
-    <form:input path="name"/>
+<form:form method="post" action="/users/doRegister" modelAttribute="user">
+    <form:label path="name">Name</form:label>
+    <form:input path="name" id="name" />
+    <br>
+    <form:label path="passwd">Password</form:label>
+    <form:input path="passwd" id="passwd"/>
+    <br>
+    <form:select path="oaPositionId">
+        <form:option value="0" label="Select an Option" />
+        <form:options items="${oaList}" itemValue="id" itemLabel="name" />
+    </form:select>
+    <br>
+    <form:select path="departmentId" items="${departmentList}" itemValue="id" itemLabel="name"/>
     <br>
     <input type="submit">
 </form:form>

@@ -6,10 +6,8 @@
     <resultMap id="getAllOaPositionResult" type="OaPosition">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
-        <result property="createdAt" column="created_at"/>
-        <result property="updatedAt" column="updated_at"/>
     </resultMap>
     <select id="getAllOaPosition" resultMap="getAllOaPositionResult">
-
+      select id, name from oa_position;
     </select>
 </mapper>
