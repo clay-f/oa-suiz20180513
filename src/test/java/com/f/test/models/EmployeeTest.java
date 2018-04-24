@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;

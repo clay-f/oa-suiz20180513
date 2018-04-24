@@ -11,6 +11,10 @@
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
     <filter>
+        <filter-name>httpMehodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter>
         <filter-name>CharEncoding</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
         <init-param>
@@ -34,6 +38,10 @@
             <param-value>classpath:springmvc-servlet.xml</param-value>
         </init-param>
     </servlet>
+    <filter-mapping>
+        <filter-name>httpMehodFilter</filter-name>
+        <servlet-name>springmvc</servlet-name>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>CharEncoding</filter-name>
         <url-pattern>/*</url-pattern>

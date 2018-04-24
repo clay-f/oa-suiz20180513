@@ -3,4 +3,38 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.f.dao.VoucherDao">
+    <cache type="org.mybatis.caches.redis.RedisCache"/>
+    <resultMap id="getAllVouchersResult" type="Voucher">
+        <id property="id" column="id"/>
+        <result property="item" column="item"/>
+        <result property="account" column="account"/>
+        <result property="checkOutStateId" column="check_out_state_id"/>
+        <result property="employeeId" column="employee_id"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+    <select id="getAllVouchers" resultMap="getAllVouchersResult">
+        select * from voucher;
+    </select>
+
+    <select id="getVoucherById" resultMap="getAllVouchersResult" parameterType="Integer">
+        select
+          id, item, account, check_out_state_id
+        from
+          voucher v
+        where id = #{id}
+    </select>
+
+    <delete id="deleteVoucherById" parameterType="Integer">
+        delete from voucher where id = #{id}
+    </delete>
+
+    <select id="size" resultType="Integer">
+        select count(1) from voucher
+    </select>
+
+    <insert id="saveVoucher" parameterType="Voucher">
+        insert into voucher(employee_id, item, account)
+        values (#{employeeId}, #{item}, #{account})
+    </insert>
 </mapper>

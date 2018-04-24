@@ -19,7 +19,7 @@
         select id, name, created_at, updated_at, passwd from employee e where 1 = 1
         <choose>
             <when test="name != null">
-                and e.name = "${name}"
+                and e.name = #{name}
             </when>
             <otherwise>
                 and e.name = "error"
@@ -27,7 +27,7 @@
         </choose>
         <choose>
             <when test="passwd != null">
-                and e.passwd = "${passwd}"
+                and e.passwd = #{passwd}
             </when>
             <otherwise>
                 and e.passwd = "error"
@@ -38,13 +38,13 @@
     <insert id="saveEmployee" parameterType="Employee">
         insert into employee(name, passwd, department_id, oa_position_id)
         values (
-        "${name}", "${passwd}",
+        #{name}, #{passwd},
         <if test="departmentId != null">
-            ${departmentId}
+            #{departmentId}
         </if>
         ,
         <if test="oaPositionId != null">
-            ${oaPositionId}
+            #{oaPositionId}
         </if>
         );
     </insert>

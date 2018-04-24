@@ -37,4 +37,6 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.0'
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.0'
     compile group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.0.9.Final'
+    compile group: 'jstl', name: 'jstl', version: '1.2'
+    compile group: 'org.mybatis.caches', name: 'mybatis-redis', version: '1.0.0-beta2'
 }
