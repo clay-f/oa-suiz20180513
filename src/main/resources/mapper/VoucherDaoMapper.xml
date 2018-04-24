@@ -37,4 +37,15 @@
         insert into voucher(employee_id, item, account)
         values (#{employeeId}, #{item}, #{account})
     </insert>
+
+    <update id="updateVoucher" parameterType="Voucher">
+        update voucher
+        <set>
+            <if test="item != null">item = #{item},</if>
+            <if test="account != null">account = #{account},</if>
+            <if test="employeeId != null">employee_id = #{employeeId},</if>
+            <if test="updatedAt != null">updated_at = #{updatedAt}</if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

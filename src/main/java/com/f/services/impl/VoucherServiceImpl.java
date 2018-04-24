@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +59,18 @@ public class VoucherServiceImpl implements VoucherService {
     public boolean deleteVoucherById(Integer id) {
         try {
             voucherDao.deleteVoucherById(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateVoucher(Voucher voucher) {
+        try {
+            voucher.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+            voucherDao.updateVoucher(voucher);
             return true;
         } catch (Exception e) {
             e.printStackTrace();

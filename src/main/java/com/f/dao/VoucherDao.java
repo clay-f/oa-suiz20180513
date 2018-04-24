@@ -14,4 +14,6 @@ public interface VoucherDao {
     Integer size();
 
     void saveVoucher(Voucher voucher);
+
+    void updateVoucher(Voucher voucher);
 }

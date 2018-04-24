@@ -1,10 +1,12 @@
 package com.f.test.models;
 
+import com.f.pojo.Employee;
 import com.f.pojo.Voucher;
 import com.f.services.VoucherService;
 import com.f.test.TestHelper;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Objects;
 
 public class VoucherTest {
@@ -34,7 +36,14 @@ public class VoucherTest {
 
     @Test
     public void deleteVoucher() {
-        int lastVal = voucherService.size();
-        assert voucherService.deleteVoucherById(lastVal);
+        List<Voucher> employeeList = voucherService.getAllVouchers();
+        assert voucherService.deleteVoucherById(employeeList.get(employeeList.size() - 1).getId());
+    }
+
+    @Test
+    public void updateVoucher() {
+        List<Voucher> vouchers = voucherService.getAllVouchers();
+        Voucher voucher = voucherService.getVoucherById(vouchers.get(vouchers.size() - 1).getId());
+        assert voucherService.updateVoucher(voucher);
     }
 }

@@ -14,4 +14,6 @@ public interface VoucherService {
     boolean saveVoucher(Voucher v);
 
     boolean deleteVoucherById(Integer id);
+
+    boolean updateVoucher(Voucher voucher);
 }
