@@ -66,8 +66,9 @@ public class VoucherController {
     }
 
     @RequestMapping(value = "/{id}", method = {RequestMethod.PUT})
-    public String update(@PathVariable(value = "id") Integer id) {
+    public String update(@PathVariable(value = "id") Integer id, @ModelAttribute(value = "user") Voucher voucher) {
         System.out.println("catch voucher put method");
+        voucherService.updateVoucher(voucher);
         return "redirect:index";
     }
 }

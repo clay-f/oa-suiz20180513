@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: f
@@ -12,12 +13,16 @@
 </head>
 <body>
 <header>/vouchers/edit.jsp</header>
-${voucher.item}
 <section>
-    <form method="post" action="/vouchers/${voucher.id}">
+    <form:form action="/vouchers/${voucher.id}" modelAttribute="voucher">
         <input type="hidden" name="_method" value="put">
+        Item
+        <form:input path="item"/>
+        <br>
+        Account
+        <form:input path="account"/>
         <input type="submit">
-    </form>
+    </form:form>
 </section>
 </body>
 </html>
