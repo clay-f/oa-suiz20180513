@@ -3,7 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.f.dao.VoucherDao">
-    <cache type="org.mybatis.caches.redis.RedisCache"/>
     <resultMap id="getAllVouchersResult" type="Voucher">
         <id property="id" column="id"/>
         <result property="item" column="item"/>

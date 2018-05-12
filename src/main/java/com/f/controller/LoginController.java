@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,14 +24,9 @@ public class LoginController {
         return new Employee();
     }
 
-    @GetMapping("/users/")
-    public String index() {
-        return "/users/index";
-    }
-
     @GetMapping("/users")
-    public String secondIndex() {
-        return "/users/index";
+    public void secondIndex(HttpServletResponse response) throws IOException {
+        response.sendRedirect("/users/index");
     }
 
     @RequestMapping("/users/login")
@@ -46,13 +43,14 @@ public class LoginController {
             Employee employee = userService.login(map).get(0);
             if (employee != null) {
                 user = employee;
-                model.addAttribute("user", user);
+                model.addAttribute("currentUser", user);
                 model.addAttribute("message", "login success");
-                return "redirect:/users/info";
             }
+            return "/users/index";
         } catch (Exception e) {
             e.printStackTrace();
         }
+        model.addAttribute("message", "you haven't ont count, sign up to create account");
         return "redirect:/users/register";
     }
 }

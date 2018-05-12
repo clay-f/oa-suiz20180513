@@ -11,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 @CrossOrigin
 @RequestMapping(value = "/users")
 @Controller
@@ -26,6 +29,12 @@ public class UserController {
     private DepartmentService departmentService;
 
     private ObjectMapper objectMapper = new ObjectMapper();
+
+    @GetMapping(value = "/")
+    public void rootIndex(HttpServletResponse response) throws IOException {
+        System.out.println("catch me");
+        response.sendRedirect("/users/index");
+    }
 
     @RequestMapping(value = "/register")
     public String register(@ModelAttribute("user") Employee user, Model model) {
@@ -48,10 +57,9 @@ public class UserController {
         return "index";
     }
 
-    @RequestMapping("/info")
-    public String userInfo(@SessionAttribute("user") Employee user) {
-        System.out.println("name: " + user.getName());
-        return "/users/show";
+    @RequestMapping("/index")
+    public String index(Model model) {
+        model.addAttribute("userList", userService.getAllUsers());
+        return "/users/index";
     }
-
 }

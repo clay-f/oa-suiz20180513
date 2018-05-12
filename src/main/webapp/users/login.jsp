@@ -14,15 +14,21 @@
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 </head>
 <body>
-<form:form action="/users/doLogin" method="post" modelAttribute="user">
-    Name:
-    <form:input path="name"/>
-    <br>
-    Password:
-    <form:password path="passwd"/>
-    <br>
-    <input type="submit">
-</form:form>
+<section>
+    <p>${message}</p>
+</section>
+<section>
+    <form:form action="/users/doLogin" method="post" modelAttribute="user">
+        Name:
+        <form:input path="name"/>
+        <br>
+        Password:
+        <form:password path="passwd"/>
+        <br>
+        <input type="submit" value="login">
+    </form:form>
+</section>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.f.dao.EmployeeDao">
-    <select id="getAllEmployee" resultType="Employee">
-        select * from employee;
+    <select id="getAllEmployee" resultMap="getUserByConditionResult">
+        select * from employee
     </select>
 
     <resultMap type="Employee" id="getUserByConditionResult">

@@ -1,5 +1,6 @@
 package com.f.controller;
 
+import com.f.lib.UserAuthenticate;
 import com.f.pojo.Employee;
 import com.f.pojo.Voucher;
 import com.f.services.VoucherService;
@@ -7,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RequestMapping(value = "/vouchers")
 @Controller
@@ -27,9 +28,15 @@ public class VoucherController {
     }
 
     @RequestMapping(value = "/new")
-    public ModelAndView newVoucher(ModelAndView modelAndView) {
-        modelAndView.addObject("voucher", new Voucher());
-        modelAndView.setViewName("/vouchers/new");
+    public ModelAndView newVoucher(ModelAndView modelAndView, HttpServletRequest request) {
+        if (UserAuthenticate.validateUserLogin(request)) {
+            modelAndView.addObject("voucher", new Voucher());
+            modelAndView.setViewName("/vouchers/new");
+        } else {
+            modelAndView.addObject("user", new Employee());
+            modelAndView.addObject("message","please login before create voucher");
+            modelAndView.setViewName("/users/login");
+        }
         return modelAndView;
     }
 

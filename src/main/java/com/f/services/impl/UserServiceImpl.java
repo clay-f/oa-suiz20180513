@@ -53,4 +53,12 @@ public class UserServiceImpl implements UserService {
             return false;
         }
     }
+
+    @Transactional
+    @Override
+    public List<Employee> getAllUsers() {
+        List<Employee> employeeList = new ArrayList<Employee>();
+        employeeList = userDao.getAllEmployee();
+        return employeeList;
+    }
 }

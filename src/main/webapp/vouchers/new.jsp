@@ -14,7 +14,15 @@
 <body>
 <section>
     <form:form modelAttribute="voucher" action="/vouchers/create">
-
+        <p>
+            <label>Item</label>
+            <form:input path="item"/>
+        </p>
+        <p>
+            <label>Account</label>
+            <form:input path="account"/>
+        </p>
+        <input type="submit">
     </form:form>
 </section>
 </body>

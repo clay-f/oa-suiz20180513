@@ -66,6 +66,7 @@ public class VoucherServiceImpl implements VoucherService {
         }
     }
 
+    @Transactional
     @Override
     public boolean updateVoucher(Voucher voucher) {
         try {

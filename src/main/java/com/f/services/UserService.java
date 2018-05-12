@@ -11,4 +11,6 @@ public interface UserService {
     boolean saveUser(Employee employee);
 
     boolean getUserByName(Map<String, Object> map);
+
+    List<Employee> getAllUsers();
 }
