@@ -1,6 +1,5 @@
 package com.f.controller;
 
-import com.f.lib.UserAuthenticate;
 import com.f.pojo.Employee;
 import com.f.pojo.Voucher;
 import com.f.services.VoucherService;
@@ -29,14 +28,8 @@ public class VoucherController {
 
     @RequestMapping(value = "/new")
     public ModelAndView newVoucher(ModelAndView modelAndView, HttpServletRequest request) {
-        if (UserAuthenticate.validateUserLogin(request)) {
-            modelAndView.addObject("voucher", new Voucher());
-            modelAndView.setViewName("/vouchers/new");
-        } else {
-            modelAndView.addObject("user", new Employee());
-            modelAndView.addObject("message","please login before create voucher");
-            modelAndView.setViewName("/users/login");
-        }
+        modelAndView.addObject("voucher", new Voucher());
+        modelAndView.setViewName("/vouchers/new");
         return modelAndView;
     }
 

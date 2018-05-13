@@ -17,7 +17,7 @@ import java.io.IOException;
 @CrossOrigin
 @RequestMapping(value = "/users")
 @Controller
-public class UserController {
+public class UserController extends ApplicationController {
     @Autowired
     @Qualifier(value = "userService")
     private UserService userService;
