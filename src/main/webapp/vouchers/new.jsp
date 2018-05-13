@@ -22,6 +22,10 @@
             <label>Account</label>
             <form:input path="account"/>
         </p>
+        <p>
+            <label>Detail</label>
+            <form:input path="voucherDetail.des"/>
+        </p>
         <input type="submit">
     </form:form>
 </section>

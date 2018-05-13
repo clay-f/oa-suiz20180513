@@ -1,5 +1,6 @@
 package com.f.controller;
 
+import com.f.pojo.Employee;
 import com.f.pojo.Voucher;
 import com.f.services.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,14 @@ public class VoucherController {
     private VoucherService voucherService;
 
     @RequestMapping(value = "/index")
-    public String index(Model model) {
-        model.addAttribute("voucherList", voucherService.getAllVouchers());
+    public String index(Model model, HttpServletRequest request) {
+        try {
+            Employee user = (Employee) request.getSession().getAttribute("currentUser");
+            user.getOaPositionId();
+            model.addAttribute("voucherList", voucherService.getAllVouchers());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "/vouchers/index";
     }
 

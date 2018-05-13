@@ -3,8 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.f.dao.VoucherDao">
-    <select id="getAllVouchers" resultMap="getAllVouchersResult">
-        select * from voucher;
+    <select id="getAllVouchers" resultMap="getAllVouchersResult" parameterType="Map">
+        select
+          id, item, check_out_state_id, account
+        from
+          voucher
     </select>
     <resultMap id="getAllVouchersResult" type="Voucher">
         <id property="id" column="id"/>
@@ -22,6 +25,23 @@
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
     </resultMap>
+
+    <select id="getVoucherAndDetailByConditions" parameterType="map">
+        select
+          v.id, item, account, check_out_state_id
+        from
+          voucher v
+        inner join employee e on v.employee_id = e.id
+        where 1 = 1
+        <choose>
+            <when test="price != null">
+                and v.account >= #{price}
+            </when>
+            <when test="oaPositionId != null">
+                and e.oa_position_id = #{oaPositionId} and v.check_out_state_id = 1
+            </when>
+        </choose>
+    </select>
 
     <select id="getVoucherById" resultMap="getAllVouchersResult" parameterType="Integer">
         select
@@ -41,7 +61,7 @@
         select count(1) from voucher
     </select>
 
-    <insert id="saveVoucher" parameterType="Voucher">
+    <insert id="saveVoucher" parameterType="Voucher" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into voucher(employee_id, item, account)
         values (#{employeeId}, #{item}, #{account})
     </insert>

@@ -1,8 +1,10 @@
 package com.f.test.models;
 
+import com.f.helper.OutputJsonHelper;
 import com.f.pojo.Employee;
 import com.f.services.UserService;
 import com.f.test.TestHelper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -14,7 +16,8 @@ import java.util.Objects;
 
 public class EmployeeTest {
     private TestHelper testHelper = TestHelper.getInstance();
-    UserService userService = (UserService) testHelper.getBean("userService");
+    private UserService userService = (UserService) testHelper.getBean("userService");
+    private OutputJsonHelper outputJsonHelper = OutputJsonHelper.getJsonOutputInstance();
 
     @Test
     public void getEmployeeList() {
@@ -22,18 +25,15 @@ public class EmployeeTest {
     }
 
     @Test
-    public void testLogin() {
+    public void testLogin() throws JsonProcessingException {
         Map<String, Object> map = new HashMap<String, Object>();
-        assertFalse(userService.login(map).size() > 0);
+        map.put("name", "foo");
+        map.put("passwd", "123456");
+        System.out.println( outputJsonHelper.outputJsonVal(userService.login(map).get(0)));
     }
 
     @Test
     public void addEmployee() {
-//        String foo = Objects.toString(System.currentTimeMillis(), "error");
-//        Employee e = new Employee("t" + foo.substring(0, 9), "123456");
-//        e.setDepartmentId(1);
-//        e.setOaPositionId(1);
-//        assert userService.saveUser(e);
         List<Employee> list = userService.getAllUsers();
         System.out.println(list);
     }

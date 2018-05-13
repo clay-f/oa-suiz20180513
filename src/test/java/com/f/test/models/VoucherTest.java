@@ -43,7 +43,6 @@ public class VoucherTest {
     @Test
     public void updateVoucher() {
         List<Voucher> vouchers = voucherService.getAllVouchers();
-        Voucher voucher = voucherService.getVoucherById(vouchers.get(vouchers.size() - 1).getId());
-        assert voucherService.updateVoucher(voucher);
+        assert voucherService.updateVoucher(vouchers.get(0));
     }
 }

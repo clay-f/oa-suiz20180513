@@ -46,8 +46,9 @@ public class VoucherServiceImpl implements VoucherService {
     @Override
     public boolean saveVoucher(Voucher v) {
         try {
-            voucherDao.saveVoucher(v);
-            return true;
+            Integer tmp_id = voucherDao.saveVoucher(v);
+            System.out.println("primary key: " + v.getId());
+            return tmp_id > 0;
         } catch (Exception e) {
             e.printStackTrace();
             return false;

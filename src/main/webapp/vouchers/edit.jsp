@@ -16,12 +16,19 @@
 <section>
     <form:form action="/vouchers/${voucher.id}" modelAttribute="voucher">
         <input type="hidden" name="_method" value="put">
-        Item
-        <form:input path="item"/>
-        <br>
-        Account
-        <form:input path="account"/>
-        <input type="submit">
+        <p>
+            <label for="item">事件名称:</label>
+            <form:input path="item" id="item"/>
+        </p>
+        <p>
+            <label for="account">金额</label>
+            <form:input path="account" id="account"/>
+        </p>
+        <p>
+            <label for="checkout_state">发票检查状态:</label>
+            <form:input path="checkOutStateId" id="checkout_state" readonly="true"/>
+        </p>
+        <input type="submit" value="更新发票">
     </form:form>
 </section>
 </body>
