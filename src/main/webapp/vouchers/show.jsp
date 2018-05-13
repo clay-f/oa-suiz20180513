@@ -13,13 +13,20 @@
 </head>
 <body>
 <header>/vouchers/show.jsp</header>
-<main>
+<article>
     <p>
-        ${voucher.item}
-        ${voucher.account}
-        ${voucher.checkOutStateId}
+        事件名称: ${voucher.item}
     </p>
-</main>
+    <p>
+        金额: ${voucher.account}
+    </p>
+    <p>
+        发票: ${voucher.checkOutStateId}
+    </p>
+    <p>
+        详细信息: ${voucher.voucherDetail.des}
+    </p>
+</article>
 
 <section>
     <a href="/vouchers/${voucher.id}/edit">edit</a>

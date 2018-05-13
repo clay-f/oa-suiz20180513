@@ -1,6 +1,8 @@
 package com.f.aspectj;
 
+import com.f.helper.OutputJsonHelper;
 import com.f.interceptors.UserLoginInterceptor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class EmployeeAop {
     private static Logger logger = LogManager.getLogger(EmployeeAop.class);
+    private static OutputJsonHelper outputJsonHelper = OutputJsonHelper.getJsonOutputInstance();
 
     @Pointcut("execution(* com.f.services.*.*(..))")
     public void pointcut() {}
@@ -32,6 +35,7 @@ public class EmployeeAop {
         Object obj = null;
         try {
             obj =  proceedingJoinPoint.proceed();
+            logger.info("catch obj val: " + outputJsonHelper.outputJsonVal(obj));
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }

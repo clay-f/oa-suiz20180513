@@ -3,6 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.f.dao.VoucherDao">
+    <select id="getAllVouchers" resultMap="getAllVouchersResult">
+        select * from voucher;
+    </select>
     <resultMap id="getAllVouchersResult" type="Voucher">
         <id property="id" column="id"/>
         <result property="item" column="item"/>
@@ -11,17 +14,23 @@
         <result property="employeeId" column="employee_id"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
+        <association property="voucherDetail" resultMap="voucherDetailResult"/>
     </resultMap>
-    <select id="getAllVouchers" resultMap="getAllVouchersResult">
-        select * from voucher;
-    </select>
+    <resultMap id="voucherDetailResult" type="VoucherDetail">
+        <id property="id" column="v_id"/>
+        <result property="des" column="des"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
 
     <select id="getVoucherById" resultMap="getAllVouchersResult" parameterType="Integer">
         select
-          id, item, account, check_out_state_id
+          v.id, v.item, v.account, v.check_out_state_id, v.created_at, v.updated_at,
+          vd.id v_id, vd.des
         from
           voucher v
-        where id = #{id}
+        inner join voucher_detail vd on v.id = vd.voucher_id
+        where v.id = #{id}
     </select>
 
     <delete id="deleteVoucherById" parameterType="Integer">

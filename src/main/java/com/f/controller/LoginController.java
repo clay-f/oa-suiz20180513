@@ -43,7 +43,6 @@ public class LoginController {
             map.put("passwd", user.getPasswd());
             Employee employee = userService.login(map).get(0);
             if (employee != null) {
-                System.out.println("\n\nuser login \n\n");
                 request.getSession().setAttribute("currentUser", employee);
             }
             return "redirect:/vouchers/index";
