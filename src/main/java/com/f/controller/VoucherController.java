@@ -39,7 +39,7 @@ public class VoucherController {
 
     @RequestMapping(value = "/create", method = {RequestMethod.POST})
     public String create(@ModelAttribute(value = "user") Voucher user, Model model) {
-        if (voucherService.saveVoucher(user)) {
+        if (voucherService.saveVoucher(user) > 0) {
             return "redirect:/vouchers/index";
         }
         model.addAttribute("message", "create false");

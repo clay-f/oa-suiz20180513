@@ -1,6 +1,8 @@
 package com.f.services.impl;
 
 import com.f.dao.VoucherDao;
+import com.f.dao.VoucherDetailDao;
+import com.f.helper.OutputJsonHelper;
 import com.f.pojo.Voucher;
 import com.f.services.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +16,14 @@ import java.util.List;
 
 @Service
 public class VoucherServiceImpl implements VoucherService {
+    private OutputJsonHelper outputJsonHelper = OutputJsonHelper.getJsonOutputInstance();
     @Autowired(required = true)
     @Qualifier(value = "voucherDao")
     private VoucherDao voucherDao;
+
+    @Autowired(required = true)
+    @Qualifier(value = "voucherDetailDao")
+    private VoucherDetailDao voucherDetailDao;
 
     @Transactional
     @Override
@@ -44,22 +51,34 @@ public class VoucherServiceImpl implements VoucherService {
 
     @Transactional
     @Override
-    public boolean saveVoucher(Voucher v) {
+    public Integer saveVoucher(Voucher v) {
+        Integer voucherPrimaryKey = -1;
         try {
-            Integer tmp_id = voucherDao.saveVoucher(v);
-            System.out.println("primary key: " + v.getId());
-            return tmp_id > 0;
+            voucherDao.saveVoucher(v);
+            voucherPrimaryKey = v.getId();
+            v.getVoucherDetail().setVoucherId(voucherPrimaryKey);
+            voucherDetailDao.saveVoucherDetail(v.getVoucherDetail());
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
+        return voucherPrimaryKey;
     }
 
     @Transactional
     @Override
     public boolean deleteVoucherById(Integer id) {
         try {
-            voucherDao.deleteVoucherById(id);
+            Voucher tmpVoucher = voucherDao.getVoucherById(id);
+            System.out.println(outputJsonHelper.outputJsonVal(tmpVoucher));
+            Integer voucherDetailId = tmpVoucher.getVoucherDetail().getVoucherId();
+            System.out.println("***********************");
+            System.out.println("id val: " + voucherDetailId);
+            if (voucherDetailId != null) {
+                System.out.println("will delete voucher_detail, id is: " + voucherDetailId);
+                voucherDetailDao.deleteVoucherDetailById(voucherDetailId);
+            }
+            System.out.println("**********************&");
+            voucherDao.deleteVoucherById(tmpVoucher.getId());
             return true;
         } catch (Exception e) {
             e.printStackTrace();

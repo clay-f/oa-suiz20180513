@@ -9,7 +9,7 @@ public class Voucher implements Serializable {
     private Float account;
     private Integer employeeId;
     private Integer checkOutStateId;
-    private VoucherDetail voucherDetail;
+    private VoucherDetail voucherDetail = new VoucherDetail();
     private Timestamp createdAt;
     private Timestamp updatedAt;
 

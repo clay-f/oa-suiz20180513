@@ -11,7 +11,7 @@ public interface VoucherService {
 
     Integer size();
 
-    boolean saveVoucher(Voucher v);
+    Integer saveVoucher(Voucher v);
 
     boolean deleteVoucherById(Integer id);
 

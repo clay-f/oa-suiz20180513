@@ -24,7 +24,7 @@
         </p>
         <p>
             <label>Detail</label>
-            <form:input path="voucherDetail.des"/>
+            <form:input path="voucherDetailService.des"/>
         </p>
         <input type="submit">
     </form:form>

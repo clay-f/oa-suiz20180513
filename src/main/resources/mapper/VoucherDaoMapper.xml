@@ -5,7 +5,7 @@
 <mapper namespace="com.f.dao.VoucherDao">
     <select id="getAllVouchers" resultMap="getAllVouchersResult" parameterType="Map">
         select
-          id, item, check_out_state_id, account
+          id, item, check_out_state_id, account, created_at, updated_at
         from
           voucher
     </select>
@@ -22,6 +22,7 @@
     <resultMap id="voucherDetailResult" type="VoucherDetail">
         <id property="id" column="v_id"/>
         <result property="des" column="des"/>
+        <result property="voucherId" column="voucher_id"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
     </resultMap>
@@ -46,7 +47,7 @@
     <select id="getVoucherById" resultMap="getAllVouchersResult" parameterType="Integer">
         select
           v.id, v.item, v.account, v.check_out_state_id, v.created_at, v.updated_at,
-          vd.id v_id, vd.des
+          vd.id v_id, vd.des, vd.voucher_id
         from
           voucher v
         inner join voucher_detail vd on v.id = vd.voucher_id
@@ -72,7 +73,8 @@
             <if test="item != null">item = #{item},</if>
             <if test="account != null">account = #{account},</if>
             <if test="employeeId != null">employee_id = #{employeeId},</if>
-            <if test="updatedAt != null">updated_at = #{updatedAt}</if>
+            <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+            <if test="checkOutStateId != null">check_out_state_id = #{checkOutStateId}</if>
         </set>
         where id = #{id}
     </update>

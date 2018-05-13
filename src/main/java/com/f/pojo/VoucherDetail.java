@@ -9,6 +9,19 @@ public class VoucherDetail {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
+    public VoucherDetail() {
+
+    }
+
+    public VoucherDetail(String des) {
+        this.des = des;
+    }
+
+    public VoucherDetail(Integer voucherId, String des) {
+        this.voucherId = voucherId;
+        this.des = des;
+    }
+
     public Integer getId() {
         return id;
     }
