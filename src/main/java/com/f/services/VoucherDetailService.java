@@ -7,4 +7,6 @@ public interface VoucherDetailService {
     Integer saveVoucherDetail(VoucherDetail voucherDetail);
 
     boolean deleteVoucherDetailById(Integer id);
+
+    boolean deleteVoucherDetailByVoucherId(Integer id);
 }

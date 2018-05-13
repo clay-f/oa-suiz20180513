@@ -33,4 +33,10 @@ public class VoucherDetailServiceImpl implements VoucherDetailService {
         }
         return saveState;
     }
+
+    @Transactional
+    @Override
+    public boolean deleteVoucherDetailByVoucherId(Integer id) {
+        return voucherDetailDao.deleteVoucherDetailByVoucherId(id) > 0;
+    }
 }

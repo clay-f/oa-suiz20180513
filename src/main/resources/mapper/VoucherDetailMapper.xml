@@ -9,6 +9,10 @@
     </insert>
 
     <delete id="deleteVoucherDetailById" parameterType="Integer">
-        delete from voucher_detail
+        delete from voucher_detail where id = #{id}
+    </delete>
+
+    <delete id="deleteVoucherDetailByVoucherId" parameterType="Integer">
+        delete from voucher_detail where voucher_id id = #{id}
     </delete>
 </mapper>

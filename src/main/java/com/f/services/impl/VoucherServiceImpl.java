@@ -4,6 +4,7 @@ import com.f.dao.VoucherDao;
 import com.f.dao.VoucherDetailDao;
 import com.f.helper.OutputJsonHelper;
 import com.f.pojo.Voucher;
+import com.f.pojo.VoucherDetail;
 import com.f.services.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -69,15 +70,10 @@ public class VoucherServiceImpl implements VoucherService {
     public boolean deleteVoucherById(Integer id) {
         try {
             Voucher tmpVoucher = voucherDao.getVoucherById(id);
-            System.out.println(outputJsonHelper.outputJsonVal(tmpVoucher));
-            Integer voucherDetailId = tmpVoucher.getVoucherDetail().getVoucherId();
-            System.out.println("***********************");
-            System.out.println("id val: " + voucherDetailId);
-            if (voucherDetailId != null) {
-                System.out.println("will delete voucher_detail, id is: " + voucherDetailId);
-                voucherDetailDao.deleteVoucherDetailById(voucherDetailId);
+            VoucherDetail voucherDetail = tmpVoucher.getVoucherDetail();
+            if (voucherDetail != null && voucherDetail.getId() != null) {
+                voucherDetailDao.deleteVoucherDetailByVoucherId(voucherDetail.getId());
             }
-            System.out.println("**********************&");
             voucherDao.deleteVoucherById(tmpVoucher.getId());
             return true;
         } catch (Exception e) {

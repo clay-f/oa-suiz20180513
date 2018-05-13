@@ -50,7 +50,7 @@
           vd.id v_id, vd.des, vd.voucher_id
         from
           voucher v
-        inner join voucher_detail vd on v.id = vd.voucher_id
+        left join voucher_detail vd on v.id = vd.voucher_id
         where v.id = #{id}
     </select>
 
