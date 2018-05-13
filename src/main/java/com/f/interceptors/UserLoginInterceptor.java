@@ -24,6 +24,7 @@ public class UserLoginInterceptor extends HandlerInterceptorAdapter {
                 return true;
             } else {
                 Employee user = (Employee) request.getSession().getAttribute("currentUser");
+                logger.info("user is null? " + user == null);
                 if (user != null) {
                     return true;
                 }
