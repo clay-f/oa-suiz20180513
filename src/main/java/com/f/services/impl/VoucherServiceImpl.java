@@ -1,7 +1,10 @@
 package com.f.services.impl;
 
 import com.f.dao.VoucherDao;
+import com.f.dao.VoucherDetailDao;
+import com.f.helper.OutputJsonHelper;
 import com.f.pojo.Voucher;
+import com.f.pojo.VoucherDetail;
 import com.f.services.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,12 +14,18 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class VoucherServiceImpl implements VoucherService {
+    private OutputJsonHelper outputJsonHelper = OutputJsonHelper.getJsonOutputInstance();
     @Autowired(required = true)
     @Qualifier(value = "voucherDao")
     private VoucherDao voucherDao;
+
+    @Autowired(required = true)
+    @Qualifier(value = "voucherDetailDao")
+    private VoucherDetailDao voucherDetailDao;
 
     @Transactional
     @Override
@@ -44,21 +53,29 @@ public class VoucherServiceImpl implements VoucherService {
 
     @Transactional
     @Override
-    public boolean saveVoucher(Voucher v) {
+    public Integer saveVoucher(Voucher v) {
+        Integer voucherPrimaryKey = -1;
         try {
             voucherDao.saveVoucher(v);
-            return true;
+            voucherPrimaryKey = v.getId();
+            v.getVoucherDetail().setVoucherId(voucherPrimaryKey);
+            voucherDetailDao.saveVoucherDetail(v.getVoucherDetail());
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
+        return voucherPrimaryKey;
     }
 
     @Transactional
     @Override
     public boolean deleteVoucherById(Integer id) {
         try {
-            voucherDao.deleteVoucherById(id);
+            Voucher tmpVoucher = voucherDao.getVoucherById(id);
+            VoucherDetail voucherDetail = tmpVoucher.getVoucherDetail();
+            if (voucherDetail != null && voucherDetail.getId() != null) {
+                voucherDetailDao.deleteVoucherDetailByVoucherId(voucherDetail.getId());
+            }
+            voucherDao.deleteVoucherById(tmpVoucher.getId());
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,5 +94,17 @@ public class VoucherServiceImpl implements VoucherService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Transactional
+    @Override
+    public List<Voucher> getVoucherByCondition(Map<String, Object> map) {
+        List<Voucher> voucherList = null;
+        try {
+            voucherList = voucherDao.getVoucherAndDetailByConditions(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return voucherList;
     }
 }

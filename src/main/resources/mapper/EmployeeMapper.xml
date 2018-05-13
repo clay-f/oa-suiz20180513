@@ -11,12 +11,14 @@
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result column="passwd" property="passwd"/>
+        <result property="departmentId" column="department_id"/>
+        <result property="oaPositionId" column="oa_position_id"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
     </resultMap>
 
     <select id="getUserByCondition" resultMap="getUserByConditionResult" parameterType="Map">
-        select id, name, created_at, updated_at, passwd from employee e where 1 = 1
+        select id, name, department_id, oa_position_id, created_at, updated_at, passwd from employee e where 1 = 1
         <choose>
             <when test="name != null">
                 and e.name = #{name}

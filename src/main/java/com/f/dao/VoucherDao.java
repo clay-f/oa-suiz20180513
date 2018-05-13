@@ -3,9 +3,12 @@ package com.f.dao;
 import com.f.pojo.Voucher;
 
 import java.util.List;
+import java.util.Map;
 
 public interface VoucherDao {
     List<Voucher> getAllVouchers();
+
+    List<Voucher> getVoucherAndDetailByConditions(Map<String, Object> map);
 
     Voucher getVoucherById(Integer id);
 
@@ -13,7 +16,7 @@ public interface VoucherDao {
 
     Integer size();
 
-    void saveVoucher(Voucher voucher);
+    Integer saveVoucher(Voucher voucher);
 
-    void updateVoucher(Voucher voucher);
+    Integer updateVoucher(Voucher voucher);
 }

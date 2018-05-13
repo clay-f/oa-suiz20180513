@@ -3,6 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.f.dao.VoucherDao">
+    <select id="getAllVouchers" resultMap="getAllVouchersResult" parameterType="Map">
+        select
+          id, item, check_out_state_id, account, created_at, updated_at
+        from
+          voucher
+    </select>
     <resultMap id="getAllVouchersResult" type="Voucher">
         <id property="id" column="id"/>
         <result property="item" column="item"/>
@@ -11,17 +17,41 @@
         <result property="employeeId" column="employee_id"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
+        <association property="voucherDetail" resultMap="voucherDetailResult"/>
     </resultMap>
-    <select id="getAllVouchers" resultMap="getAllVouchersResult">
-        select * from voucher;
+    <resultMap id="voucherDetailResult" type="VoucherDetail">
+        <id property="id" column="v_id"/>
+        <result property="des" column="des"/>
+        <result property="voucherId" column="voucher_id"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <select id="getVoucherAndDetailByConditions" parameterType="map" resultMap="getAllVouchersResult">
+        select
+          v.id, item, account, check_out_state_id
+        from
+          voucher v
+        inner join employee e on v.employee_id = e.id
+        where 1 = 1
+        <choose>
+            <when test="price != null">
+                and v.account >= #{price}
+            </when>
+            <when test="oaPositionId != null">
+                and e.oa_position_id = #{oaPositionId} and v.check_out_state_id = 1
+            </when>
+        </choose>
     </select>
 
     <select id="getVoucherById" resultMap="getAllVouchersResult" parameterType="Integer">
         select
-          id, item, account, check_out_state_id
+          v.id, v.item, v.account, v.check_out_state_id, v.created_at, v.updated_at,
+          vd.id v_id, vd.des, vd.voucher_id
         from
           voucher v
-        where id = #{id}
+        left join voucher_detail vd on v.id = vd.voucher_id
+        where v.id = #{id}
     </select>
 
     <delete id="deleteVoucherById" parameterType="Integer">
@@ -32,7 +62,7 @@
         select count(1) from voucher
     </select>
 
-    <insert id="saveVoucher" parameterType="Voucher">
+    <insert id="saveVoucher" parameterType="Voucher" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into voucher(employee_id, item, account)
         values (#{employeeId}, #{item}, #{account})
     </insert>
@@ -43,7 +73,8 @@
             <if test="item != null">item = #{item},</if>
             <if test="account != null">account = #{account},</if>
             <if test="employeeId != null">employee_id = #{employeeId},</if>
-            <if test="updatedAt != null">updated_at = #{updatedAt}</if>
+            <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+            <if test="checkOutStateId != null">check_out_state_id = #{checkOutStateId}</if>
         </set>
         where id = #{id}
     </update>

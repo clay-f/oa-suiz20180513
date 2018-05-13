@@ -2,6 +2,8 @@ package com.f.test.models;
 
 import com.f.pojo.Employee;
 import com.f.pojo.Voucher;
+import com.f.pojo.VoucherDetail;
+import com.f.services.VoucherDetailService;
 import com.f.services.VoucherService;
 import com.f.test.TestHelper;
 import org.junit.Test;
@@ -11,16 +13,12 @@ import java.util.Objects;
 
 public class VoucherTest {
     private VoucherService voucherService = (VoucherService) TestHelper.getInstance().getBean("voucherServiceImpl");
+    private VoucherDetailService voucherDetailService = (VoucherDetailService) TestHelper.getInstance().getBean("voucherDetailServiceImpl");
 
     @Test
     public void getVouchersList() {
         assert voucherService != null;
         assert voucherService.getAllVouchers().size() > 0;
-    }
-
-    @Test
-    public void getVoucherById() {
-        assert voucherService.getVoucherById(1).getId() != null;
     }
 
     @Test
@@ -31,19 +29,20 @@ public class VoucherTest {
     @Test
     public void addVoucher() {
         Voucher voucher = new Voucher("foo" + Objects.toString(System.currentTimeMillis()), (float) 0.00, 1);
-        assert voucherService.saveVoucher(voucher);
+        VoucherDetail voucherDetail = new VoucherDetail("foo details");
+        voucher.setVoucherDetail(voucherDetail);
+        voucherService.saveVoucher(voucher);
     }
 
     @Test
     public void deleteVoucher() {
         List<Voucher> employeeList = voucherService.getAllVouchers();
-        assert voucherService.deleteVoucherById(employeeList.get(employeeList.size() - 1).getId());
+        assert voucherService.deleteVoucherById(employeeList.get(4).getId());
     }
 
     @Test
     public void updateVoucher() {
         List<Voucher> vouchers = voucherService.getAllVouchers();
-        Voucher voucher = voucherService.getVoucherById(vouchers.get(vouchers.size() - 1).getId());
-        assert voucherService.updateVoucher(voucher);
+        assert voucherService.updateVoucher(vouchers.get(0));
     }
 }
