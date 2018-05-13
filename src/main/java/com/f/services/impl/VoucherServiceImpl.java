@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class VoucherServiceImpl implements VoucherService {
@@ -93,5 +94,17 @@ public class VoucherServiceImpl implements VoucherService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Transactional
+    @Override
+    public List<Voucher> getVoucherByCondition(Map<String, Object> map) {
+        List<Voucher> voucherList = null;
+        try {
+            voucherList = voucherDao.getVoucherAndDetailByConditions(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return voucherList;
     }
 }

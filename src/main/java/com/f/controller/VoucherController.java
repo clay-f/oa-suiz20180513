@@ -9,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
+import java.util.Hashtable;
+import java.util.Map;
 
 @RequestMapping(value = "/vouchers")
 @Controller
@@ -20,10 +23,16 @@ public class VoucherController {
 
     @RequestMapping(value = "/index")
     public String index(Model model, HttpServletRequest request) {
+        Map<String, Object> map = new Hashtable<String, Object>();
         try {
             Employee user = (Employee) request.getSession().getAttribute("currentUser");
-            user.getOaPositionId();
-            model.addAttribute("voucherList", voucherService.getAllVouchers());
+            Integer oaPosition = user.getOaPositionId();
+            if (oaPosition == 4) {
+                map.put("price", 5000);
+            } else if (oaPosition == 3) {
+                map.put("oaPositionId", 3);
+            }
+            model.addAttribute("voucherList", voucherService.getVoucherByCondition(map));
         } catch (Exception e) {
             e.printStackTrace();
         }

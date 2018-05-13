@@ -27,7 +27,7 @@
         <result property="updatedAt" column="updated_at"/>
     </resultMap>
 
-    <select id="getVoucherAndDetailByConditions" parameterType="map">
+    <select id="getVoucherAndDetailByConditions" parameterType="map" resultMap="getAllVouchersResult">
         select
           v.id, item, account, check_out_state_id
         from

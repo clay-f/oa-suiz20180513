@@ -24,7 +24,7 @@
         发票: ${voucher.checkOutStateId}
     </p>
     <p>
-        详细信息: ${voucher.voucherDetailService.des}
+        详细信息: ${voucher.voucherDetail.des}
     </p>
 </article>
 
