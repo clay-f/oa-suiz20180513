@@ -13,6 +13,6 @@
     </delete>
 
     <delete id="deleteVoucherDetailByVoucherId" parameterType="Integer">
-        delete from voucher_detail where voucher_id id = #{id}
+        delete from voucher_detail where voucher_id = #{id}
     </delete>
 </mapper>

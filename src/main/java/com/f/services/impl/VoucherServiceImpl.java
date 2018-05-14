@@ -1,9 +1,11 @@
 package com.f.services.impl;
 
+import com.f.dao.VoucherCheckResultDao;
 import com.f.dao.VoucherDao;
 import com.f.dao.VoucherDetailDao;
 import com.f.helper.OutputJsonHelper;
 import com.f.pojo.Voucher;
+import com.f.pojo.VoucherCheckResult;
 import com.f.pojo.VoucherDetail;
 import com.f.services.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,9 @@ public class VoucherServiceImpl implements VoucherService {
     @Autowired(required = true)
     @Qualifier(value = "voucherDao")
     private VoucherDao voucherDao;
+
+    @Resource(name = "voucherCheckResultDao")
+    private VoucherCheckResultDao voucherCheckResultDao;
 
     @Autowired(required = true)
     @Qualifier(value = "voucherDetailDao")
@@ -72,8 +78,12 @@ public class VoucherServiceImpl implements VoucherService {
         try {
             Voucher tmpVoucher = voucherDao.getVoucherById(id);
             VoucherDetail voucherDetail = tmpVoucher.getVoucherDetail();
+            VoucherCheckResult voucherCheckResult = tmpVoucher.getCheckResult();
             if (voucherDetail != null && voucherDetail.getId() != null) {
-                voucherDetailDao.deleteVoucherDetailByVoucherId(voucherDetail.getId());
+                voucherDetailDao.deleteVoucherDetailByVoucherId(voucherDetail.getVoucherId());
+            }
+            if (voucherCheckResult != null) {
+                voucherCheckResultDao.deleteVoucherCheckResultByVoucherId(voucherCheckResult.getVoucherId());
             }
             voucherDao.deleteVoucherById(tmpVoucher.getId());
             return true;

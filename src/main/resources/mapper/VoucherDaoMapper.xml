@@ -18,6 +18,7 @@
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
         <association property="voucherDetail" resultMap="voucherDetailResult"/>
+        <association property="checkResult" resultMap="VoucherCheckResult"/>
     </resultMap>
     <resultMap id="voucherDetailResult" type="VoucherDetail">
         <id property="id" column="v_id"/>
@@ -25,6 +26,11 @@
         <result property="voucherId" column="voucher_id"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+    <resultMap id="VoucherCheckResult" type="VoucherCheckResult">
+        <id property="id" column="vc_id"/>
+        <result property="stateId" column="state_id"/>
+        <result property="whoCheckId" column="whoCheckId"/>
     </resultMap>
 
     <select id="getVoucherAndDetailByConditions" parameterType="map" resultMap="getAllVouchersResult">
@@ -46,10 +52,12 @@
 
     <select id="getVoucherById" resultMap="getAllVouchersResult" parameterType="Integer">
         select
-          v.id, v.item, v.account, v.check_out_state_id, v.created_at, v.updated_at,
-          vd.id v_id, vd.des, vd.voucher_id
+          v.id, v.item, v.account, v.check_out_state_id, v.employee_id, v.created_at, v.updated_at,
+          vd.id v_id, vd.des, vd.voucher_id,
+          vcr.id vc_id, vcr.state_id, vcr.who_check_id
         from
           voucher v
+        inner join voucher_check_result vcr on v.id = vcr.voucher_id
         left join voucher_detail vd on v.id = vd.voucher_id
         where v.id = #{id}
     </select>
