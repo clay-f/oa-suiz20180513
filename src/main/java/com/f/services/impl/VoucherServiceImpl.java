@@ -26,7 +26,7 @@ public class VoucherServiceImpl implements VoucherService {
     @Qualifier(value = "voucherDao")
     private VoucherDao voucherDao;
 
-    @Resource(name = "voucherCheckResultDao")
+    @Autowired
     private VoucherCheckResultDao voucherCheckResultDao;
 
     @Autowired(required = true)

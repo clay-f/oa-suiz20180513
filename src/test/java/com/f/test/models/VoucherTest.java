@@ -22,6 +22,11 @@ public class VoucherTest {
     }
 
     @Test
+    public void getVoucherById() {
+        voucherService.getVoucherById(1);
+    }
+
+    @Test
     public void getSize() {
         assert voucherService.size() > 0;
     }

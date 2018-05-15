@@ -1,5 +1,5 @@
 package com.f.services;
 
 public interface VoucherCheckResultService {
-    boolean deleteVoucherCheckResult(Integer id);r
+    boolean deleteVoucherCheckResult(Integer id);
 }

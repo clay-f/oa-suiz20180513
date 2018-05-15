@@ -5,9 +5,13 @@
 <mapper namespace="com.f.dao.VoucherDao">
     <select id="getAllVouchers" resultMap="getAllVouchersResult" parameterType="Map">
         select
-          id, item, check_out_state_id, account, created_at, updated_at
+          v.id, item, check_out_state_id, account, v.created_at, v.updated_at,
+          vd.id v_id, vd.voucher_id, vd.des,
+          vcr.id vc_id, vcr.state_id
         from
-          voucher
+          voucher v
+        left join voucher_detail vd on v.id = vd.voucher_id
+        inner join voucher_check_result vcr on vcr.voucher_id = v.id
     </select>
     <resultMap id="getAllVouchersResult" type="Voucher">
         <id property="id" column="id"/>
@@ -29,6 +33,8 @@
     </resultMap>
     <resultMap id="VoucherCheckResult" type="VoucherCheckResult">
         <id property="id" column="vc_id"/>
+        <result property="whoCheckId" column="who_check_id"/>
+        <result property="voucherId" column="voucher_id"/>
         <result property="stateId" column="state_id"/>
         <result property="whoCheckId" column="whoCheckId"/>
     </resultMap>
