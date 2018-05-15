@@ -22,6 +22,11 @@ public class VoucherTest {
     }
 
     @Test
+    public void getVoucherById() {
+        voucherService.getVoucherById(1);
+    }
+
+    @Test
     public void getSize() {
         assert voucherService.size() > 0;
     }
@@ -37,12 +42,13 @@ public class VoucherTest {
     @Test
     public void deleteVoucher() {
         List<Voucher> employeeList = voucherService.getAllVouchers();
-        assert voucherService.deleteVoucherById(employeeList.get(4).getId());
+        assert voucherService.deleteVoucherById(employeeList.get(0).getId());
     }
 
     @Test
     public void updateVoucher() {
         List<Voucher> vouchers = voucherService.getAllVouchers();
         assert voucherService.updateVoucher(vouchers.get(0));
+        voucherService.getVoucherById(1);
     }
 }

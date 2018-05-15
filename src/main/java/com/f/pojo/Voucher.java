@@ -10,6 +10,7 @@ public class Voucher implements Serializable {
     private Integer employeeId;
     private Integer checkOutStateId;
     private VoucherDetail voucherDetail = new VoucherDetail();
+    private VoucherCheckResult checkResult = new VoucherCheckResult();
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
@@ -69,6 +70,14 @@ public class Voucher implements Serializable {
 
     public void setVoucherDetail(VoucherDetail voucherDetail) {
         this.voucherDetail = voucherDetail;
+    }
+
+    public VoucherCheckResult getCheckResult() {
+        return checkResult;
+    }
+
+    public void setCheckResult(VoucherCheckResult checkResult) {
+        this.checkResult = checkResult;
     }
 
     public Timestamp getCreatedAt() {
