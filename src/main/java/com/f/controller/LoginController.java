@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
@@ -36,16 +35,18 @@ public class LoginController {
     }
 
     @PostMapping("/users/doLogin")
-    public String doLogin(@ModelAttribute("user") Employee user, Model model, HttpServletRequest request) {
+    public String doLogin(@ModelAttribute("user") Employee user, Model model) {
         try {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("name", user.getName());
             map.put("passwd", user.getPasswd());
             Employee employee = userService.login(map).get(0);
             if (employee != null) {
-                request.getSession().setAttribute("currentUser", employee);
+                user = employee;
+                model.addAttribute("currentUser", user);
+                model.addAttribute("message", "login success");
             }
-            return "redirect:/vouchers/index";
+            return "/users/index";
         } catch (Exception e) {
             e.printStackTrace();
         }
