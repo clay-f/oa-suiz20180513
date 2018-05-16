@@ -27,6 +27,16 @@
             <td><c:out value="${item.account}"/></td>
             <td>
                 <c:choose>
+                    <c:when test="${item.checkResult.stateId==1}">
+                        true
+                    </c:when>
+                    <c:when test="${item.checkResult.stateId==2}">
+                        false
+                    </c:when>
+                </c:choose>
+            </td>
+            <td>
+                <c:choose>
                     <c:when test="${item.checkOutStateId == 2}">
                         false
                     </c:when>
