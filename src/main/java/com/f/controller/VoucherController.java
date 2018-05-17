@@ -47,7 +47,10 @@ public class VoucherController {
     }
 
     @RequestMapping(value = "/create", method = {RequestMethod.POST})
-    public String create(@ModelAttribute(value = "user") Voucher user, Model model) {
+    public String create(@ModelAttribute(value = "user") Voucher user, Model model, HttpServletRequest request) {
+        Employee currentUser = (Employee) request.getSession().getAttribute("currentUser");
+        user.setEmployeeId(currentUser.getId());
+
         if (voucherService.saveVoucher(user) > 0) {
             return "redirect:/vouchers/index";
         }
