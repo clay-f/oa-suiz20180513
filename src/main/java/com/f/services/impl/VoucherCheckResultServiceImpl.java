@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
 
 @Service
 public class VoucherCheckResultServiceImpl implements VoucherCheckResultService {
@@ -38,5 +39,12 @@ public class VoucherCheckResultServiceImpl implements VoucherCheckResultService 
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Transactional
+    @Override
+    public boolean updateVoucherCheckResult(VoucherCheckResult voucherCheckResult) {
+        voucherCheckResult.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        return voucherCheckResultDao.update(voucherCheckResult) > 0;
     }
 }

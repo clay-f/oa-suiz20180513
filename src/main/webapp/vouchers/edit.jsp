@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: f
@@ -24,9 +25,12 @@
             <label for="account">金额</label>
             <form:input path="account" id="account"/>
         </p>
+        <c:if test="${currentUser.oaPositionId == 2 || currentUser.oaPositionId == 3}">
+            <form:input path="checkResult.stateId"/>
+        </c:if>
         <p>
-            <label for="checkout_state">发票检查状态:</label>
-            <form:input path="checkOutStateId" id="checkout_state" readonly="true"/>
+            <label for="detail">详细信息</label>
+            <form:input path="voucherDetail.des" id="detail"/>
         </p>
         <input type="submit" value="更新发票">
     </form:form>

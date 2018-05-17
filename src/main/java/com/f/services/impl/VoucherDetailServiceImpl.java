@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
+
 @Service
 public class VoucherDetailServiceImpl implements VoucherDetailService {
     @Autowired(required = true)
@@ -38,5 +40,12 @@ public class VoucherDetailServiceImpl implements VoucherDetailService {
     @Override
     public boolean deleteVoucherDetailByVoucherId(Integer id) {
         return voucherDetailDao.deleteVoucherDetailByVoucherId(id) > 0;
+    }
+
+    @Transactional
+    @Override
+    public boolean updateVoucherDetail(VoucherDetail voucherDetail) {
+        voucherDetail.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        return voucherDetailDao.saveVoucherDetail(voucherDetail) > 0;
     }
 }

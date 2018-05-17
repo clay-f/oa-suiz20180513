@@ -6,4 +6,6 @@ public interface VoucherCheckResultService {
     boolean deleteVoucherCheckResult(Integer id);
 
     boolean save(VoucherCheckResult result);
+
+    boolean updateVoucherCheckResult(VoucherCheckResult voucherCheckResult);
 }

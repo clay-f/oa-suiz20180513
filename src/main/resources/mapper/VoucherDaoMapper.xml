@@ -37,6 +37,8 @@
         <result property="voucherId" column="voucher_id"/>
         <result property="stateId" column="state_id"/>
         <result property="whoCheckId" column="whoCheckId"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
     </resultMap>
 
     <select id="getVoucherAndDetailByConditions" parameterType="map" resultMap="getAllVouchersResult">
@@ -69,8 +71,8 @@
     <select id="getVoucherById" resultMap="getAllVouchersResult" parameterType="Integer">
         select
           v.id, v.item, v.account, v.check_out_state_id, v.employee_id, v.created_at, v.updated_at,
-          vd.id v_id vd.id v_id, vd.des, vd.voucher_id,
-          vcr.id vc_id vcr.id vc_id, vcr.state_id, vcr.who_check_id
+          vd.id v_id, vd.des, vd.voucher_id,
+          vcr.id vc_id, vcr.state_id, vcr.who_check_id, vcr.created_at, vcr.updated_at
         from
           voucher v
         inner join voucher_check_result vcr on v.id = vcr.voucher_id

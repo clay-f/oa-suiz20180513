@@ -1,8 +1,11 @@
 package com.f.controller;
 
+import com.f.helper.OutputJsonHelper;
 import com.f.pojo.Employee;
 import com.f.pojo.Voucher;
 import com.f.services.VoucherService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,7 @@ import java.util.Map;
 @RequestMapping(value = "/vouchers")
 @Controller
 public class VoucherController {
+    private OutputJsonHelper outputJsonHelper = OutputJsonHelper.getJsonOutputInstance();
     @Autowired(required = true)
     @Qualifier(value = "voucherServiceImpl")
     private VoucherService voucherService;
@@ -83,8 +87,9 @@ public class VoucherController {
 
     @RequestMapping(value = "/{id}", method = {RequestMethod.PUT})
     public String update(@PathVariable(value = "id") Integer id, @ModelAttribute(value = "user") Voucher voucher) {
-        System.out.println("catch voucher put method");
-        voucherService.updateVoucher(voucher);
-        return "redirect:index";
+        Voucher previousVoucher = voucherService.getVoucherById(voucher.getId());
+        previousVoucher.getVoucherDetail().setDes(voucher.getVoucherDetail().getDes());
+        previousVoucher
+        return "redirect:/vouchers/index";
     }
 }

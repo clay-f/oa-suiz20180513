@@ -25,7 +25,7 @@
                 updated_at = #{updatedAt}
             </if>
         </set>
-        where id = id
+        where id = #{id}
     </update>
 
     <select id="getCheckResultByConditions" parameterType="VoucherCheckResult">

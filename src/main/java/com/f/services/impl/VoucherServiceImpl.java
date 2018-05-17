@@ -101,6 +101,8 @@ public class VoucherServiceImpl implements VoucherService {
         try {
             voucher.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
             voucherDao.updateVoucher(voucher);
+            voucherDetailDao.update(voucher.getVoucherDetail());
+            voucherCheckResultDao.update(voucher.getCheckResult());
             return true;
         } catch (Exception e) {
             e.printStackTrace();

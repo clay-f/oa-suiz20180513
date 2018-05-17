@@ -1,11 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: f
-  Date: 4/24/18
-  Time: 09:29
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -21,11 +14,21 @@
         金额: ${voucher.account}
     </p>
     <p>
-        发票: ${voucher.checkOutStateId}
+        发票审批状态:
+        <c:choose>
+            <c:when test="${voucher.checkResult.stateId == 2}">
+                未通过
+            </c:when>
+            <c:otherwise>
+                通过
+            </c:otherwise>
+        </c:choose>
     </p>
-    <p>
-        详细信息: ${voucher.voucherDetail.des}
-    </p>
+    <details>
+        <p>
+            详细信息: ${voucher.voucherDetail.des}
+        </p>
+    </details>
 </article>
 
 <section>
