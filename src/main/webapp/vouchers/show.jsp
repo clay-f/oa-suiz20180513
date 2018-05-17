@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: f
@@ -12,6 +12,10 @@
     <title>show voucher</title>
 </head>
 <body>
+<nav>
+    <c:out value="${currentUser.name}"></c:out>
+    <a href="/users/logout">注销</a>
+</nav>
 <header>/vouchers/show.jsp</header>
 <article>
     <p>

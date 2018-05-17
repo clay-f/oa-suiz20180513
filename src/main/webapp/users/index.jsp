@@ -13,7 +13,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 </head>
 <body>
-<a href="login" action="users/logout">注销</a>
+<nav>
+    <c:out value="${currentUser.name}"></c:out>
+    <a href="/users/logout">注销</a>
+</nav>
 <p>welcome users index.jsp</p>
 <ul>
     <c:forEach var="item" items="${userList}">

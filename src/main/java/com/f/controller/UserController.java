@@ -36,7 +36,6 @@ public class UserController extends ApplicationController {
 
     @GetMapping(value = "/")
     public void rootIndex(HttpServletResponse response) throws IOException {
-        System.out.println("catch me");
         response.sendRedirect("/users/index");
     }
 
@@ -71,6 +70,6 @@ public class UserController extends ApplicationController {
     public String logout(HttpServletRequest request, SessionStatus session,Model model){
         request.getSession().removeAttribute("currentUser");
         model.addAttribute("message","logout success");
-        return "users/login";
+        return "redirect:/vouchers/index";
     }
 }
