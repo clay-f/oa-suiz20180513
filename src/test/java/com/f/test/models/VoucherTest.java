@@ -8,7 +8,9 @@ import com.f.services.VoucherService;
 import com.f.test.TestHelper;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class VoucherTest {
@@ -42,7 +44,7 @@ public class VoucherTest {
     @Test
     public void deleteVoucher() {
         List<Voucher> employeeList = voucherService.getAllVouchers();
-        assert voucherService.deleteVoucherById(employeeList.get(0).getId());
+//        assert voucherService.deleteVoucherById(employeeList.get(0).getId());
     }
 
     @Test
@@ -50,5 +52,12 @@ public class VoucherTest {
         List<Voucher> vouchers = voucherService.getAllVouchers();
         assert voucherService.updateVoucher(vouchers.get(0));
         voucherService.getVoucherById(1);
+    }
+
+    @Test
+    public void getVoucherByOaPositionId() {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("userId", 1);
+        assert voucherService.getVoucherByCondition(map).size() > 0;
     }
 }

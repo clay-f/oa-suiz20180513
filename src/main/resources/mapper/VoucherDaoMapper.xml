@@ -41,26 +41,36 @@
 
     <select id="getVoucherAndDetailByConditions" parameterType="map" resultMap="getAllVouchersResult">
         select
-          v.id, item, account, check_out_state_id
+          v.id, item, account, check_out_state_id, v.employee_id,
+          vcr.state_id, vcr.who_check_id
         from
           voucher v
         inner join employee e on v.employee_id = e.id
-        where 1 = 1
-        <choose>
-            <when test="price != null">
-                and v.account >= #{price}
-            </when>
-            <when test="oaPositionId != null">
-                and e.oa_position_id = #{oaPositionId} and v.check_out_state_id = 1
-            </when>
-        </choose>
+        left join voucher_check_result vcr on v.id = vcr.voucher_id
+        left join voucher_detail vd on v.id = vd.voucher_id
+        <where>
+            <choose>
+                <when test="userId != null">
+                  e.id = #{userId}
+                </when>
+                <when test="chargeId != null">
+                    vrc.state_id = 2 and v.account > 5000
+                </when>
+                <when test="managerId != null">
+                    vrc.state_id = 2
+                </when>
+                <when test="financeId != null">
+                    vrc.state_id = 2 and v.check_out_state_id = 1
+                </when>
+            </choose>
+        </where>
     </select>
 
     <select id="getVoucherById" resultMap="getAllVouchersResult" parameterType="Integer">
         select
           v.id, v.item, v.account, v.check_out_state_id, v.employee_id, v.created_at, v.updated_at,
-          vd.id v_id, vd.des, vd.voucher_id,
-          vcr.id vc_id, vcr.state_id, vcr.who_check_id
+          vd.id v_id vd.id v_id, vd.des, vd.voucher_id,
+          vcr.id vc_id vcr.id vc_id, vcr.state_id, vcr.who_check_id
         from
           voucher v
         inner join voucher_check_result vcr on v.id = vcr.voucher_id
