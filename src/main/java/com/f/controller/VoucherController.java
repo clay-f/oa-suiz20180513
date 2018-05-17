@@ -89,7 +89,7 @@ public class VoucherController {
     public String update(@PathVariable(value = "id") Integer id, @ModelAttribute(value = "user") Voucher voucher) {
         Voucher previousVoucher = voucherService.getVoucherById(voucher.getId());
         previousVoucher.getVoucherDetail().setDes(voucher.getVoucherDetail().getDes());
-        previousVoucher
+        voucherService.updateVoucher(previousVoucher);
         return "redirect:/vouchers/index";
     }
 }

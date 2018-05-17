@@ -20,10 +20,10 @@
         update voucher_detail
         <set>
             <if test="des != null">
-                des = #{des}
+                des = #{des},
             </if>
             <if test="updatedAt != null">
-                updated_at = #{updated_at}
+                updated_at = #{updatedAt}
             </if>
         </set>
         where id = #{id}
