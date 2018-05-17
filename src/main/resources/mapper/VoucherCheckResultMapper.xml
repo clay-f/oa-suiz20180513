@@ -16,7 +16,7 @@
         update voucher_check_result
         <set>
             <if test="whoCheckId != null">
-                who_check_id = #{who_check_id},
+                who_check_id = #{whoCheckId},
             </if>
             <if test="stateId != null">
                 state_id = #{stateId},
