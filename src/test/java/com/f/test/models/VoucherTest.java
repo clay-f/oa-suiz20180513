@@ -57,7 +57,7 @@ public class VoucherTest {
     @Test
     public void getVoucherByOaPositionId() {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("userId", 1);
+        map.put("financeId", 1);
         assert voucherService.getVoucherByCondition(map).size() > 0;
     }
 }
