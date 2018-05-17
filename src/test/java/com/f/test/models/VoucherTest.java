@@ -2,6 +2,7 @@ package com.f.test.models;
 
 import com.f.pojo.Employee;
 import com.f.pojo.Voucher;
+import com.f.pojo.VoucherCheckResult;
 import com.f.pojo.VoucherDetail;
 import com.f.services.VoucherDetailService;
 import com.f.services.VoucherService;
@@ -35,8 +36,8 @@ public class VoucherTest {
 
     @Test
     public void addVoucher() {
-        Voucher voucher = new Voucher("foo" + Objects.toString(System.currentTimeMillis()), (float) 0.00, 1);
-        VoucherDetail voucherDetail = new VoucherDetail("foo details");
+        Voucher voucher = new Voucher("jany get a car" + Objects.toString(System.currentTimeMillis()), (float) 0.00, 1);
+        VoucherDetail voucherDetail = new VoucherDetail("get a car by 500$");
         voucher.setVoucherDetail(voucherDetail);
         voucherService.saveVoucher(voucher);
     }
@@ -57,7 +58,7 @@ public class VoucherTest {
     @Test
     public void getVoucherByOaPositionId() {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("financeId", 1);
+        map.put("userId", 1);
         assert voucherService.getVoucherByCondition(map).size() > 0;
     }
 }

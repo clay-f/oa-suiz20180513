@@ -66,6 +66,8 @@ public class VoucherServiceImpl implements VoucherService {
             voucherPrimaryKey = v.getId();
             v.getVoucherDetail().setVoucherId(voucherPrimaryKey);
             voucherDetailDao.saveVoucherDetail(v.getVoucherDetail());
+            v.getCheckResult().setVoucherId(voucherPrimaryKey);
+            voucherCheckResultDao.save(v.getCheckResult());
         } catch (Exception e) {
             e.printStackTrace();
         }
