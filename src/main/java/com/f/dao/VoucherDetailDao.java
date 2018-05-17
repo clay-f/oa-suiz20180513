@@ -8,4 +8,6 @@ public interface VoucherDetailDao {
     Integer deleteVoucherDetailById(Integer id);
 
     Integer deleteVoucherDetailByVoucherId(Integer id);
+
+    Integer update(VoucherDetail voucherDetail);
 }

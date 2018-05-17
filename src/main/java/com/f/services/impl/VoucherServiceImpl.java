@@ -66,6 +66,8 @@ public class VoucherServiceImpl implements VoucherService {
             voucherPrimaryKey = v.getId();
             v.getVoucherDetail().setVoucherId(voucherPrimaryKey);
             voucherDetailDao.saveVoucherDetail(v.getVoucherDetail());
+            v.getCheckResult().setVoucherId(voucherPrimaryKey);
+            voucherCheckResultDao.save(v.getCheckResult());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -99,6 +101,8 @@ public class VoucherServiceImpl implements VoucherService {
         try {
             voucher.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
             voucherDao.updateVoucher(voucher);
+            voucherDetailDao.update(voucher.getVoucherDetail());
+            voucherCheckResultDao.update(voucher.getCheckResult());
             return true;
         } catch (Exception e) {
             e.printStackTrace();

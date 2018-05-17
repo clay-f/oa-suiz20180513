@@ -9,4 +9,6 @@ public interface VoucherDetailService {
     boolean deleteVoucherDetailById(Integer id);
 
     boolean deleteVoucherDetailByVoucherId(Integer id);
+
+    boolean updateVoucherDetail(VoucherDetail voucherDetail);
 }

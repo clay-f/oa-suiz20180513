@@ -20,7 +20,8 @@
         <th>id</th>
         <th>item</th>
         <th>account</th>
-        <th>state</th>
+        <th>报销状态</th>
+        <th>批准状态</th>
     </tr>
     </thead>
     <tbody>
@@ -32,6 +33,14 @@
             <td>
                 <c:choose>
                     <c:when test="${item.checkOutStateId == 2}">
+                        false
+                    </c:when>
+                    <c:otherwise>true</c:otherwise>
+                </c:choose>
+            </td>
+            <td>
+                <c:choose>
+                    <c:when test="${item.checkResult.stateId == 2}">
                         false
                     </c:when>
                     <c:otherwise>true</c:otherwise>

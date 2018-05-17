@@ -1,8 +1,11 @@
 package com.f.controller;
 
+import com.f.helper.OutputJsonHelper;
 import com.f.pojo.Employee;
 import com.f.pojo.Voucher;
 import com.f.services.VoucherService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,7 @@ import java.util.Map;
 @RequestMapping(value = "/vouchers")
 @Controller
 public class VoucherController {
+    private OutputJsonHelper outputJsonHelper = OutputJsonHelper.getJsonOutputInstance();
     @Autowired(required = true)
     @Qualifier(value = "voucherServiceImpl")
     private VoucherService voucherService;
@@ -27,12 +31,21 @@ public class VoucherController {
         try {
             Employee user = (Employee) request.getSession().getAttribute("currentUser");
             Integer oaPosition = user.getOaPositionId();
-            if (oaPosition == 4) {
-                map.put("price", 5000);
-            } else if (oaPosition == 3) {
-                map.put("oaPositionId", 3);
-            }
-            model.addAttribute("voucherList", voucherService.getVoucherByCondition(map));
+            switch(oaPosition){
+                case 1:
+                    map.put("userId", 1);
+                    break;
+                case 2:
+                    map.put("chargeId", 2);
+                    break;
+                case 3:
+                    map.put("managerId",3);
+                    break;
+                case 4:
+                    map.put("financeId",4);
+                    break;
+            };
+           model.addAttribute("voucherList", voucherService.getVoucherByCondition(map));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,7 +60,10 @@ public class VoucherController {
     }
 
     @RequestMapping(value = "/create", method = {RequestMethod.POST})
-    public String create(@ModelAttribute(value = "user") Voucher user, Model model) {
+    public String create(@ModelAttribute(value = "user") Voucher user, Model model, HttpServletRequest request) {
+        Employee currentUser = (Employee) request.getSession().getAttribute("currentUser");
+        user.setEmployeeId(currentUser.getId());
+
         if (voucherService.saveVoucher(user) > 0) {
             return "redirect:/vouchers/index";
         }
@@ -80,8 +96,9 @@ public class VoucherController {
 
     @RequestMapping(value = "/{id}", method = {RequestMethod.PUT})
     public String update(@PathVariable(value = "id") Integer id, @ModelAttribute(value = "user") Voucher voucher) {
-        System.out.println("catch voucher put method");
-        voucherService.updateVoucher(voucher);
-        return "redirect:index";
+        Voucher previousVoucher = voucherService.getVoucherById(voucher.getId());
+        previousVoucher.getVoucherDetail().setDes(voucher.getVoucherDetail().getDes());
+        voucherService.updateVoucher(previousVoucher);
+        return "redirect:/vouchers/index";
     }
 }

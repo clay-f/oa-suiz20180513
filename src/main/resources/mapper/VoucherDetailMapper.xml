@@ -15,4 +15,17 @@
     <delete id="deleteVoucherDetailByVoucherId" parameterType="Integer">
         delete from voucher_detail where voucher_id = #{id}
     </delete>
+
+    <update id="update" parameterType="VoucherDetail">
+        update voucher_detail
+        <set>
+            <if test="des != null">
+                des = #{des},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

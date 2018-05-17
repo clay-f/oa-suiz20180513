@@ -6,4 +6,42 @@
     <delete id="deleteVoucherCheckResultByVoucherId" parameterType="Integer">
         delete from voucher_check_result where voucher_id = #{id}
     </delete>
+
+    <insert id="save" parameterType="VoucherCheckResult">
+        insert into voucher_check_result(voucher_id)
+        values (#{voucherId})
+    </insert>
+
+    <update id="update" parameterType="VoucherCheckResult">
+        update voucher_check_result
+        <set>
+            <if test="whoCheckId != null">
+                who_check_id = #{whoCheckId},
+            </if>
+            <if test="stateId != null">
+                state_id = #{stateId},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="getCheckResultByConditions" parameterType="VoucherCheckResult">
+        select
+        id, who_check_id, voucher_id, updated_at, created_at
+        from
+        voucher_check_result
+        <where>
+            <choose>
+                <when test="id != null">
+                    id = #{id}
+                </when>
+                <when test="voucherId != null">
+                    voucher_id = #{voucherId}
+                </when>
+            </choose>
+        </where>
+    </select>
 </mapper>
