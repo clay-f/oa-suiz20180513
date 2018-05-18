@@ -34,16 +34,16 @@ public class VoucherController {
             Integer oaPosition = user.getOaPositionId();
             switch(oaPosition){
                 case 1:
-                    map.put("userId", 1);
+                    map.put("userId", user.getId());
                     break;
                 case 2:
-                    map.put("chargeId", 2);
+                    map.put("chargeId", user.getId());
                     break;
                 case 3:
-                    map.put("managerId",3);
+                    map.put("managerId", user.getId());
                     break;
                 case 4:
-                    map.put("financeId",4);
+                    map.put("financeId", user.getId());
                     break;
             };
            model.addAttribute("voucherList", voucherService.getVoucherByCondition(map));

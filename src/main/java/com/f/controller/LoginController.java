@@ -47,7 +47,7 @@ public class LoginController {
                 request.getSession().setAttribute("currentUser", user);
                 model.addAttribute("message", "login success");
             }
-            return "/users/index";
+            return "redirect:/vouchers/index";
         } catch (Exception e) {
             e.printStackTrace();
         }
