@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Hashtable;
 import java.util.Map;
 
+@SessionAttributes("currentUser")
 @RequestMapping(value = "/vouchers")
 @Controller
 public class VoucherController {
@@ -95,9 +96,24 @@ public class VoucherController {
     }
 
     @RequestMapping(value = "/{id}", method = {RequestMethod.PUT})
-    public String update(@PathVariable(value = "id") Integer id, @ModelAttribute(value = "user") Voucher voucher) {
+    public String update(@PathVariable(value = "id") Integer id, @ModelAttribute(value = "user") Voucher voucher, @ModelAttribute(value = "currentUser") Employee currentUser) throws JsonProcessingException {
         Voucher previousVoucher = voucherService.getVoucherById(voucher.getId());
-        previousVoucher.getVoucherDetail().setDes(voucher.getVoucherDetail().getDes());
+        switch (currentUser.getOaPositionId()) {
+            case 1:
+                previousVoucher.getVoucherDetail().setDes(voucher.getVoucherDetail().getDes());
+                previousVoucher.setItem(voucher.getItem());
+                previousVoucher.setAccount(voucher.getAccount());
+                break;
+            case 2:
+                previousVoucher.getCheckResult().setStateId(voucher.getCheckResult().getStateId());
+                break;
+            case 3:
+                previousVoucher.getCheckResult().setStateId(voucher.getCheckResult().getStateId());
+                break;
+            case 4:
+                previousVoucher.setCheckOutStateId(voucher.getCheckOutStateId());
+                break;
+        }
         voucherService.updateVoucher(previousVoucher);
         return "redirect:/vouchers/index";
     }

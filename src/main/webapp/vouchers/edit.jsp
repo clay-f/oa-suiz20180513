@@ -29,9 +29,24 @@
             <label for="account">金额</label>
             <form:input path="account" id="account"/>
         </p>
-        <c:if test="${currentUser.oaPositionId == 2 || currentUser.oaPositionId == 3}">
-            <form:input path="checkResult.stateId"/>
+        <p>
+        <c:if test="${currentUser.oaPositionId == 4}">
+            报销状态 <form:input path="checkOutStateId"/>
+            <blockquote>(1: 同意, 2: 不同意)</blockquote>
         </c:if>
+        </p>
+        <p>
+            审批状态
+            <c:choose>
+            <c:when test="${currentUser.oaPositionId == 2 || currentUser.oaPositionId == 3}">
+                <form:input path="checkResult.stateId"/>
+            </c:when>
+            <c:otherwise>
+                <form:input path="checkResult.stateId" readonly="true"/>
+            </c:otherwise>
+            </c:choose>
+        <blockquote>(1: 通过, 2: 不通过)</blockquote>
+        </p>
         <p>
             <label for="detail">详细信息</label>
             <form:input path="voucherDetail.des" id="detail"/>

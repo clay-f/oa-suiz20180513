@@ -28,7 +28,18 @@
         金额: ${voucher.account}
     </p>
     <p>
-        发票审批状态:
+        报销状态:
+        <c:choose>
+            <c:when test="${voucher.checkOutStateId == 2}">
+                未报销
+            </c:when>
+            <c:otherwise>
+                已报销
+            </c:otherwise>
+        </c:choose>
+    </p>
+    <p>
+        审批状态:
         <c:choose>
             <c:when test="${voucher.checkResult.stateId == 2}">
                 未通过
