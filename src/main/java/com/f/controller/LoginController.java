@@ -43,7 +43,9 @@ public class LoginController {
             map.put("passwd", user.getPasswd());
             Employee employee = userService.login(map).get(0);
             if (employee != null) {
-                request.getSession().setAttribute("currentUser", employee);
+                user = employee;
+                request.getSession().setAttribute("currentUser", user);
+                model.addAttribute("message", "login success");
             }
             return "redirect:/vouchers/index";
         } catch (Exception e) {

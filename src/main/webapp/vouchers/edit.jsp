@@ -13,6 +13,10 @@
     <title>edit voucher</title>
 </head>
 <body>
+<nav>
+    <c:out value="${currentUser.name}"></c:out>
+    <a href="/users/logout">注销</a>
+</nav>
 <header>/vouchers/edit.jsp</header>
 <section>
     <form:form action="/vouchers/${voucher.id}" modelAttribute="voucher">

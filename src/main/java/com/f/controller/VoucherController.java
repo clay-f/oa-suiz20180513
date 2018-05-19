@@ -32,12 +32,21 @@ public class VoucherController {
         try {
             Employee user = (Employee) request.getSession().getAttribute("currentUser");
             Integer oaPosition = user.getOaPositionId();
-            if (oaPosition == 4) {
-                map.put("price", 5000);
-            } else if (oaPosition == 3) {
-                map.put("oaPositionId", 3);
-            }
-            model.addAttribute("voucherList", voucherService.getVoucherByCondition(map));
+            switch(oaPosition){
+                case 1:
+                    map.put("userId", user.getId());
+                    break;
+                case 2:
+                    map.put("chargeId", user.getId());
+                    break;
+                case 3:
+                    map.put("managerId", user.getId());
+                    break;
+                case 4:
+                    map.put("financeId", user.getId());
+                    break;
+            };
+           model.addAttribute("voucherList", voucherService.getVoucherByCondition(map));
         } catch (Exception e) {
             e.printStackTrace();
         }

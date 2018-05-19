@@ -10,11 +10,11 @@
 <p>${message}</p>
 <section>
     <form:form method="post" action="/users/doRegister" modelAttribute="user">
-        <form:label path="name">Name</form:label>
-        <form:input path="name" id="name"/>
+        <form:label path="name" >Name</form:label>
+        <form:input path="name" id="name" required="true"/>
         <br>
-        <form:label path="passwd">Password</form:label>
-        <form:password path="passwd" id="passwd"/>
+        <form:label path="passwd" >Password</form:label>
+        <form:password path="passwd" id="passwd" required="true"/>
         <br>
         <form:select path="oaPositionId">
             <form:options items="${oaList}" itemValue="id" itemLabel="name"/>

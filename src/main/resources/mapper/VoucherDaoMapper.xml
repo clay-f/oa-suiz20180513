@@ -62,7 +62,7 @@
                     vcr.state_id = 2
                 </when>
                 <when test="financeId != null">
-                    vcr.state_id = 2 and v.check_out_state_id = 1
+                    vcr.state_id = 1 and v.check_out_state_id = 2
                 </when>
             </choose>
         </where>

@@ -20,10 +20,10 @@
 <section>
     <form:form action="/users/doLogin" method="post" modelAttribute="user">
         Name:
-        <form:input path="name"/>
+        <form:input path="name" required="true"/>
         <br>
         Password:
-        <form:password path="passwd"/>
+        <form:password path="passwd" required="true"/>
         <br>
         <input type="submit" value="login">
     </form:form>

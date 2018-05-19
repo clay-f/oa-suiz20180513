@@ -5,14 +5,18 @@ import com.f.services.DepartmentService;
 import com.f.services.OaPositionService;
 import com.f.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jdk.nashorn.internal.runtime.GlobalConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
 
 @CrossOrigin
 @RequestMapping(value = "/users")
@@ -32,7 +36,6 @@ public class UserController extends ApplicationController {
 
     @GetMapping(value = "/")
     public void rootIndex(HttpServletResponse response) throws IOException {
-        System.out.println("catch me");
         response.sendRedirect("/users/index");
     }
 
@@ -61,5 +64,12 @@ public class UserController extends ApplicationController {
     public String index(Model model) {
         model.addAttribute("userList", userService.getAllUsers());
         return "/users/index";
+    }
+
+    @RequestMapping(value = "/logout",method = RequestMethod.GET)
+    public String logout(HttpServletRequest request, SessionStatus session,Model model){
+        request.getSession().removeAttribute("currentUser");
+        model.addAttribute("message","logout success");
+        return "redirect:/vouchers/index";
     }
 }

@@ -12,6 +12,10 @@
     <title>new</title>
 </head>
 <body>
+<nav>
+    <c:out value="${currentUser.name}"></c:out>
+    <a href="/users/logout">注销</a>
+</nav>
 <section>
     <form:form modelAttribute="voucher" action="/vouchers/create">
         <p>
