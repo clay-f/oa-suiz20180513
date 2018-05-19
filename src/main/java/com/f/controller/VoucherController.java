@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Hashtable;
 import java.util.Map;
 
-@SessionAttributes("currentUser")
 @RequestMapping(value = "/vouchers")
 @Controller
 public class VoucherController {
@@ -64,7 +63,6 @@ public class VoucherController {
     public String create(@ModelAttribute(value = "user") Voucher user, Model model, HttpServletRequest request) {
         Employee currentUser = (Employee) request.getSession().getAttribute("currentUser");
         user.setEmployeeId(currentUser.getId());
-
         if (voucherService.saveVoucher(user) > 0) {
             return "redirect:/vouchers/index";
         }
@@ -96,7 +94,7 @@ public class VoucherController {
     }
 
     @RequestMapping(value = "/{id}", method = {RequestMethod.PUT})
-    public String update(@PathVariable(value = "id") Integer id, @ModelAttribute(value = "user") Voucher voucher, @ModelAttribute(value = "currentUser") Employee currentUser) throws JsonProcessingException {
+    public String update(@PathVariable(value = "id") Integer id, @ModelAttribute(value = "user") Voucher voucher,@SessionAttribute(required = true) Employee currentUser) throws JsonProcessingException {
         Voucher previousVoucher = voucherService.getVoucherById(voucher.getId());
         switch (currentUser.getOaPositionId()) {
             case 1:
