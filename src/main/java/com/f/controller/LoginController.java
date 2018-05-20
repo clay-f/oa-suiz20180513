@@ -45,7 +45,7 @@ public class LoginController {
             if (employee != null) {
                 user = employee;
                 request.getSession().setAttribute("currentUser", user);
-                model.addAttribute("message", "login success");
+                model.addAttribute("message", "1");
             }
             return "redirect:/vouchers/index";
         } catch (Exception e) {

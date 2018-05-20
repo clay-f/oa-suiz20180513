@@ -6,6 +6,8 @@ import com.f.pojo.Voucher;
 import com.f.services.VoucherService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.ibatis.annotations.Param;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,7 @@ import java.util.Map;
 @Controller
 public class VoucherController {
     private OutputJsonHelper outputJsonHelper = OutputJsonHelper.getJsonOutputInstance();
+    private Logger logger = LogManager.getLogger(VoucherController.class);
     @Autowired(required = true)
     @Qualifier(value = "voucherServiceImpl")
     private VoucherService voucherService;
@@ -29,7 +32,12 @@ public class VoucherController {
     public String index(Model model, HttpServletRequest request) {
         Map<String, Object> map = new Hashtable<String, Object>();
         try {
+            logger.debug("user val: ");
+            logger.info("info");
+            logger.error("error");
+            logger.warn("warn");
             Employee user = (Employee) request.getSession().getAttribute("currentUser");
+            System.out.println(outputJsonHelper.outputJsonVal(user));
             Integer oaPosition = user.getOaPositionId();
             switch(oaPosition){
                 case 1:

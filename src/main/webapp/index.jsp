@@ -8,9 +8,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>index</title>
     <jsp:include page="/public/head.jsp"/>
+    <link rel="stylesheet" href="/assets/css/homepage.css">
 </head>
 <body>
-    <div class="jumbotron">hello world</div>
+    <section>
+        <figure>
+            <img src="/assets/images/index_bg.jpg" alt="">
+            <figcaption><h3><a href="/users/login">Welcome jboa</a></h3></figcaption>
+        </figure>
+    </section>    
 <jsp:include page="/public/footer.jsp"/>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.f.interceptors;
 
+import com.f.controller.LoginController;
 import com.f.pojo.Employee;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
 
 public class UserLoginInterceptor extends HandlerInterceptorAdapter {
-    private static Logger logger = LogManager.getLogger(UserLoginInterceptor.class);
+    private static Logger logger = LogManager.getLogger(HandlerInterceptorAdapter.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -19,11 +20,11 @@ public class UserLoginInterceptor extends HandlerInterceptorAdapter {
                 + "]" + request.getRequestURI() + getParameters(request));
         String requestUrl = request.getRequestURI();
         try {
+            Employee user = (Employee) request.getSession().getAttribute("currentUser");
             if (requestUrl.equals("/users/login") || requestUrl.equals("/users/doLogin") ||
                     requestUrl.equals("/users/register") || requestUrl.equals("/users/doRegister")) {
                 return true;
             } else {
-                Employee user = (Employee) request.getSession().getAttribute("currentUser");
                 if (user != null && !user.equals("")) {
                     return true;
                 }

@@ -35,7 +35,7 @@ public class EmployeeAop {
         Object obj = null;
         try {
             obj =  proceedingJoinPoint.proceed();
-            logger.info("catch obj val: " + outputJsonHelper.outputJsonVal(obj));
+            logger.info("around method catch val: " + outputJsonHelper.outputJsonVal(obj));
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }

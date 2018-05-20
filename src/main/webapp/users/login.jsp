@@ -1,7 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,20 +11,24 @@
     <jsp:include page="/public/head.jsp"/>
 </head>
 <body>
-<section>
-    <p>${message}</p>
-</section>
-<section>
-    <form:form action="/users/doLogin" method="post" modelAttribute="user">
-        Name:
-        <form:input path="name" required="true"/>
-        <br>
-        Password:
-        <form:password path="passwd" required="true"/>
-        <br>
-        <input type="submit" value="login">
-    </form:form>
-</section>
+<div class="container">
+    <section>
+        <form:form action="/users/doLogin" method="post" modelAttribute="user">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <form:input path="name" required="true" id="name" cssClass="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="passwd">Password</label>
+                <form:password path="passwd" required="true" id="passwd" cssClass="form-control"/>
+            </div>
+            <input type="submit" value="login" class="btn btn-primary">
+        </form:form>
+    </section>
+</div>
 <jsp:include page="/public/footer.jsp"/>
+<script>
+
+</script>
 </body>
 </html>

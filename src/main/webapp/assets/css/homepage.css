@@ -1,0 +1,21 @@
+section {
+    overflow: hidden;
+    position: absolute;
+}
+
+figcaption {
+    position: relative;
+    left: 600px;
+    top: -750px;
+    border: 1px solid white;
+    height: 100px;
+    width: 200px;
+}
+
+figcaption a {
+    color: white;
+    opacity: 0.6;
+    text-decoration: none;
+    line-height: 90px;
+    margin-left: 20px;
+}

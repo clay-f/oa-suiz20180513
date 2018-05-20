@@ -49,5 +49,13 @@
     </tbody>
 </table>
 <jsp:include page="/public/footer.jsp"/>
+<script>
+    {
+        var search_val = location.search.split();
+        if (search_val.length > 0 && parseInt(search_val[0].split('=')[1]) == 1) {
+            toastr.success("login success", "welcome jboa");
+        }
+    }
+</script>
 </body>
 </html>
