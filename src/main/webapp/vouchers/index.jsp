@@ -3,11 +3,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <jsp:include page="/public/head.jsp"/>
     <title>voucher index</title>
+    <jsp:include page="/public/head.jsp"/>
 </head>
 <body>
 <nav>
@@ -50,5 +48,6 @@
     </c:forEach>
     </tbody>
 </table>
+<jsp:include page="/public/footer.jsp"/>
 </body>
 </html>
