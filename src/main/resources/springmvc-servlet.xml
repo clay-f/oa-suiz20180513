@@ -10,7 +10,4 @@
     </bean>
     <mvc:resources mapping="/assets/**" location="/assets/"/>
     <mvc:annotation-driven/>
-    <mvc:interceptors>
-        <bean id="loggerInterceptor" class="com.f.interceptors.UserLoginInterceptor"/>
-    </mvc:interceptors>
 </beans>

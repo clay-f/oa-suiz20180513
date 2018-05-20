@@ -32,10 +32,6 @@ public class VoucherController {
     public String index(Model model, HttpServletRequest request) {
         Map<String, Object> map = new Hashtable<String, Object>();
         try {
-            logger.debug("user val: ");
-            logger.info("info");
-            logger.error("error");
-            logger.warn("warn");
             Employee user = (Employee) request.getSession().getAttribute("currentUser");
             System.out.println(outputJsonHelper.outputJsonVal(user));
             Integer oaPosition = user.getOaPositionId();

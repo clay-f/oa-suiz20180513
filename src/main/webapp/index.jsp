@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>index</title>
     <jsp:include page="/public/head.jsp"/>
-    <link rel="stylesheet" href="/assets/css/homepage.css">
+    <link rel="stylesheet" href="/assets/css/homepage.css" type="text/css">
 </head>
 <body>
     <section>

@@ -7,4 +7,7 @@
     <import resource="classpath:mybatis-spring.xml"/>
     <context:component-scan base-package="com.f.services, com.f.dao, com.f.controller, com.f.aspectj, com.f.interceptors"/>
     <aop:aspectj-autoproxy/>
+    <mvc:interceptors>
+        <bean id="loggerInterceptor" class="com.f.interceptors.UserLoginInterceptor"/>
+    </mvc:interceptors>
 </beans>
