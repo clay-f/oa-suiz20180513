@@ -11,12 +11,13 @@
     <link rel="stylesheet" href="/assets/css/homepage.css" type="text/css">
 </head>
 <body>
-    <section>
-        <figure>
-            <img src="/assets/images/index_bg.jpg" alt="">
-            <figcaption><h3><a href="/users/login">Welcome jboa</a></h3></figcaption>
-        </figure>
-    </section>    
+<jsp:include page="/public/navbar.jsp"/>
+<section>
+    <figure>
+        <img src="/assets/images/index_bg.jpg" alt="">
+        <figcaption><h3><a href="/users/login">Welcome jboa</a></h3></figcaption>
+    </figure>
+</section>
 <jsp:include page="/public/footer.jsp"/>
 </body>
 </html>

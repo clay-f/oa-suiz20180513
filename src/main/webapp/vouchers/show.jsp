@@ -11,11 +11,7 @@
     <jsp:include page="/public/head.jsp"/>
 </head>
 <body>
-<nav>
-    <c:out value="${currentUser.name}"></c:out>
-    <a href="/users/logout">注销</a>
-</nav>
-<header>/vouchers/show.jsp</header>
+<jsp:include page="/public/navbar.jsp"/>
 <article>
     <p>
         事件名称: ${voucher.item}
@@ -53,8 +49,8 @@
 </article>
 
 <section>
-    <a href="/vouchers/${voucher.id}/edit">edit</a>
-    <a href="/vouchers/delete/${voucher.id}">delete</a>
+    <a href="/vouchers/${voucher.id}/edit" class="btn btn-primary">edit</a>
+    <a href="/vouchers/delete/${voucher.id}" class="btn btn-danger">delete</a>
 </section>
 <jsp:include page="/public/footer.jsp"/>
 </body>

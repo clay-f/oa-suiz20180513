@@ -11,7 +11,7 @@
     <jsp:include page="/public/head.jsp"/>
 </head>
 <body>
-<p>${message}</p>
+<jsp:include page="/public/navbar.jsp"/>
 <section>
     <form:form method="post" action="/users/doRegister" modelAttribute="user">
         <form:label path="name">Name</form:label>
@@ -30,5 +30,8 @@
     </form:form>
 </section>
 <jsp:include page="/public/footer.jsp"/>
+<script>
+    toastr.info("please register before login");
+</script>
 </body>
 </html>

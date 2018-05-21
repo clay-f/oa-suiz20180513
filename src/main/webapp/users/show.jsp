@@ -11,10 +11,7 @@
     <jsp:include page="/public/head.jsp"/>
 </head>
 <body>
-<nav>
-    <c:out value="${currentUser.name}"></c:out>
-    <a href="/users/logout">注销</a>
-</nav>
+<jsp:include page="/public/navbar.jsp"/>
 <h1>show user info</h1>
 <p>
     ${user.id}

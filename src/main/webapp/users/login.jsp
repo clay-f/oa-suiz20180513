@@ -11,6 +11,7 @@
     <jsp:include page="/public/head.jsp"/>
 </head>
 <body>
+<jsp:include page="/public/navbar.jsp"/>
 <div class="container">
     <section>
         <form:form action="/users/doLogin" method="post" modelAttribute="user">
@@ -27,8 +28,5 @@
     </section>
 </div>
 <jsp:include page="/public/footer.jsp"/>
-<script>
-
-</script>
 </body>
 </html>

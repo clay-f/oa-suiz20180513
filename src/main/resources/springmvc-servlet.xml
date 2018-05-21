@@ -8,6 +8,9 @@
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="suffix" value=".jsp"/>
     </bean>
+    <mvc:interceptors>
+        <bean id="loggerInterceptor" class="com.f.interceptors.UserLoginInterceptor"/>
+    </mvc:interceptors>
     <mvc:resources mapping="/assets/**" location="/assets/"/>
     <mvc:annotation-driven/>
 </beans>

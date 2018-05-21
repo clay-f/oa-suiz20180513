@@ -12,11 +12,7 @@
 
 </head>
 <body>
-<nav>
-    <c:out value="${currentUser.name}"></c:out>
-    <a href="/users/logout">注销</a>
-</nav>
-<header>/vouchers/edit.jsp</header>
+<jsp:include page="/public/navbar.jsp"/>
 <section>
     <form:form action="/vouchers/${voucher.id}" modelAttribute="voucher">
         <input type="hidden" name="_method" value="put">
@@ -50,7 +46,7 @@
             <label for="detail">详细信息</label>
             <form:input path="voucherDetail.des" id="detail"/>
         </p>
-        <input type="submit" value="更新发票">
+        <input type="submit" value="更新发票" class="btn btn-success">
     </form:form>
 </section>
 </body>

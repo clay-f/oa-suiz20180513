@@ -5,43 +5,39 @@
 <head>
     <jsp:include page="/public/head.jsp"/>
     <title>voucher index</title>
-    <jsp:include page="/public/head.jsp"/>
 </head>
 <body>
-<nav>
-    <c:out value="${currentUser.name}"></c:out>
-    <a href="/users/logout">注销</a>
-</nav>
-<table>
+<jsp:include page="/public/navbar.jsp"/>
+<table class="table">
     <thead>
     <tr>
-        <th>id</th>
-        <th>item</th>
-        <th>account</th>
-        <th>报销状态</th>
-        <th>批准状态</th>
+        <th scope="col">id</th>
+        <th scope="col">事项</th>
+        <th scope="col">价格</th>
+        <th scope="col">报销状态</th>
+        <th scope="col">批准状态</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach items="${voucherList}" var="item">
-        <tr>
+        <tr scope="row">
             <td><a href="/vouchers/<c:out value="${item.id}"/>"><c:out value="${item.id}"/></a></td>
             <td><c:out value="${item.item}"/></td>
             <td><c:out value="${item.account} "/></td>
             <td>
                 <c:choose>
                     <c:when test="${item.checkOutStateId == 2}">
-                        false
+                        <i class="fas fa-times"></i>
                     </c:when>
-                    <c:otherwise>true</c:otherwise>
+                    <c:otherwise><i class="fas fa-check"></i></c:otherwise>
                 </c:choose>
             </td>
             <td>
                 <c:choose>
                     <c:when test="${item.checkResult.stateId == 2}">
-                        false
+                        <i class="fas fa-times"></i>
                     </c:when>
-                    <c:otherwise>true</c:otherwise>
+                    <c:otherwise><i class="fas fa-check"></i></c:otherwise>
                 </c:choose>
             </td>
         </tr>
