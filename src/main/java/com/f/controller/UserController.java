@@ -21,7 +21,7 @@ import java.util.Enumeration;
 
 @CrossOrigin
 @RequestMapping(value = "/users")
-@Controller
+@Controller("userController")
 public class UserController extends ApplicationController {
     private Logger logger = LogManager.getLogger(UserController.class);
 
