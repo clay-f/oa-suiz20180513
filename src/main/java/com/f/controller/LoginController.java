@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller
+@Controller(value = "loginController")
 @SessionAttributes("user")
 public class LoginController {
     @Autowired
