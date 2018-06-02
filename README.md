@@ -1,7 +1,4 @@
 # jboa
-springmvc demo
-=======
-jboa
 
 ## develop moduls
 1. user authenticate
