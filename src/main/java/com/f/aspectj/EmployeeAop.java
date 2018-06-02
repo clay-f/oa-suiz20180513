@@ -1,8 +1,6 @@
 package com.f.aspectj;
 
 import com.f.helper.OutputJsonHelper;
-import com.f.interceptors.UserLoginInterceptor;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
