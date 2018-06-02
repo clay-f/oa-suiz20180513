@@ -1,4 +1,4 @@
-package com.f.test.models;
+package com.f.test.service;
 
 import com.f.pojo.Voucher;
 import com.f.pojo.VoucherDetail;

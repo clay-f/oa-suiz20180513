@@ -1,4 +1,4 @@
-package com.f.test.models;
+package com.f.test.service;
 
 import com.f.services.OaPositionService;
 import com.f.test.TestHelper;

@@ -1,4 +1,4 @@
-package com.f.test.models;
+package com.f.test.service;
 
 import com.f.helper.OutputJsonHelper;
 import com.f.pojo.Employee;
@@ -8,12 +8,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 
 
-import static org.junit.Assert.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class EmployeeTest {
     private TestHelper testHelper = TestHelper.getInstance();
