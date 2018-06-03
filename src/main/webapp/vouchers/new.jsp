@@ -19,22 +19,21 @@
 </nav>
 <section>
     <form:form modelAttribute="voucher" action="/vouchers/create">
-        <p>
+        <div class="form-group">
             <label>Item</label>
-            <form:input path="item"/>
-        </p>
-        <p>
+            <form:input path="item" cssClass="form-control"/>
+        </div>
+        <div class="form-group">
             <label>Account</label>
             <form:input path="account"/>
-        </p>
-        <p>
+        </div>
+        <div class="form-group">
             <label>Detail</label>
-            <form:input path="voucherDetail"/>
-        </p>
+            <form:input path="voucherDetail.des"/>
+        </div>
         <input type="submit">
     </form:form>
 </section>
-<jsp:include page="/public/footer.jsp.jsp"/>
-
+<jsp:include page="/public/footer.jsp"/>
 </body>
 </html>
