@@ -13,10 +13,7 @@
     <jsp:include page="/public/head.jsp"/>
 </head>
 <body>
-<nav>
-    <c:out value="${currentUser.name}"></c:out>
-    <a href="/users/logout">注销</a>
-</nav>
+<jsp:include page="/public/navbar.jsp"/>
 <section>
     <form:form modelAttribute="voucher" action="/vouchers/create">
         <div class="form-group">
@@ -25,11 +22,11 @@
         </div>
         <div class="form-group">
             <label>Account</label>
-            <form:input path="account"/>
+            <form:input path="account" cssClass="form-control"/>
         </div>
         <div class="form-group">
             <label>Detail</label>
-            <form:input path="voucherDetail.des"/>
+            <form:input path="voucherDetail.des" cssClass="form-control"/>
         </div>
         <input type="submit">
     </form:form>
