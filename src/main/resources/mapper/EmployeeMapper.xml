@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.f.dao.EmployeeDao">
-    <select id="getAllEmployee" resultMap="getUserByConditionResult">
+    <select id="getAll" resultMap="getUserByConditionResult">
         select * from employee
     </select>
 
@@ -37,7 +37,7 @@
         </choose>
     </select>
 
-    <insert id="saveEmployee" parameterType="Employee">
+    <insert id="insert" parameterType="Employee">
         insert into employee(name, passwd, department_id, oa_position_id)
         values (
         #{name}, #{passwd},
@@ -50,4 +50,8 @@
         </if>
         );
     </insert>
+
+    <select id="get" parameterType="Integer" resultType="Employee">
+        select * from employee where id = #{id}
+    </select>
 </mapper>

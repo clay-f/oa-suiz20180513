@@ -14,11 +14,16 @@ public class VoucherCheckResultServiceImpl implements VoucherCheckResultService 
     @Resource(name = "voucherCheckResultDao")
     private VoucherCheckResultDao voucherCheckResultDao;
 
-    @Transactional
     @Override
     public boolean save(VoucherCheckResult result) {
+            voucherCheckResultDao.insert(result);
+            return true;
+    }
+
+    @Override
+    public boolean deleteVoucherCheckResult(Integer id) {
         try {
-            voucherCheckResultDao.save(result);
+            voucherCheckResultDao.delete(id);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -26,25 +31,10 @@ public class VoucherCheckResultServiceImpl implements VoucherCheckResultService 
         }
     }
 
-    @Transactional
-    @Override
-    public boolean deleteVoucherCheckResult(Integer id) {
-        try {
-            if (voucherCheckResultDao.deleteVoucherCheckResultByVoucherId(id) > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    @Transactional
     @Override
     public boolean updateVoucherCheckResult(VoucherCheckResult voucherCheckResult) {
         voucherCheckResult.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-        return voucherCheckResultDao.update(voucherCheckResult) > 0;
+         voucherCheckResultDao.update(voucherCheckResult);
+         return true;
     }
 }

@@ -24,6 +24,7 @@ import java.util.Map;
 public class VoucherController {
     private OutputJsonHelper outputJsonHelper = OutputJsonHelper.getJsonOutputInstance();
     private Logger logger = LogManager.getLogger(VoucherController.class);
+
     @Autowired(required = true)
     @Qualifier(value = "voucherServiceImpl")
     private VoucherService voucherService;
@@ -35,7 +36,7 @@ public class VoucherController {
             Employee user = (Employee) request.getSession().getAttribute("currentUser");
             System.out.println(outputJsonHelper.outputJsonVal(user));
             Integer oaPosition = user.getOaPositionId();
-            switch(oaPosition){
+            switch (oaPosition) {
                 case 1:
                     map.put("userId", user.getId());
                     break;
@@ -48,8 +49,9 @@ public class VoucherController {
                 case 4:
                     map.put("financeId", user.getId());
                     break;
-            };
-           model.addAttribute("voucherList", voucherService.getVoucherByCondition(map));
+            }
+            ;
+            model.addAttribute("voucherList", voucherService.getVoucherByCondition(map));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,39 +69,32 @@ public class VoucherController {
     public String create(@ModelAttribute(value = "user") Voucher user, Model model, HttpServletRequest request) {
         Employee currentUser = (Employee) request.getSession().getAttribute("currentUser");
         user.setEmployeeId(currentUser.getId());
-        if (voucherService.saveVoucher(user) > 0) {
-            return "redirect:/vouchers/index";
-        }
-        model.addAttribute("message", "create false");
-        return "/vouchers/new";
+        return "redirect:/vouchers/index";
     }
 
 
     @RequestMapping(value = "/{id}")
     public String show(@PathVariable(value = "id") Integer id, Model model) {
-        model.addAttribute("voucher", voucherService.getVoucherById(id));
+        model.addAttribute("voucher", voucherService.get(id));
         return "/vouchers/show";
     }
 
     @RequestMapping(value = "/{id}/edit")
     public String edit(@PathVariable(value = "id") Integer id, Model model) {
-        model.addAttribute("voucher", voucherService.getVoucherById(id));
+        model.addAttribute("voucher", voucherService.get(id));
         return "/vouchers/edit";
     }
 
     @RequestMapping(value = "/delete/{id}")
     public String delete(@PathVariable(value = "id") Integer id, Model model) {
-        if (voucherService.deleteVoucherById(id)) {
-            return "redirect:/vouchers/index";
-        } else {
-            model.addAttribute("message", "delete voucher false");
-            return "/vouchers/" + id;
-        }
+        voucherService.delete(id);
+        return "redirect:/vouchers/index";
+
     }
 
     @RequestMapping(value = "/{id}", method = {RequestMethod.PUT})
-    public String update(@PathVariable(value = "id") Integer id, @ModelAttribute(value = "user") Voucher voucher,@SessionAttribute(required = true) Employee currentUser) throws JsonProcessingException {
-        Voucher previousVoucher = voucherService.getVoucherById(voucher.getId());
+    public String update(@PathVariable(value = "id") Integer id, @ModelAttribute(value = "user") Voucher voucher, @SessionAttribute(required = true) Employee currentUser) throws JsonProcessingException {
+        Voucher previousVoucher = voucherService.get(voucher.getId());
         switch (currentUser.getOaPositionId()) {
             case 1:
                 previousVoucher.getVoucherDetail().setDes(voucher.getVoucherDetail().getDes());
@@ -116,7 +111,7 @@ public class VoucherController {
                 previousVoucher.setCheckOutStateId(voucher.getCheckOutStateId());
                 break;
         }
-        voucherService.updateVoucher(previousVoucher);
+        voucherService.update(previousVoucher);
         return "redirect:/vouchers/index";
     }
 }

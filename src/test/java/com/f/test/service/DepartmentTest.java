@@ -13,7 +13,7 @@ public class DepartmentTest {
     @Test
     public void getDepartmentList() {
         try {
-            System.out.println(mapper.writeValueAsString(departmentService.getDepartmentList()));
+            System.out.println(mapper.writeValueAsString(departmentService.getAll()));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

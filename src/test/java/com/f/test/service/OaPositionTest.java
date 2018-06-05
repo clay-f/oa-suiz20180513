@@ -8,6 +8,6 @@ public class OaPositionTest {
     private OaPositionService oaPositionService = (OaPositionService) TestHelper.getInstance().getBean("oaPositionServiceImpl");
     @Test
     public void getAllPosition() {
-        assert oaPositionService.getPositionList().size() > 0;
+        assert oaPositionService.getAll().size() > 0;
     }
 }

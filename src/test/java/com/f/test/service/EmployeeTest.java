@@ -21,6 +21,7 @@ public class EmployeeTest {
     @Test
     public void getEmployeeList() {
         assert testHelper != null;
+        userService.get(2);
     }
 
     @Test
@@ -33,7 +34,7 @@ public class EmployeeTest {
 
     @Test
     public void addEmployee() {
-        List<Employee> list = userService.getAllUsers();
+        List<Employee> list = userService.getAll();
         System.out.println(list);
     }
 }

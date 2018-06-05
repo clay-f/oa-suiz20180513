@@ -4,6 +4,5 @@ import com.f.pojo.Department;
 
 import java.util.List;
 
-public interface DepartmentService {
-    List<Department> getDepartmentList();
+public interface DepartmentService extends GenericService<Department, Integer> {
 }

@@ -6,6 +6,7 @@ import com.f.services.VoucherDetailService;
 import com.f.services.VoucherService;
 import com.f.test.TestHelper;
 import org.junit.jupiter.api.Test;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,12 +19,12 @@ public class VoucherTest {
     @Test
     public void getVouchersList() {
         assert voucherService != null;
-        assert voucherService.getAllVouchers().size() > 0;
+        assert voucherService.getAll().size() > 0;
     }
 
     @Test
     public void getVoucherById() {
-        voucherService.getVoucherById(1);
+        voucherService.get(2);
     }
 
     @Test
@@ -36,20 +37,19 @@ public class VoucherTest {
         Voucher voucher = new Voucher("jany get a car" + Objects.toString(System.currentTimeMillis()), (float) 0.00, 1);
         VoucherDetail voucherDetail = new VoucherDetail("get a car by 500$");
         voucher.setVoucherDetail(voucherDetail);
-        voucherService.saveVoucher(voucher);
+        voucherService.save(voucher);
     }
 
     @Test
     public void deleteVoucher() {
-        List<Voucher> employeeList = voucherService.getAllVouchers();
+        List<Voucher> employeeList = voucherService.getAll();
 //        assert voucherService.deleteVoucherById(employeeList.get(0).getId());
     }
 
     @Test
     public void updateVoucher() {
-        List<Voucher> vouchers = voucherService.getAllVouchers();
-        assert voucherService.updateVoucher(vouchers.get(0));
-        voucherService.getVoucherById(1);
+        List<Voucher> vouchers = voucherService.getAll();
+        voucherService.update(vouchers.get(0));
     }
 
     @Test

@@ -1,5 +1,6 @@
 package com.f.services.impl;
 
+import com.f.dao.GenericCrudMapper;
 import com.f.dao.VoucherDetailDao;
 import com.f.pojo.VoucherDetail;
 import com.f.services.VoucherDetailService;
@@ -12,40 +13,18 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 
 @Service
-public class VoucherDetailServiceImpl implements VoucherDetailService {
-    @Autowired(required = true)
-    @Qualifier(value = "voucherDetailDao")
+public class VoucherDetailServiceImpl extends GenericCrudService<VoucherDetail, Integer> implements VoucherDetailService {
+    @Autowired
+    public VoucherDetailServiceImpl(@Qualifier("voucherDetailDao") GenericCrudMapper mapper) {
+        super(mapper);
+        voucherDetailDao = (VoucherDetailDao) mapper;
+    }
+
     private VoucherDetailDao voucherDetailDao;
-
-    @Transactional
-    @Override
-    public boolean deleteVoucherDetailById(Integer id) {
-       return voucherDetailDao.deleteVoucherDetailById(id) > 0;
-    }
-
-    @Transactional
-    @Override
-    public Integer saveVoucherDetail(VoucherDetail voucherDetail) {
-        Integer saveState = -1;
-        try {
-            saveState = voucherDetailDao.saveVoucherDetail(voucherDetail);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return -1;
-        }
-        return saveState;
-    }
 
     @Transactional
     @Override
     public boolean deleteVoucherDetailByVoucherId(Integer id) {
         return voucherDetailDao.deleteVoucherDetailByVoucherId(id) > 0;
-    }
-
-    @Transactional
-    @Override
-    public boolean updateVoucherDetail(VoucherDetail voucherDetail) {
-        voucherDetail.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-        return voucherDetailDao.saveVoucherDetail(voucherDetail) > 0;
     }
 }

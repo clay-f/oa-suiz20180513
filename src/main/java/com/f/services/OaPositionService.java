@@ -4,6 +4,5 @@ import com.f.pojo.OaPosition;
 
 import java.util.List;
 
-public interface OaPositionService {
-    List<OaPosition> getPositionList();
+public interface OaPositionService extends GenericService<OaPosition, Integer>  {
 }

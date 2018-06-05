@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.f.dao.VoucherDao">
-    <select id="getAllVouchers" resultMap="getAllVouchersResult" parameterType="Map">
+    <select id="getAll" resultMap="getAllVouchersResult" parameterType="Map">
         select
           v.id, item, check_out_state_id, account, v.created_at, v.updated_at,
           vd.id v_id, vd.voucher_id, vd.des,
@@ -68,7 +68,7 @@
         </where>
     </select>
 
-    <select id="getVoucherById" resultMap="getAllVouchersResult" parameterType="Integer">
+    <select id="get" resultMap="getAllVouchersResult" parameterType="Integer">
         select
           v.id, v.item, v.account, v.check_out_state_id, v.employee_id, v.created_at, v.updated_at,
           vd.id v_id, vd.des, vd.voucher_id,
@@ -80,7 +80,7 @@
         where v.id = #{id}
     </select>
 
-    <delete id="deleteVoucherById" parameterType="Integer">
+    <delete id="delete" parameterType="Integer">
         delete from voucher where id = #{id}
     </delete>
 
@@ -88,12 +88,12 @@
         select count(1) from voucher
     </select>
 
-    <insert id="saveVoucher" parameterType="Voucher" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    <insert id="insert" parameterType="Voucher" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into voucher(employee_id, item, account)
         values (#{employeeId}, #{item}, #{account})
     </insert>
 
-    <update id="updateVoucher" parameterType="Voucher">
+    <update id="update" parameterType="Voucher">
         update voucher
         <set>
             <if test="item != null">item = #{item},</if>

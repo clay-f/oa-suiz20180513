@@ -4,7 +4,6 @@ import com.f.pojo.Employee;
 import com.f.services.DepartmentService;
 import com.f.services.OaPositionService;
 import com.f.services.UserService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +11,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Enumeration;
 
 @CrossOrigin
 @RequestMapping(value = "/users")
@@ -35,8 +32,6 @@ public class UserController extends ApplicationController {
     @Autowired
     private DepartmentService departmentService;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
-
     @GetMapping(value = "/")
     public void rootIndex(HttpServletResponse response) throws IOException {
         response.sendRedirect("/users/index");
@@ -44,29 +39,22 @@ public class UserController extends ApplicationController {
 
     @RequestMapping(value = "/register")
     public String register(@ModelAttribute("user") Employee user, Model model) {
-        model.addAttribute("oaList", oaPositionService.getPositionList());
-        model.addAttribute("departmentList", departmentService.getDepartmentList());
+        model.addAttribute("oaList", oaPositionService.getAll());
+        model.addAttribute("departmentList", departmentService.getAll());
         return "/users/register";
     }
 
     @RequestMapping(value = "/doRegister", method = {RequestMethod.POST})
     public String doRegister(@ModelAttribute("user") Employee user, Model model) {
-        try {
-            if (userService.saveUser(user)) {
-                model.addAttribute("message", "register success");
-            } else {
-                model.addAttribute("message", "false");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        userService.save(user);
+        model.addAttribute("message", "register success");
         return "index";
     }
 
     @RequestMapping("/index")
     public String index(Model model, @SessionAttribute(name = "currentUser", required = false) Employee user) {
         logger.info("user index, login user val: " + user);
-        model.addAttribute("userList", userService.getAllUsers());
+        model.addAttribute("userList", userService.getAll());
         return "/users/index";
     }
 

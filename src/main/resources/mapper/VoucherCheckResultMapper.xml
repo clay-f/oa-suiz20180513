@@ -3,11 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.f.dao.VoucherCheckResultDao">
-    <delete id="deleteVoucherCheckResultByVoucherId" parameterType="Integer">
+    <delete id="delete" parameterType="Integer">
         delete from voucher_check_result where voucher_id = #{id}
     </delete>
 
-    <insert id="save" parameterType="VoucherCheckResult">
+    <insert id="insert" parameterType="VoucherCheckResult">
         insert into voucher_check_result(voucher_id)
         values (#{voucherId})
     </insert>

@@ -7,7 +7,7 @@
         <id property="id" column="id"/>
         <result property="name" column="name"/>
     </resultMap>
-    <select id="getAllOaPosition" resultMap="getAllOaPositionResult">
+    <select id="getAll" resultMap="getAllOaPositionResult">
       select id, name from oa_position;
     </select>
 </mapper>
