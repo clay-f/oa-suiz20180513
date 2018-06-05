@@ -24,7 +24,7 @@ public class VoucherTest {
 
     @Test
     public void getVoucherById() {
-        voucherService.get(2);
+        voucherService.get(51);
     }
 
     @Test

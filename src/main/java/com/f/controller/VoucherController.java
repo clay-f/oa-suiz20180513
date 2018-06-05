@@ -50,7 +50,6 @@ public class VoucherController {
                     map.put("financeId", user.getId());
                     break;
             }
-            ;
             model.addAttribute("voucherList", voucherService.getVoucherByCondition(map));
         } catch (Exception e) {
             e.printStackTrace();
