@@ -57,4 +57,12 @@ public class VoucherServiceImpl extends GenericCrudService<Voucher, Integer> imp
         }
         return voucherList;
     }
+
+    @Transactional
+    @Override
+    public void update(Voucher voucher) {
+        super.update(voucher);
+        voucherDetailDao.update(voucher.getVoucherDetail());
+        voucherCheckResultDao.update(voucher.getCheckResult());
+    }
 }

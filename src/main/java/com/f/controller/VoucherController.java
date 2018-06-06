@@ -84,7 +84,6 @@ public class VoucherController {
     public String delete(@PathVariable(value = "id") Integer id, Model model) {
         voucherService.delete(id);
         return "redirect:/vouchers/index";
-
     }
 
     @RequestMapping(value = "/{id}", method = {RequestMethod.PUT})
