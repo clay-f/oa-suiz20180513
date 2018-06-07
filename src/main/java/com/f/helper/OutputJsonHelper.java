@@ -17,6 +17,9 @@ public class OutputJsonHelper {
         return HelpOutputJson.INSTANCE;
     }
 
+    /*
+       生成格式化 json 数据
+     */
     public Object outputJsonVal(Object obj) throws JsonProcessingException {
         return objectMapper.writeValueAsString(obj);
     }

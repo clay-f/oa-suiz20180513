@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("oaPositionService")
 public class OaPositionServiceImpl extends GenericCrudService<OaPosition, Integer> implements OaPositionService {
     @Autowired
     public OaPositionServiceImpl(@Qualifier("oaPositionDao") GenericCrudMapper mapper) {
