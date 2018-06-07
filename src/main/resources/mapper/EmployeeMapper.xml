@@ -27,14 +27,6 @@
                 and e.name = "error"
             </otherwise>
         </choose>
-        <choose>
-            <when test="passwd != null">
-                and e.passwd = #{passwd}
-            </when>
-            <otherwise>
-                and e.passwd = "error"
-            </otherwise>
-        </choose>
     </select>
 
     <insert id="insert" parameterType="Employee">

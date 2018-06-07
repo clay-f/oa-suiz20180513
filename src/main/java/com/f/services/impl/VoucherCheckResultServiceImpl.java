@@ -16,25 +16,20 @@ public class VoucherCheckResultServiceImpl implements VoucherCheckResultService 
 
     @Override
     public boolean save(VoucherCheckResult result) {
-            voucherCheckResultDao.insert(result);
-            return true;
+        voucherCheckResultDao.insert(result);
+        return true;
     }
 
     @Override
     public boolean deleteVoucherCheckResult(Integer id) {
-        try {
-            voucherCheckResultDao.delete(id);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        voucherCheckResultDao.delete(id);
+        return true;
     }
 
     @Override
     public boolean updateVoucherCheckResult(VoucherCheckResult voucherCheckResult) {
         voucherCheckResult.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-         voucherCheckResultDao.update(voucherCheckResult);
-         return true;
+        voucherCheckResultDao.update(voucherCheckResult);
+        return true;
     }
 }

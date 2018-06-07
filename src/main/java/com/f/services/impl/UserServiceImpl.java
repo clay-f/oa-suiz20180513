@@ -6,6 +6,7 @@ import com.f.pojo.Employee;
 import com.f.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,27 +25,30 @@ public class UserServiceImpl extends GenericCrudService<Employee, Integer> imple
 
     private EmployeeDao userDao;
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
-    public List<Employee> login(Map<String, Object> map) {
-        List<Employee> employeeList = new ArrayList<Employee>();
-        try {
-            employeeList = userDao.getUserByCondition(map);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public Employee login(Map<String, Object> map) throws IllegalAccessException {
+        String tmpPasswd = (String) map.get("passwd");
+        map.remove("passwd");
+        Employee employee = userDao.getUserByCondition(map).get(0);
+        if (BCrypt.checkpw(tmpPasswd, employee.getPasswd())) {
+            return employee;
+        } else {
+            throw new IllegalAccessException("username or password error");
         }
-        return employeeList;
     }
 
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public boolean getUserByName(Map<String, Object> map) {
-        try {
-            return userDao.getUserByCondition(map).size() > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        return userDao.getUserByCondition(map).size() > 0;
+    }
+
+    @Override
+    public void save(Employee employee) {
+        String passwd = BCrypt.hashpw(employee.getPasswd(), BCrypt.gensalt());
+        employee.setPasswd(passwd);
+        super.save(employee);
     }
 }

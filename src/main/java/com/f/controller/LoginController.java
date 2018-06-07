@@ -41,7 +41,7 @@ public class LoginController {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("name", user.getName());
             map.put("passwd", user.getPasswd());
-            Employee employee = userService.login(map).get(0);
+            Employee employee = userService.login(map);
             if (employee != null) {
                 user = employee;
                 request.getSession().setAttribute("currentUser", user);

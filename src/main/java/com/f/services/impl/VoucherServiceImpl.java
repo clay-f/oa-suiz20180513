@@ -50,11 +50,7 @@ public class VoucherServiceImpl extends GenericCrudService<Voucher, Integer> imp
     @Override
     public List<Voucher> getVoucherByCondition(Map<String, Object> map) {
         List<Voucher> voucherList = null;
-        try {
-            voucherList = voucherDao.getVoucherAndDetailByConditions(map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        voucherList = voucherDao.getVoucherAndDetailByConditions(map);
         return voucherList;
     }
 
@@ -64,5 +60,17 @@ public class VoucherServiceImpl extends GenericCrudService<Voucher, Integer> imp
         super.update(voucher);
         voucherDetailDao.update(voucher.getVoucherDetail());
         voucherCheckResultDao.update(voucher.getCheckResult());
+    }
+
+    @Transactional
+    @Override
+    public void save(Voucher voucher) {
+        super.save(voucher);
+        Integer id = voucher.getId();
+        System.out.println("save voucher should catch id: " + id);
+        voucher.getVoucherDetail().setVoucherId(id);
+        voucherDetailDao.insert(voucher.getVoucherDetail());
+        voucher.getCheckResult().setVoucherId(id);
+        voucherCheckResultDao.insert(voucher.getCheckResult());
     }
 }

@@ -47,7 +47,6 @@ public class UserController extends ApplicationController {
     @RequestMapping(value = "/doRegister", method = {RequestMethod.POST})
     public String doRegister(@ModelAttribute("user") Employee user, Model model) {
         userService.save(user);
-        model.addAttribute("message", "register success");
         return "index";
     }
 
