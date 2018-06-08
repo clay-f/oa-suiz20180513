@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Service
+@Service("voucherService")
 public class VoucherServiceImpl extends GenericCrudService<Voucher, Integer> implements VoucherService {
     @Autowired
     public VoucherServiceImpl(@Qualifier("voucherDao") GenericCrudMapper mapper) {

@@ -1,33 +1,21 @@
 package com.f.pojo;
 
-import java.sql.Timestamp;
+import com.fasterxml.jackson.annotation.JsonView;
 
-public class OaPosition {
-    private Integer id;
+public class OaPosition extends BasePojo {
     private String name;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
 
     public OaPosition() {
-    }
-
-    public OaPosition(Integer id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public OaPosition(String name) {
         this.name = name;
     }
 
-    public Integer getId() {
-        return id;
+    public static interface OaPositionPojoView extends BasePojoView {
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
+    @JsonView(OaPositionPojoView.class)
     public String getName() {
         return name;
     }
@@ -36,19 +24,5 @@ public class OaPosition {
         this.name = name;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 }

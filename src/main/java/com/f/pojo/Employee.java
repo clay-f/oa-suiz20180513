@@ -1,18 +1,15 @@
 package com.f.pojo;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.sql.Time;
-import java.sql.Timestamp;
 
-public class Employee {
-    private Integer id;
+public class Employee extends BasePojo {
     private String name;
     private String passwd;
     private Integer departmentId;
     private Integer oaPositionId;
-    private Timestamp createdAt;
-    private Time updatedAt;
 
     public Employee() {
     }
@@ -22,14 +19,11 @@ public class Employee {
         this.passwd = passwd;
     }
 
-    public Integer getId() {
-        return id;
+    public static interface EmployeePojoView extends BasePojoView, Department.DepartmentPojoView, OaPosition.OaPositionPojoView {
+
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
+    @JsonView(EmployeePojoView.class)
     @NotNull
     @Size(min = 2, message = "name min value must great than 2")
     public String getName() {
@@ -40,6 +34,7 @@ public class Employee {
         this.name = name;
     }
 
+    @JsonView(EmployeePojoView.class)
     @NotNull
     @Size(min = 6, max = 20, message = "password length between 6 and 20")
     public String getPasswd() {
@@ -50,6 +45,7 @@ public class Employee {
         this.passwd = passwd;
     }
 
+    @JsonView(EmployeePojoView.class)
     @NotNull
     public Integer getDepartmentId() {
         return departmentId;
@@ -59,6 +55,7 @@ public class Employee {
         this.departmentId = departmentId;
     }
 
+    @JsonView(EmployeePojoView.class)
     @NotNull
     public Integer getOaPositionId() {
         return oaPositionId;
@@ -66,21 +63,5 @@ public class Employee {
 
     public void setOaPositionId(Integer oaPositionId) {
         this.oaPositionId = oaPositionId;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Time getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Time updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

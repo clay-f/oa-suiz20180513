@@ -1,18 +1,16 @@
 package com.f.pojo;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
+import com.fasterxml.jackson.annotation.JsonView;
 
-public class Voucher implements Serializable {
-    private Integer id;
+
+public class Voucher extends BasePojo {
     private String item;
     private Float account;
     private Integer employeeId;
     private Integer checkOutStateId;
     private VoucherDetail voucherDetail = new VoucherDetail();
     private VoucherCheckResult checkResult = new VoucherCheckResult();
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+
 
     public Voucher() {
 
@@ -24,14 +22,11 @@ public class Voucher implements Serializable {
         this.employeeId = employeeId;
     }
 
-    public Integer getId() {
-        return id;
+    public static interface VoucherPojoView extends VoucherDetail.VoucherDetailPojoView, VoucherCheckResult.VoucherCheckResultPojoView {
+
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
+    @JsonView(VoucherPojoView.class)
     public String getItem() {
         return item;
     }
@@ -40,6 +35,7 @@ public class Voucher implements Serializable {
         this.item = item;
     }
 
+    @JsonView(VoucherPojoView.class)
     public Float getAccount() {
         return account;
     }
@@ -48,6 +44,7 @@ public class Voucher implements Serializable {
         this.account = account;
     }
 
+    @JsonView(VoucherPojoView.class)
     public Integer getEmployeeId() {
         return employeeId;
     }
@@ -56,6 +53,7 @@ public class Voucher implements Serializable {
         this.employeeId = employeeId;
     }
 
+    @JsonView(VoucherPojoView.class)
     public Integer getCheckOutStateId() {
         return checkOutStateId;
     }
@@ -64,6 +62,7 @@ public class Voucher implements Serializable {
         this.checkOutStateId = checkOutStateId;
     }
 
+    @JsonView(VoucherPojoView.class)
     public VoucherDetail getVoucherDetail() {
         return voucherDetail;
     }
@@ -72,27 +71,12 @@ public class Voucher implements Serializable {
         this.voucherDetail = voucherDetail;
     }
 
+    @JsonView(VoucherPojoView.class)
     public VoucherCheckResult getCheckResult() {
         return checkResult;
     }
 
     public void setCheckResult(VoucherCheckResult checkResult) {
         this.checkResult = checkResult;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

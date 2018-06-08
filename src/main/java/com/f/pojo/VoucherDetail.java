@@ -1,13 +1,10 @@
 package com.f.pojo;
 
-import java.sql.Timestamp;
+import com.fasterxml.jackson.annotation.JsonView;
 
-public class VoucherDetail {
-    private Integer id;
+public class VoucherDetail extends BasePojo {
     private Integer voucherId;
     private String des;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
 
     public VoucherDetail() {
 
@@ -22,14 +19,11 @@ public class VoucherDetail {
         this.des = des;
     }
 
-    public Integer getId() {
-        return id;
+    public static interface VoucherDetailPojoView {
+
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
+    @JsonView(Voucher.VoucherPojoView.class)
     public Integer getVoucherId() {
         return voucherId;
     }
@@ -38,27 +32,12 @@ public class VoucherDetail {
         this.voucherId = voucherId;
     }
 
+    @JsonView(Voucher.VoucherPojoView.class)
     public String getDes() {
         return des;
     }
 
     public void setDes(String des) {
         this.des = des;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }
