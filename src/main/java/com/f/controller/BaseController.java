@@ -37,8 +37,4 @@ public abstract class BaseController<T, ID extends Serializable> {
     public GenericCrudService getGenericCrudService() {
         return genericCrudService;
     }
-
-    public void setGenericCrudService(GenericCrudService genericCrudService) {
-        this.genericCrudService = genericCrudService;
-    }
 }

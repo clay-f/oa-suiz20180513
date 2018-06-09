@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/vouchers")
 @RestController
 public class VoucherController extends BaseController<Voucher, Integer> {
-
     @Autowired
     public VoucherController(@Qualifier("voucherService") GenericCrudService genericCrudService) {
         super(genericCrudService);
