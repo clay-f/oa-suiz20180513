@@ -1,6 +1,5 @@
 # j-b
 
-----
 update 2018-06-08 21:44
 
 in order to adapter new struct so MVC will change in to back/front, release v0.2 reserve mvc
