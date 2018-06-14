@@ -7,7 +7,7 @@ in order to adapter new struct so MVC will change in to back/front, release v0.2
 ----
 update 2018-06-14 17:27
 
-### bill-part of jboa workflow:
+### bill-part of jb workflow:
 
 #### description
 according to current user role display or edit relative item after user login
