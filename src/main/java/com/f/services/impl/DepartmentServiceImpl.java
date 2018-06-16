@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DepartmentServiceImplAbstract extends AbstractGenericService<Department, Integer> implements DepartmentService {
+public class DepartmentServiceImpl extends AbstractGenericService<Department, Integer> implements DepartmentService {
     @Autowired
-    public DepartmentServiceImplAbstract(@Qualifier("departmentDao") GenericMapper mapper) {
+    public DepartmentServiceImpl(@Qualifier("departmentDao") GenericMapper mapper) {
         super(mapper);
     }
 }

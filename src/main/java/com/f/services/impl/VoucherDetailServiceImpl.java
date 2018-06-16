@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class VoucherDetailServiceImplAbstract extends AbstractGenericService<VoucherDetail, Integer> implements VoucherDetailService {
+public class VoucherDetailServiceImpl extends AbstractGenericService<VoucherDetail, Integer> implements VoucherDetailService {
     @Autowired
-    public VoucherDetailServiceImplAbstract(@Qualifier("voucherDetailDao") GenericMapper mapper) {
+    public VoucherDetailServiceImpl(@Qualifier("voucherDetailDao") GenericMapper mapper) {
         super(mapper);
         voucherDetailDao = (VoucherDetailDao) mapper;
     }

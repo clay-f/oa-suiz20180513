@@ -14,6 +14,11 @@ public class JResult {
         this.code = code;
     }
 
+    public JResult(String message, int code) {
+        this.message = message;
+        this.code = code;
+    }
+
     public Object getResult() {
         return result;
     }
@@ -40,5 +45,9 @@ public class JResult {
 
     public static JResult success(Object obj) {
         return new JResult(obj, "ok", 200);
+    }
+
+    public static JResult unauthorized() {
+        return new JResult("login false, please confirm your name or passord", 404);
     }
 }

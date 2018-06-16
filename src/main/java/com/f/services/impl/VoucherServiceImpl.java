@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 @Service("voucherService")
-public class VoucherServiceImplAbstract extends AbstractGenericService<Voucher, Integer> implements VoucherService {
+public class VoucherServiceImpl extends AbstractGenericService<Voucher, Integer> implements VoucherService {
     @Autowired
-    public VoucherServiceImplAbstract(@Qualifier("voucherDao") GenericMapper mapper) {
+    public VoucherServiceImpl(@Qualifier("voucherDao") GenericMapper mapper) {
         super(mapper);
         this.voucherDao = (VoucherDao) mapper;
     }

@@ -1,5 +1,6 @@
 package com.f.controller;
 
+import com.f.common.JResult;
 import com.f.pojo.Employee;
 import com.f.services.DepartmentService;
 import com.f.services.OaPositionService;
@@ -51,28 +52,28 @@ public class LoginController {
     }
 
     @PostMapping("/doLogin")
-    public String doLogin(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "passwd", required = false) String passwd,
-                          HttpServletRequest request) {
+    @ResponseBody
+    public JResult doLogin(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "passwd", required = false) String passwd,
+                           HttpServletRequest request) {
         Subject currentUser = SecurityUtils.getSubject();
         if (!currentUser.isAuthenticated()) {
-            String salt = request.getParameter(passwd);
-            String md5Passwd = new Md5Hash(passwd, salt).toString();
+            String salt = request.getParameter("name");
+            String md5Passwd = new Md5Hash(passwd, salt).toHex();
             UsernamePasswordToken token = new UsernamePasswordToken(name, md5Passwd);
             token.setRememberMe(true);
             try {
                 currentUser.login(token);
                 logger.info("user: " + currentUser.getPrincipal() + "logged in successfully.");
-                return "redirect:/vouchers/index";
+                return JResult.success("ok");
             } catch (UnknownAccountException uae) {
+                uae.printStackTrace();
             } catch (IncorrectCredentialsException ice) {
                 ice.printStackTrace();
             } catch (LockedAccountException lae) {
                 lae.printStackTrace();
-            } catch (AuthenticationException ae) {
-                ae.printStackTrace();
             }
         }
-        return "redirect:/users/login";
+        return JResult.unauthorized();
     }
 
     @RequestMapping(value = "/register")
@@ -82,10 +83,11 @@ public class LoginController {
         return "/users/register";
     }
 
+    @ResponseBody
     @RequestMapping(value = "/doRegister", method = {RequestMethod.POST})
-    public String doRegister(@ModelAttribute("user") Employee user, Model model) {
+    public JResult doRegister(@ModelAttribute("user") Employee user, Model model) {
         userService.save(user);
-        return "redirect:/vouchers/index";
+        return JResult.success("ok");
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
