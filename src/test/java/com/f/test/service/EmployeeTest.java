@@ -6,13 +6,21 @@ import com.f.services.UserService;
 import com.f.test.TestHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class EmployeeTest {
     private TestHelper testHelper = TestHelper.getInstance();
     private UserService userService = (UserService) testHelper.getBean("userService");
@@ -21,20 +29,14 @@ public class EmployeeTest {
     @Test
     public void getEmployeeList() {
         assert testHelper != null;
-        userService.get(2);
+        assertNotNull(userService.get(16));
     }
 
     @Test
-    public void testLogin() throws JsonProcessingException {
+    public void testLogin() throws JsonProcessingException, IllegalAccessException {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("name", "foo");
         map.put("passwd", "123456");
-        System.out.println( outputJsonHelper.outputJsonVal(userService.login(map).get(0)));
-    }
-
-    @Test
-    public void addEmployee() {
-        List<Employee> list = userService.getAll();
-        System.out.println(list);
+        assertNotNull(outputJsonHelper.outputJsonVal(userService.login(map)));
     }
 }

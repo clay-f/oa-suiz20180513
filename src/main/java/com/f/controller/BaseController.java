@@ -7,6 +7,7 @@ import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.Iterator;
@@ -14,7 +15,7 @@ import java.util.Map;
 
 public abstract class BaseController<T, ID extends Serializable> {
     private AbstractGenericService abstractGenericService;
-    @Autowired
+    @Resource
     private HttpServletRequest request;
 
     public BaseController(AbstractGenericService abstractGenericService) {

@@ -12,8 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+
 public class VoucherTest {
-    private VoucherService voucherService = (VoucherService) TestHelper.getInstance().getBean("voucherServiceImpl");
+    private VoucherService voucherService = (VoucherService) TestHelper.getInstance().getBean("voucherService");
     private VoucherDetailService voucherDetailService = (VoucherDetailService) TestHelper.getInstance().getBean("voucherDetailServiceImpl");
 
     @Test

@@ -87,7 +87,7 @@ public class LoginController {
     @RequestMapping(value = "/doRegister", method = {RequestMethod.POST})
     public JResult doRegister(@ModelAttribute("user") Employee user, Model model) {
         userService.save(user);
-        return JResult.success("ok");
+        return JResult.success("login success");
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
