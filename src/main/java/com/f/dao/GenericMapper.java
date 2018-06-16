@@ -3,7 +3,7 @@ package com.f.dao;
 import java.io.Serializable;
 import java.util.List;
 
-public interface GenericCrudMapper<T, ID extends Serializable> {
+public interface GenericMapper<T, ID extends Serializable> {
     <T> T get(ID id);
 
     <T> List<T> getAll();

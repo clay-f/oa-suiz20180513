@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/users/login"/>
+        <property name="successUrl" value="/vouchers/index"/>
+        <property name="unauthorizedUrl" value="/users/login"/>
+        <property name="filterChainDefinitions">
+            <value>
+                /assets/** = anon
+                / = anon
+                /users/doLogin = anon
+                /users/logout = anon
+                /users/** = authc
+                /** = authc
+            </value>
+        </property>
+    </bean>
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="myRealm"/>
+    </bean>
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <bean id="myRealm" class="com.f.security.MyRealm">
+        <property name="serviceBeanName" value="userService"/>
+    </bean>
+</beans>

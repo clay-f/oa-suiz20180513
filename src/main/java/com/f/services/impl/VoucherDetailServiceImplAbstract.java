@@ -1,21 +1,18 @@
 package com.f.services.impl;
 
-import com.f.dao.GenericCrudMapper;
+import com.f.dao.GenericMapper;
 import com.f.dao.VoucherDetailDao;
 import com.f.pojo.VoucherDetail;
 import com.f.services.VoucherDetailService;
-import com.f.services.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
-
 @Service
-public class VoucherDetailServiceImpl extends GenericCrudService<VoucherDetail, Integer> implements VoucherDetailService {
+public class VoucherDetailServiceImplAbstract extends AbstractGenericService<VoucherDetail, Integer> implements VoucherDetailService {
     @Autowired
-    public VoucherDetailServiceImpl(@Qualifier("voucherDetailDao") GenericCrudMapper mapper) {
+    public VoucherDetailServiceImplAbstract(@Qualifier("voucherDetailDao") GenericMapper mapper) {
         super(mapper);
         voucherDetailDao = (VoucherDetailDao) mapper;
     }

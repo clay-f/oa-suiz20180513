@@ -14,17 +14,17 @@
 <jsp:include page="/public/navbar.jsp"/>
 <div class="container">
     <section>
-        <form:form action="/users/doLogin" method="post" modelAttribute="user">
+        <form action="/users/doLogin" method="post">
             <div class="form-group">
                 <label for="name">Name</label>
-                <form:input path="name" required="true" id="name" cssClass="form-control"/>
+                <input type="text" id="name"  name="name" class="form-control" required/>
             </div>
             <div class="form-group">
                 <label for="passwd">Password</label>
-                <form:password path="passwd" required="true" id="passwd" cssClass="form-control"/>
+                <input type="password" id="passwd" name="passwd" class="form-control" required/>
             </div>
             <input type="submit" value="login" class="btn btn-primary">
-        </form:form>
+        </form>
     </section>
 </div>
 <jsp:include page="/public/footer.jsp"/>

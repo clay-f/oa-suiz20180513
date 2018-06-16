@@ -1,24 +1,20 @@
 package com.f.services.impl;
 
 import com.f.dao.EmployeeDao;
-import com.f.dao.GenericCrudMapper;
+import com.f.dao.GenericMapper;
 import com.f.pojo.Employee;
 import com.f.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service(value = "userService")
-public class UserServiceImpl extends GenericCrudService<Employee, Integer> implements UserService {
+public class UserServiceImplAbstract extends AbstractGenericService<Employee, Integer> implements UserService {
     @Autowired
-    public UserServiceImpl(@Qualifier("employeeDao") GenericCrudMapper mapper) {
+    public UserServiceImplAbstract(@Qualifier("employeeDao") GenericMapper mapper) {
         super(mapper);
         userDao = (EmployeeDao) mapper;
     }
@@ -28,14 +24,7 @@ public class UserServiceImpl extends GenericCrudService<Employee, Integer> imple
     @Transactional(readOnly = true)
     @Override
     public Employee login(Map<String, Object> map) throws IllegalAccessException {
-        String tmpPasswd = (String) map.get("passwd");
-        map.remove("passwd");
-        Employee employee = userDao.getUserByCondition(map).get(0);
-        if (BCrypt.checkpw(tmpPasswd, employee.getPasswd())) {
-            return employee;
-        } else {
-            throw new IllegalAccessException("username or password error");
-        }
+        return userDao.getUserByCondition(map).get(0);
     }
 
 
@@ -47,8 +36,6 @@ public class UserServiceImpl extends GenericCrudService<Employee, Integer> imple
 
     @Override
     public void save(Employee employee) {
-        String passwd = BCrypt.hashpw(employee.getPasswd(), BCrypt.gensalt());
-        employee.setPasswd(passwd);
-        super.save(employee);
+//        super.save(employee);
     }
 }

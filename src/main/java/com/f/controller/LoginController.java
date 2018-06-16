@@ -4,17 +4,20 @@ import com.f.pojo.Employee;
 import com.f.services.DepartmentService;
 import com.f.services.OaPositionService;
 import com.f.services.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @SessionAttributes("user")
 @Controller
@@ -29,6 +32,7 @@ public class LoginController {
 
     @Autowired
     private DepartmentService departmentService;
+    private Logger logger = LogManager.getLogger(getClass());
 
     @ModelAttribute("user")
     public Employee setUpUserForm() {
@@ -47,23 +51,28 @@ public class LoginController {
     }
 
     @PostMapping("/doLogin")
-    public String doLogin(@ModelAttribute("user") Employee user, Model model, HttpServletRequest request) {
-        try {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("name", user.getName());
-            map.put("passwd", user.getPasswd());
-            Employee employee = userService.login(map);
-            if (employee != null) {
-                user = employee;
-                request.getSession().setAttribute("currentUser", user);
-                model.addAttribute("message", "1");
+    public String doLogin(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "passwd", required = false) String passwd,
+                          HttpServletRequest request) {
+        Subject currentUser = SecurityUtils.getSubject();
+        if (!currentUser.isAuthenticated()) {
+            String salt = request.getParameter(passwd);
+            String md5Passwd = new Md5Hash(passwd, salt).toString();
+            UsernamePasswordToken token = new UsernamePasswordToken(name, md5Passwd);
+            token.setRememberMe(true);
+            try {
+                currentUser.login(token);
+                logger.info("user: " + currentUser.getPrincipal() + "logged in successfully.");
+                return "redirect:/vouchers/index";
+            } catch (UnknownAccountException uae) {
+            } catch (IncorrectCredentialsException ice) {
+                ice.printStackTrace();
+            } catch (LockedAccountException lae) {
+                lae.printStackTrace();
+            } catch (AuthenticationException ae) {
+                ae.printStackTrace();
             }
-            return "redirect:/vouchers/index";
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        model.addAttribute("message", "you haven't ont count, sign up to create account");
-        return "redirect:/users/register";
+        return "redirect:/users/login";
     }
 
     @RequestMapping(value = "/register")
@@ -81,7 +90,7 @@ public class LoginController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpServletRequest request, Model model) {
-        request.getSession().removeAttribute("currentUser");
+        SecurityUtils.getSubject().logout();
         return "redirect:/users/login";
     }
 }

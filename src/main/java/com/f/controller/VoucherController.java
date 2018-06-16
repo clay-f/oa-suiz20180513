@@ -3,23 +3,24 @@ package com.f.controller;
 import com.f.common.JResult;
 import com.f.pojo.Employee;
 import com.f.pojo.Voucher;
-import com.f.services.impl.GenericCrudService;
+import com.f.services.impl.AbstractGenericService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RequestMapping(value = "/vouchers")
 @RestController
 public class VoucherController extends BaseController<Voucher, Integer> {
     @Autowired
-    public VoucherController(@Qualifier("voucherService") GenericCrudService genericCrudService) {
-        super(genericCrudService);
+    public VoucherController(@Qualifier("voucherService") AbstractGenericService abstractGenericService) {
+        super(abstractGenericService);
     }
 
     @RequestMapping(value = "/{id}", method = {RequestMethod.PUT})
     public JResult update(@PathVariable(value = "id") Integer id, @ModelAttribute(value = "user") Voucher voucher, @SessionAttribute(required = true) Employee currentUser) throws JsonProcessingException {
-        Voucher previousVoucher = (Voucher) getGenericCrudService().get(voucher.getId());
+        Voucher previousVoucher = (Voucher) getAbstractGenericService().get(voucher.getId());
         switch (currentUser.getOaPositionId()) {
             case 1:
                 previousVoucher.getVoucherDetail().setDes(voucher.getVoucherDetail().getDes());
@@ -36,7 +37,7 @@ public class VoucherController extends BaseController<Voucher, Integer> {
                 previousVoucher.setCheckOutStateId(voucher.getCheckOutStateId());
                 break;
         }
-        getGenericCrudService().update(previousVoucher);
+        getAbstractGenericService().update(previousVoucher);
         return JResult.success("ok");
     }
 }

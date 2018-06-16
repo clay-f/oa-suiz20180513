@@ -1,16 +1,16 @@
 package com.f.services.impl;
 
-import com.f.dao.GenericCrudMapper;
+import com.f.dao.GenericMapper;
 import com.f.services.GenericService;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class GenericCrudService<T, ID extends Serializable> implements GenericService<T, ID> {
-    protected GenericCrudMapper mapper;
+public abstract class AbstractGenericService<T, ID extends Serializable> implements GenericService<T, ID> {
+    protected GenericMapper mapper;
 
-    public GenericCrudService(GenericCrudMapper mapper) {
+    public AbstractGenericService(GenericMapper mapper) {
         this.mapper = mapper;
     }
 

@@ -5,7 +5,7 @@ import com.f.pojo.Voucher;
 import java.util.List;
 import java.util.Map;
 
-public interface VoucherDao extends GenericCrudMapper<Voucher, Integer> {
+public interface VoucherDao extends GenericMapper<Voucher, Integer> {
     List<Voucher> getVoucherAndDetailByConditions(Map<String, Object> map);
 
     Integer size();

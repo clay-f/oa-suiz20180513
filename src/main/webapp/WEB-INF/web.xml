@@ -27,18 +27,10 @@
         </init-param>
     </filter>
     <filter>
-        <filter-name>druidWebStatFilter</filter-name>
-        <filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
+        <filter-name>shiroFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
         <init-param>
-            <param-name>exclusions</param-name>
-            <param-value>/public/*,*.js,*.css,/druid*,*.jsp,*.swf</param-value>
-        </init-param>
-        <init-param>
-            <param-name>principalSessionName</param-name>
-            <param-value>sessionInfo</param-value>
-        </init-param>
-        <init-param>
-            <param-name>profileEnable</param-name>
+            <param-name>targetFilterLifecycle</param-name>
             <param-value>true</param-value>
         </init-param>
     </filter>
@@ -52,18 +44,15 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath:springmvc-servlet.xml</param-value>
         </init-param>
+        <load-on-startup>1</load-on-startup>
     </servlet>
-    <servlet>
-        <servlet-name>DruidStatView</servlet-name>
-        <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
-    </servlet>
+    <filter-mapping>
+        <filter-name>shiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>httpMethodFilter</filter-name>
         <servlet-name>springmvc</servlet-name>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>druidWebStatFilter</filter-name>
-        <url-pattern>/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>CharEncoding</filter-name>
@@ -72,10 +61,6 @@
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
         <url-pattern>/</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DruidStatView</servlet-name>
-        <url-pattern>/druid/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>5</session-timeout>

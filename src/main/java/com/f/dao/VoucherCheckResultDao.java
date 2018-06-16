@@ -5,6 +5,6 @@ import com.f.pojo.VoucherCheckResult;
 import java.util.List;
 import java.util.Map;
 
-public interface VoucherCheckResultDao extends GenericCrudMapper<VoucherCheckResult, Integer> {
+public interface VoucherCheckResultDao extends GenericMapper<VoucherCheckResult, Integer> {
     List<VoucherCheckResult> getCheckResultByConditions(Map<String, Object> map);
 }
