@@ -17,6 +17,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
                 /users/register = anon
                 /users/doRegister = anon
                 /users/** = authc
+                /vouchers/** = anon
                 /** = authc
             </value>
         </property>

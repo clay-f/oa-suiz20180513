@@ -1,7 +1,6 @@
 package com.f.test.service;
 
 import com.f.helper.OutputJsonHelper;
-import com.f.pojo.Employee;
 import com.f.services.UserService;
 import com.f.test.TestHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -10,12 +9,8 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import static org.junit.jupiter.api.Assertions.*;
-
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

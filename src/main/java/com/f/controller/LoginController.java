@@ -5,6 +5,7 @@ import com.f.pojo.Employee;
 import com.f.services.DepartmentService;
 import com.f.services.OaPositionService;
 import com.f.services.UserService;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -19,7 +20,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Map;
 
+@CrossOrigin
 @SessionAttributes("user")
 @Controller
 @RequestMapping("/users")
@@ -37,7 +41,6 @@ public class LoginController {
 
     @ModelAttribute("user")
     public Employee setUpUserForm() {
-        System.out.println("catch setup user form");
         return new Employee();
     }
 
@@ -51,14 +54,15 @@ public class LoginController {
         return "/users/login";
     }
 
-    @PostMapping("/doLogin")
+    @PostMapping( value = "/doLogin", consumes = "application/json")
     @ResponseBody
-    public JResult doLogin(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "passwd", required = false) String passwd,
-                           HttpServletRequest request) {
+    public JResult doLogin(
+                           HttpServletRequest request,@RequestBody Map<String, Object> map) {
         Subject currentUser = SecurityUtils.getSubject();
+        String name = map.get("name").toString();
+        String passwd = map.get("passwd").toString();
         if (!currentUser.isAuthenticated()) {
-            String salt = request.getParameter("name");
-            String md5Passwd = new Md5Hash(passwd, salt).toHex();
+            String md5Passwd = new Md5Hash(passwd, name).toHex();
             UsernamePasswordToken token = new UsernamePasswordToken(name, md5Passwd);
             token.setRememberMe(true);
             try {

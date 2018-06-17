@@ -13,4 +13,7 @@
     <!--</mvc:interceptors>-->
     <mvc:resources mapping="/assets/**" location="/assets/"/>
     <mvc:annotation-driven/>
+    <mvc:cors>
+        <mvc:mapping path="/**"/>
+    </mvc:cors>
 </beans>
