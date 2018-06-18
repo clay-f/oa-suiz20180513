@@ -14,7 +14,7 @@
 <jsp:include page="/public/navbar.jsp"/>
 <div class="container">
     <section>
-        <form action="/users/doLogin" method="post">
+        <form action="/users/doLogin" method="post" id="login_form">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name"  name="name" class="form-control" required/>
@@ -28,5 +28,6 @@
     </section>
 </div>
 <jsp:include page="/public/footer.jsp"/>
+<script src="/assets/js/login.js"></script>
 </body>
 </html>

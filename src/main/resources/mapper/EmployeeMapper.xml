@@ -11,14 +11,30 @@
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result column="passwd" property="passwd"/>
-        <result property="departmentId" column="department_id"/>
-        <result property="oaPositionId" column="oa_position_id"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
+        <association property="oaPosition" resultMap="oaPositionResult"/>
+        <association property="department" resultMap="departmentResult"/>
+    </resultMap>
+    <resultMap id="oaPositionResult" type="OaPosition">
+        <id property="id" column="o_id"/>
+        <result property="name" column="o_name"/>
+    </resultMap>
+    <resultMap id="departmentResult" type="Department">
+        <id property="id" column="d_id"/>
+        <result property="name" column="d_name"/>
     </resultMap>
 
     <select id="getUserByCondition" resultMap="getUserByConditionResult" parameterType="Map">
-        select id, name, department_id, oa_position_id, created_at, updated_at, passwd from employee e where 1 = 1
+        select
+          e.id, e.name, e.passwd, e.created_at, e.updated_at,
+          d.id d_id, d.name d_name,
+          o.id o_id, o.name o_name
+        from
+          employee e
+        left join department d on e.department_id = d.id
+        left join oa_position o on e.oa_position_id = o.id
+        where 1 = 1
         <choose>
             <when test="name != null">
                 and e.name = #{name}
