@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -54,10 +55,9 @@ public class LoginController {
         return "/users/login";
     }
 
-    @PostMapping( value = "/doLogin", consumes = "application/json")
+    @PostMapping(value = "/doLogin", consumes = "application/json")
     @ResponseBody
-    public JResult doLogin(
-                           HttpServletRequest request,@RequestBody Map<String, Object> map) {
+    public JResult doLogin(HttpServletRequest request, @RequestBody Map<String, Object> map) {
         Subject currentUser = SecurityUtils.getSubject();
         String name = map.get("name").toString();
         String passwd = map.get("passwd").toString();

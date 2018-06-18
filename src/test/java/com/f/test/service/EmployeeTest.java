@@ -9,7 +9,9 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +24,7 @@ public class EmployeeTest {
     private OutputJsonHelper outputJsonHelper = OutputJsonHelper.getJsonOutputInstance();
 
     @Test
-    public void getEmployeeList() {
+    public void getEmployeeById() {
         assert testHelper != null;
         assertNotNull(userService.get(16));
     }

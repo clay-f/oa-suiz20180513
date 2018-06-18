@@ -21,7 +21,7 @@ public class VoucherController extends BaseController<Voucher, Integer> {
     @RequestMapping(value = "/{id}", method = {RequestMethod.PUT})
     public JResult update(@PathVariable(value = "id") Integer id, @ModelAttribute(value = "user") Voucher voucher, @SessionAttribute(required = true) Employee currentUser) throws JsonProcessingException {
         Voucher previousVoucher = (Voucher) getAbstractGenericService().get(voucher.getId());
-        switch (currentUser.getOaPositionId()) {
+        switch (currentUser.getOaPosition().getId()) {
             case 1:
                 previousVoucher.getVoucherDetail().setDes(voucher.getVoucherDetail().getDes());
                 previousVoucher.setItem(voucher.getItem());

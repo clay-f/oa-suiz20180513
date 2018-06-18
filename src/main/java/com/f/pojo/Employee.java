@@ -8,8 +8,8 @@ import javax.validation.constraints.Size;
 public class Employee extends BasePojo {
     private String name;
     private String passwd;
-    private Integer departmentId;
-    private Integer oaPositionId;
+    private OaPosition oaPosition;
+    private Department department;
 
     public Employee() {
     }
@@ -46,22 +46,20 @@ public class Employee extends BasePojo {
     }
 
     @JsonView(EmployeePojoView.class)
-    @NotNull
-    public Integer getDepartmentId() {
-        return departmentId;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDepartmentId(Integer departmentId) {
-        this.departmentId = departmentId;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     @JsonView(EmployeePojoView.class)
-    @NotNull
-    public Integer getOaPositionId() {
-        return oaPositionId;
+    public OaPosition getOaPosition() {
+        return oaPosition;
     }
 
-    public void setOaPositionId(Integer oaPositionId) {
-        this.oaPositionId = oaPositionId;
+    public void setOaPosition(OaPosition oaPosition) {
+        this.oaPosition = oaPosition;
     }
 }

@@ -19,10 +19,6 @@ public class DepartmentTest {
 
     @Test
     public void getDepartmentList() {
-        try {
-            System.out.println(mapper.writeValueAsString(departmentService.getAll()));
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        assert departmentService.getAll().size() > 0;
     }
 }

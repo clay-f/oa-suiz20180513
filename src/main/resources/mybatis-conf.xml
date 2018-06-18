@@ -6,6 +6,9 @@
     <settings>
         <setting name="autoMappingBehavior" value="NONE"/>
         <setting name="logImpl" value="LOG4J2"/>
+        <setting name="aggressiveLazyLoading" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="defaultStatementTimeout" value="25"/>
     </settings>
     <typeAliases>
         <package name="com.f.pojo"/>

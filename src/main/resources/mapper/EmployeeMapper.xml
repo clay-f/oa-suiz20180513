@@ -42,8 +42,31 @@
         </if>
         );
     </insert>
-
-    <select id="get" parameterType="Integer" resultType="Employee">
-        select * from employee where id = #{id}
+    
+    <select id="get" parameterType="Integer" resultMap="getEmployeeResult">
+        select
+          e.id, e.name, e.passwd, e.created_at, e.updated_at,
+          d.id d_id, d.name d_name,
+          o.id o_id, o.name o_name
+        from
+          employee e
+        left outer join department d on e.department_id = d.id
+        left outer join oa_position o on e.oa_position_id = o.id
+        where e.id = #{id}
     </select>
+    <resultMap id="getEmployeeResult" type="Employee">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="passwd" column="passwd"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <association property="department" javaType="Department">
+            <id property="id" column="d_id"/>
+            <result property="name" column="d_name"/>
+        </association>
+        <association property="oaPosition" javaType="OaPosition">
+            <id property="id" column="o_id"/>
+            <result property="name" column="o_name"/>
+        </association>
+    </resultMap>
 </mapper>

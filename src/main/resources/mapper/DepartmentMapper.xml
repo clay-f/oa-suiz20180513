@@ -8,8 +8,19 @@
         <result property="name" column="name"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
+        <collection property="employees" ofType="Employee">
+            <id property="id" column="e_id"/>
+            <result property="name" column="e_name"/>
+            <result property="createdAt" column="e_created_at"/>
+            <result property="updatedAt" column="e_updated_at"/>
+        </collection>
     </resultMap>
     <select id="getAll" resultMap="getAllDepartmentResult">
-        select * from department;
+        select
+         d.id, d.name, d.updated_at, d.created_at,
+         e.id e_id, e.name e_name, e.updated_at e_updated_at, e.created_at e_created_at
+        from
+         department d
+        left outer join employee e on d.id = e.department_id
     </select>
 </mapper>

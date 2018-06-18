@@ -3,8 +3,12 @@ package com.f.pojo;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Department extends BasePojo {
     private String name;
+    private Set<Employee> employees = new HashSet<Employee>();
 
     public Department() {
     }
@@ -24,5 +28,13 @@ public class Department extends BasePojo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 }
