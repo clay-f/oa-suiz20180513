@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Aspect
-public class EmployeeAop {
-    private static Logger logger = LogManager.getLogger(EmployeeAop.class);
+public class LogAOP {
+    private static Logger logger = LogManager.getLogger(LogAOP.class);
     private static OutputJsonHelper outputJsonHelper = OutputJsonHelper.getJsonOutputInstance();
 
     @Pointcut("execution(* com.f.services.*.*(..))")
