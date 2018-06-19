@@ -41,10 +41,11 @@ dependencies {
     compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0'
     compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.0'
     compile group: 'org.apache.tomcat', name: 'tomcat-api', version: '9.0.8'
-    compile group: 'jstl', name: 'jstl', version: '1.2'
     compile group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.0.10.Final'
     compile group: 'org.apache.shiro', name: 'shiro-core', version: '1.4.0'
     compile group: 'org.apache.shiro', name: 'shiro-spring', version: '1.4.0'
+    compile group: 'org.springframework.data', name: 'spring-data-redis', version: '2.0.8.RELEASE'
+    compile group: 'io.lettuce', name: 'lettuce-core', version: '5.1.0.M1'
 
     //log
     testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.8.0-beta2'
