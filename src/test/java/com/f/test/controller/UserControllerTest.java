@@ -1,7 +1,7 @@
 package com.f.test.controller;
 
-import com.f.controller.LoginController;
-import com.f.controller.UserController;
+import com.f.api.controller.LoginController;
+import com.f.api.controller.UserController;
 import com.f.helper.OutputJsonHelper;
 import com.f.pojo.Employee;
 import com.f.services.UserService;

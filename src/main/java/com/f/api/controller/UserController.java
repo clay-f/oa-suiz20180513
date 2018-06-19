@@ -1,4 +1,4 @@
-package com.f.controller;
+package com.f.api.controller;
 
 import com.f.pojo.Employee;
 import com.f.services.impl.AbstractGenericService;
@@ -10,15 +10,10 @@ import java.io.IOException;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/api/users")
 public class UserController extends BaseController<Employee, Integer> {
     @Autowired
     public UserController(@Qualifier("userService") AbstractGenericService abstractGenericService) {
         super(abstractGenericService);
-    }
-
-    @GetMapping(value = "/")
-    public void rootIndex(HttpServletResponse response) throws IOException {
-        response.sendRedirect("/users/index");
     }
 }

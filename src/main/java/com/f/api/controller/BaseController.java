@@ -1,10 +1,8 @@
-package com.f.controller;
+package com.f.api.controller;
 
 import com.f.common.JResult;
 import com.f.services.impl.AbstractGenericService;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
