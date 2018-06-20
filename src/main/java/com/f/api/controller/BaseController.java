@@ -4,7 +4,6 @@ import com.f.common.JResult;
 import com.f.services.impl.AbstractGenericService;
 import com.google.common.collect.Maps;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;

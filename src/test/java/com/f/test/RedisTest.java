@@ -1,11 +1,13 @@
 package com.f.test;
 
+import com.f.api.controller.RedisController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.redisson.api.RBucket;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -14,15 +16,18 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class RedisTest {
     @Autowired
-    private RedisTemplate<String, String> template;
-
-    @Autowired
-    private StringRedisTemplate redisTemplate;
-
+    @Qualifier("redissonClient")
+    private RedissonClient redissonClient;
     @Test
-    void getRedisTemplate() {
-        assert template != null;
-        assert redisTemplate != null;
+    void say() {
+        try {
+            redissonClient.getConfig().toJSON().toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        RBucket<String> bucket = RedisController.getRBucket(redissonClient, "test");
+        bucket.set("test");
+        System.out.println(bucket.get());
     }
 
 }

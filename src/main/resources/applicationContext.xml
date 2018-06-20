@@ -2,11 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:redisson="http://redisson.org/schema/redisson"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://redisson.org/schema/redisson http://redisson.org/schema/redisson/redisson.xsd">
     <import resource="classpath:mybatis-spring.xml"/>
     <import resource="classpath:spring-shiro.xml"/>
-    <import resource="spring-redis.xml"/>
+    <redisson:client id="redissonClient">
+        <redisson:single-server address="redis://127.0.0.1:6379"/>
+    </redisson:client>
     <context:component-scan
             base-package="com.f.services, com.f.api.controller, com.f.aspectj, com.f.config"/>
     <aop:aspectj-autoproxy proxy-target-class="true"/>

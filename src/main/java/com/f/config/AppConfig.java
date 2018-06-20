@@ -9,17 +9,4 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 
 @Configuration
 public class AppConfig {
-    @Bean
-    public LettuceConnectionFactory redisConnectionFactory() {
-        return new LettuceConnectionFactory(new RedisStandaloneConfiguration("server", 6379));
-    }
-
-    @Bean
-    public RedisConnectionFactory lettuceConnectionFactory() {
-        RedisSentinelConfiguration sentinelConfig = new RedisSentinelConfiguration()
-                .master("mymaster")
-                .sentinel("127.0.0.1", 26379)
-                .sentinel("127.0.0.1", 26380);
-        return new LettuceConnectionFactory(sentinelConfig);
-    }
 }
