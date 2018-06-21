@@ -34,7 +34,6 @@ public class UserControllerTest {
     private LoginController loginController;
 
     private MockMvc mockMvc;
-    private MockMvc mockSecond;
 
     private InternalResourceViewResolver viewResolver;
     @Autowired
@@ -62,7 +61,7 @@ public class UserControllerTest {
     void getAllUsers() {
         try {
             Employee employee = new Employee("foo", "123456");
-            mockMvc.perform(MockMvcRequestBuilders.post("/users/login").requestAttr("user", employee))
+            mockMvc.perform(MockMvcRequestBuilders.post("/api/users/login").requestAttr("user", employee))
                     .andExpect(status().isOk())
                     .andDo(print());
         } catch (Exception e) {

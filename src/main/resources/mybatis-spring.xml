@@ -5,35 +5,31 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.passwd}"/>
-        <property name="url" value="${jdbc.url}"/>
-        <property name="driverClassName" value="${jdbc.driver}"/>
-        <property name="initialSize" value="1"/>
-        <property name="minIdle" value="1"/>
-        <property name="maxActive" value="10"/>
-        <property name="maxWait" value="10000"/>
-        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
-        <property name="minEvictableIdleTimeMillis" value="300000"/>
-        <property name="testWhileIdle" value="true"/>
-        <property name="testOnBorrow" value="true"/>
-        <property name="testOnReturn" value="false"/>
-        <property name="poolPreparedStatements" value="true"/>
-        <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
-        <property name="defaultAutoCommit" value="true"/>
-        <property name="validationQuery" value="select 1"/>
-        <property name="filters" value="stat"/>
-        <property name="proxyFilters">
-            <list>
-                <ref bean="logFilter"/>
-            </list>
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <constructor-arg ref="hikariConfig"/>
+    </bean>
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="poolName" value="springHikariCP"/>
+        <property name="connectionTestQuery" value="SELECT 1"/>
+        <property name="dataSourceClassName" value="com.mysql.cj.jdbc.MysqlDataSource"/>
+        <property name="dataSourceProperties">
+            <props>
+                <prop key="url">${jdbc.url}</prop>
+                <prop key="user">${jdbc.username}</prop>
+                <prop key="password">${jdbc.passwd}</prop>
+                <prop key="cachePrepStmts">${dataSource.cachePrepStmts}</prop>
+                <prop key="prepStmtCacheSqlLimit">${dataSource.prepStmtCacheSqlLimit}</prop>
+                <prop key="useServerPrepStmts">${dataSource.useServerPrepStmts}</prop>
+                <prop key="useLocalSessionState">${dataSource.useLocalSessionState}</prop>
+                <prop key="rewriteBatchedStatements">${dataSource.rewriteBatchedStatements}</prop>
+                <prop key="cacheResultSetMetadata">${dataSource.cacheResultSetMetadata}</prop>
+                <prop key="cacheServerConfiguration">${dataSource.cacheServerConfiguration}</prop>
+                <prop key="elideSetAutoCommits">${dataSource.elideSetAutoCommits}</prop>
+                <prop key="maintainTimeStats">${dataSource.maintainTimeStats}</prop>
+            </props>
         </property>
     </bean>
 
-    <bean id="logFilter" class="com.alibaba.druid.filter.logging.Log4j2Filter">
-        <property name="statementExecutableSqlLogEnable" value="false"/>
-    </bean>
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:mybatis-conf.xml"/>
