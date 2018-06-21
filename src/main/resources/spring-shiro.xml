@@ -5,20 +5,17 @@
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/users/login"/>
+        <property name="loginUrl" value="/api/users/login"/>
         <property name="successUrl" value="/vouchers/index"/>
-        <property name="unauthorizedUrl" value="/users/login"/>
+        <property name="unauthorizedUrl" value="/api/users/login"/>
         <property name="filterChainDefinitions">
             <value>
                 /assets/** = anon
-                / = anon
-                /users/doLogin = anon
-                /users/logout = anon
-                /users/register = anon
-                /users/doRegister = anon
-                /users/** = authc
-                /vouchers/** = anon
-                /** = authc
+                /api/users/doLogin = anon
+                /api/users/logout = anon
+                /api/users/register = anon
+                /api/users/doRegister = anon
+                /api/users/** = authc
             </value>
         </property>
     </bean>

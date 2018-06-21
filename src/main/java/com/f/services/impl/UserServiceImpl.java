@@ -7,11 +7,14 @@ import com.f.services.UserService;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
+@Scope("prototype")
 @Service(value = "userService")
 public class UserServiceImpl extends AbstractGenericService<Employee, Integer> implements UserService {
     @Autowired

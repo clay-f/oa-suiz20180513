@@ -45,7 +45,6 @@ public abstract class BaseController<T, ID extends Serializable> {
         return abstractGenericService;
     }
 
-
     protected Map<String, Object> getRequestParams() {
         return getRequestParams(request);
     }
