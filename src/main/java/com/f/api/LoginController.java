@@ -1,4 +1,4 @@
-package com.f.api.controller;
+package com.f.api;
 
 import com.f.common.JResult;
 import com.f.pojo.Employee;
@@ -18,7 +18,6 @@ import java.util.Map;
 
 @Scope("prototype")
 @RestController
-@RequestMapping("/api/users")
 public class LoginController {
     @Autowired
     private UserService userService;

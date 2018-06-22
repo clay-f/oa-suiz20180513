@@ -1,4 +1,4 @@
-package com.f.api.controller;
+package com.f.api;
 
 import com.f.common.JResult;
 import com.f.services.impl.AbstractGenericService;

@@ -1,4 +1,4 @@
-package com.f.api.controller;
+package com.f.api;
 
 import com.f.common.JResult;
 import com.f.pojo.Employee;
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
 @RequestMapping(value = "/api/vouchers")
 @RestController
 public class VoucherController extends BaseController<Voucher, Integer> {

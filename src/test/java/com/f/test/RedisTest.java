@@ -1,6 +1,6 @@
 package com.f.test;
 
-import com.f.api.controller.RedisController;
+import com.f.api.RedisController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
