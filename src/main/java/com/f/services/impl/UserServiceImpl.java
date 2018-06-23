@@ -5,6 +5,7 @@ import com.f.dao.GenericMapper;
 import com.f.pojo.Employee;
 import com.f.services.UserService;
 import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -40,7 +41,7 @@ public class UserServiceImpl extends AbstractGenericService<Employee, Integer> i
 
     @Override
     public void save(Employee employee) {
-        String passwd = new Md5Hash(employee.getPasswd(), employee.getName()).toHex();
+        String passwd = new Sha256Hash(employee.getPasswd(), employee.getName()).toHex();
         employee.setPasswd(passwd);
         super.save(employee);
     }

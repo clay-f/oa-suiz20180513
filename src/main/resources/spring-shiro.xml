@@ -8,6 +8,11 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
         <property name="loginUrl" value="/login"/>
         <property name="successUrl" value="/api/vouchers/index"/>
         <property name="unauthorizedUrl" value="/login"/>
+        <property name="filters">
+            <map>
+                <entry key="logout" value-ref="logoutFilter"/>
+            </map>
+        </property>
         <property name="filterChainDefinitions">
             <value>
                 /login = authc

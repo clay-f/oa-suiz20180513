@@ -7,12 +7,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
@@ -29,7 +30,7 @@ public class LoginController {
         String name = map.get("name").toString();
         String passwd = map.get("passwd").toString();
         if (!currentUser.isAuthenticated()) {
-            String md5Passwd = new Md5Hash(passwd, name).toHex();
+            String md5Passwd = new Sha256Hash(name, passwd).toHex();
             UsernamePasswordToken token = new UsernamePasswordToken(name, md5Passwd);
             token.setRememberMe(true);
             try {
