@@ -6,7 +6,7 @@
     <select id="getAll" resultMap="getAllVouchersResult" parameterType="Map">
         select
           v.id, item, check_out_state_id, account, v.created_at, v.updated_at,
-          vd.id v_id, vd.voucher_id, vd.des,
+          vd.id v_id, vd.des,
           vcr.id vc_id, vcr.state_id
         from
           voucher v
@@ -18,7 +18,6 @@
         <result property="item" column="item"/>
         <result property="account" column="account"/>
         <result property="checkOutStateId" column="check_out_state_id"/>
-        <result property="employeeId" column="employee_id"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
         <association property="voucherDetail" resultMap="voucherDetailResult"/>
@@ -27,7 +26,6 @@
     <resultMap id="voucherDetailResult" type="VoucherDetail">
         <id property="id" column="v_id"/>
         <result property="des" column="des"/>
-        <result property="voucherId" column="voucher_id"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
     </resultMap>
@@ -43,7 +41,7 @@
 
     <select id="getVoucherAndDetailByConditions" parameterType="map" resultMap="getAllVouchersResult">
         select
-          v.id, item, account, check_out_state_id, v.employee_id,
+          v.id, item, account, check_out_state_id,
           vcr.state_id, vcr.who_check_id
         from
           voucher v
