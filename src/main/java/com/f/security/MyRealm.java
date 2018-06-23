@@ -4,6 +4,8 @@ import com.f.helper.SpringContextHolder;
 import com.f.pojo.Employee;
 import com.f.services.UserService;
 import com.google.common.collect.Maps;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -12,12 +14,12 @@ import org.apache.shiro.subject.PrincipalCollection;
 import java.util.Map;
 
 public class MyRealm extends AuthorizingRealm {
+    private Logger logger = LogManager.getLogger(getClass());
     private String serviceBeanName;
 
     private UserService userService;
 
     public MyRealm() {
-
     }
 
     public MyRealm(String serviceBeanName) {
@@ -42,7 +44,7 @@ public class MyRealm extends AuthorizingRealm {
             e.printStackTrace();
         }
         if (user != null) {
-            return new SimpleAuthenticationInfo(user.getName(), user.getPasswd(), getName());
+            return new SimpleAuthenticationInfo(user, user.getPasswd(), getName());
         }
         return null;
     }

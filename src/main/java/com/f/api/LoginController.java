@@ -24,7 +24,6 @@ public class LoginController {
     private Logger logger = LogManager.getLogger(getClass());
 
     @PostMapping(value = "/login", consumes = "application/json")
-    @ResponseBody
     public JResult doLogin(HttpServletRequest request, @RequestBody Map<String, Object> map) {
         Subject currentUser = SecurityUtils.getSubject();
         String name = map.get("name").toString();
@@ -48,16 +47,9 @@ public class LoginController {
         return JResult.unauthorized();
     }
 
-    @ResponseBody
     @RequestMapping(value = "/register", method = {RequestMethod.POST})
     public JResult doRegister(@ModelAttribute("user") Employee user, Model model) {
         userService.save(user);
         return JResult.success("login success");
-    }
-
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public JResult logout(HttpServletRequest request, Model model) {
-        SecurityUtils.getSubject().logout();
-        return JResult.success("ok");
     }
 }

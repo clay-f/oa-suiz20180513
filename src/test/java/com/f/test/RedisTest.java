@@ -1,6 +1,6 @@
 package com.f.test;
 
-import com.f.api.RedisController;
+import com.f.helper.RedisHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +25,7 @@ public class RedisTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        RBucket<String> bucket = RedisController.getRBucket(redissonClient, "test");
+        RBucket<String> bucket = RedisHelper.getRBucket(redissonClient, "test");
         bucket.set("test");
         System.out.println(bucket.get());
     }

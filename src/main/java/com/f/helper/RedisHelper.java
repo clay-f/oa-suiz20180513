@@ -1,9 +1,9 @@
-package com.f.api;
+package com.f.helper;
 
 import org.redisson.api.*;
 import org.springframework.stereotype.Service;
 
-public class RedisController {
+public class RedisHelper {
 
     public static <T> RBucket<T> getRBucket(RedissonClient redissonClient, String objectName) {
         RBucket<T> bucket = redissonClient.getBucket(objectName);
