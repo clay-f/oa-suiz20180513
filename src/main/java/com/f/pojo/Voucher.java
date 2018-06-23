@@ -6,20 +6,17 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class Voucher extends BasePojo {
     private String item;
     private Float account;
-    private Integer employeeId;
     private Integer checkOutStateId;
     private VoucherDetail voucherDetail = new VoucherDetail();
     private VoucherCheckResult checkResult = new VoucherCheckResult();
-
 
     public Voucher() {
 
     }
 
-    public Voucher(String item, Float account, Integer employeeId) {
+    public Voucher(String item, Float account) {
         this.item = item;
         this.account = account;
-        this.employeeId = employeeId;
     }
 
     public static interface VoucherPojoView extends VoucherDetail.VoucherDetailPojoView, VoucherCheckResult.VoucherCheckResultPojoView {
@@ -42,15 +39,6 @@ public class Voucher extends BasePojo {
 
     public void setAccount(Float account) {
         this.account = account;
-    }
-
-    @JsonView(VoucherPojoView.class)
-    public Integer getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(Integer employeeId) {
-        this.employeeId = employeeId;
     }
 
     @JsonView(VoucherPojoView.class)
