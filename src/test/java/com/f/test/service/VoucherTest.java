@@ -35,7 +35,7 @@ public class VoucherTest {
 
     @Test
     public void addVoucher() {
-        Voucher voucher = new Voucher("jany get a car" + Objects.toString(System.currentTimeMillis()), (float) 0.00, 1);
+        Voucher voucher = new Voucher("jany get a car" + Objects.toString(System.currentTimeMillis()), (float) 0.00);
         VoucherDetail voucherDetail = new VoucherDetail("get a car by 500$");
         voucher.setVoucherDetail(voucherDetail);
         voucherService.save(voucher);

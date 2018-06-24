@@ -27,6 +27,9 @@ public class EmployeeTest {
     public void getEmployeeById() {
         assert testHelper != null;
         assertNotNull(userService.get(16));
+        assertNotNull(userService.get(16));
+        assertNotNull(userService.get(16));
+
     }
 
     @Test

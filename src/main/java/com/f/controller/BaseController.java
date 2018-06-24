@@ -4,10 +4,12 @@ import com.f.common.JResult;
 import com.f.services.impl.AbstractGenericService;
 import com.google.common.collect.Maps;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public abstract class BaseController<T, ID extends Serializable> {
@@ -26,7 +28,6 @@ public abstract class BaseController<T, ID extends Serializable> {
 
     @RequestMapping("/list")
     public JResult getAll() {
-        Map<String, Object> params = getRequestParams();
         return JResult.success(abstractGenericService.getAll());
     }
 

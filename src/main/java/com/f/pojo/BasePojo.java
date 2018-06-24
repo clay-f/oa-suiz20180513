@@ -2,9 +2,10 @@ package com.f.pojo;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class BasePojo {
+public class BasePojo implements Serializable {
     private Integer id;
     private Timestamp createdAt;
     private Timestamp updatedAt;
