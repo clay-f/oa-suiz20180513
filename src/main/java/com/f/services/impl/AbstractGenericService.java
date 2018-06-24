@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class AbstractGenericService<T, ID extends Serializable> implements GenericService<T, ID> {
+public abstract class AbstractGenericService<T, ID extends Serializable> implements GenericService<T, ID>, Serializable {
+    private static final long serialVersionUID = 1L;
+
     protected GenericMapper mapper;
     @Autowired
     private RedissonClient redissonClient;
@@ -23,11 +25,12 @@ public abstract class AbstractGenericService<T, ID extends Serializable> impleme
 
     @Transactional(readOnly = true)
     public <T> List<T> getAll() {
+        String listName = this.getClass().getSimpleName().toLowerCase() + "_list";
         RMap<String, Object> rMap = RedisHelper.getRMap(redissonClient, "mapMap");
-        List<T> list = (List<T>) rMap.get("list");
+        List<T> list = (List<T>) rMap.get(listName);
         if (list == null) {
-            list = mapper.getAll();
-            list = (List<T>) rMap.get("list");
+            rMap.put(listName, mapper.getAll());
+            list = (List<T>) rMap.get(listName);
         }
         return list;
     }
