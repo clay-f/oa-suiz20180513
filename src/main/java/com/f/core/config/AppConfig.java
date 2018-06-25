@@ -1,4 +1,4 @@
-package com.f.config;
+package com.f.core.config;
 
 import org.springframework.context.annotation.Configuration;
 

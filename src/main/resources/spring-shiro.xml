@@ -19,7 +19,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
     </bean>
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
-    <bean id="myRealm" class="com.f.security.MyRealm">
+    <bean id="myRealm" class="com.f.core.security.MyRealm">
         <property name="serviceBeanName" value="userService"/>
     </bean>
     <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">

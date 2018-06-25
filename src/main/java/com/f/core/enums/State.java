@@ -1,4 +1,4 @@
-package com.f.enums;
+package com.f.core.enums;
 
 public enum State {
     FALSE(0, "false"), TRUE(1, "true");
