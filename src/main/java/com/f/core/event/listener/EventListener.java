@@ -1,7 +1,7 @@
 package com.f.core.event.listener;
 
-import com.f.core.enums.EventType;
+import com.f.core.event.EventContent;
 
 public interface EventListener {
-    void notify(EventType eventType);
+    void notify(EventContent eventContent);
 }
