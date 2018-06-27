@@ -15,6 +15,16 @@
     </redission:client>
     <bean class="com.f.helper.RedisHelper"/>
     <bean class="com.f.core.event.handler.VoucherHandler">
-        <constructor-arg name="eventType" value="CHANGE_VOUCHER"/>
+        <constructor-arg name="eventType">
+            <ref bean="changeVoucher"/>
+        </constructor-arg>
+    </bean>
+    <bean class="com.f.core.event.listener.VoucherListener">
+        <constructor-arg name="eventTypes" value="CHANGE_VOUCHER"/>
+    </bean>
+    <bean id="changeVoucher"
+          class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+        <property name="staticField"
+                  value="com.f.core.enums.EventType.CHANGE_VOUCHER"/>
     </bean>
 </beans>
