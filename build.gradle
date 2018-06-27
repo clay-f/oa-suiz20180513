@@ -62,4 +62,5 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '25.1-jre'
     compile group: 'org.apache.poi', name: 'poi', version: '3.17'
     compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+    compile group: 'cglib', name: 'cglib', version: '3.2.6'
 }

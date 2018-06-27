@@ -7,11 +7,14 @@
     <import resource="classpath:mybatis-spring.xml"/>
     <import resource="classpath:spring-shiro.xml"/>
     <context:component-scan
-            base-package="com.f.services, com.f.aspectj, com.f.core.config"/>
+            base-package="com.f.services, com.f.aspectj, com.f.core"/>
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <bean class="com.f.helper.SpringContextHolder"/>
     <redission:client>
         <redission:single-server address="redis://127.0.0.1:6379"/>
     </redission:client>
     <bean class="com.f.helper.RedisHelper"/>
+    <bean class="com.f.core.event.handler.VoucherHandler">
+        <constructor-arg name="eventType" value="CHANGE_VOUCHER"/>
+    </bean>
 </beans>

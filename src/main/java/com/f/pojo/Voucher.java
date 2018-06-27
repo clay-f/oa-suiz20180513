@@ -67,4 +67,8 @@ public class Voucher extends BasePojo {
     public void setCheckResult(VoucherCheckResult checkResult) {
         this.checkResult = checkResult;
     }
+
+    public static enum VoucherType {
+        UPDATE_VOUCHER_STATE, UPDATE_RESULT_STATE;
+    }
 }

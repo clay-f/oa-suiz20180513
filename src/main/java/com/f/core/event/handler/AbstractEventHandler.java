@@ -32,6 +32,6 @@ public abstract class AbstractEventHandler implements EventHandler {
 
     @Override
     public Set<EventType> getEventType() {
-        return null;
+        return eventTypes;
     }
 }

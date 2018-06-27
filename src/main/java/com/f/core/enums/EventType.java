@@ -1,7 +1,7 @@
 package com.f.core.enums;
 
 public enum EventType {
-    CHANGE_VOUCHER("change voucher state", 1), CHECK_STATE("check voucher detail state", 2);
+    CHANGE_VOUCHER("change voucher state", 1);
     private String name;
     private Integer code;
 
@@ -9,6 +9,4 @@ public enum EventType {
         this.name = name;
         this.code = code;
     }
-
-
 }
