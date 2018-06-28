@@ -26,31 +26,26 @@ public class VoucherController extends BaseController<Voucher, Integer> {
     }
 
     @RequestMapping(value = "/{id}", method = {RequestMethod.PUT})
-    public JResult update(@PathVariable(value = "id") Integer id, @ModelAttribute(value = "user") Voucher voucher, @SessionAttribute(required = true) Employee currentUser) throws JsonProcessingException {
-        Voucher previousVoucher = (Voucher) getAbstractGenericService().get(voucher.getId());
+    public JResult update(@PathVariable(value = "id") Integer id, @RequestBody Map<String, String> params, @SessionAttribute(required = true) Employee currentUser) throws JsonProcessingException {
+        Voucher previousVoucher = (Voucher) getAbstractGenericService().get(params.get("id").toString());
         Map<String, Object> map = Maps.newHashMap();
         switch (currentUser.getOaPosition().getId()) {
             case 1:
-                previousVoucher.getVoucherDetail().setDes(voucher.getVoucherDetail().getDes());
-                previousVoucher.setItem(voucher.getItem());
-                previousVoucher.setAccount(voucher.getAccount());
+                previousVoucher.getVoucherDetail().setDes(params.get("des"));
+                previousVoucher.setItem(params.get("item"));
+                previousVoucher.setAccount(Float.parseFloat(params.get("account")));
                 break;
             case 2:
-                map.put("type", Voucher.VoucherType.UPDATE_RESULT_STATE);
-                map.put("id", voucher.getId());
-                map.put("state", voucher.getCheckOutStateId());
-                EventExecutor.fireEvent(new EventContent(getUserId().toString(), EventType.CHANGE_VOUCHER, map));
-                break;
             case 3:
                 map.put("type", Voucher.VoucherType.UPDATE_RESULT_STATE);
-                map.put("id", voucher.getId());
-                map.put("state", voucher.getCheckOutStateId());
+                map.put("id", params.get("id"));
+                map.put("state", params.get("state"));
                 EventExecutor.fireEvent(new EventContent(getUserId().toString(), EventType.CHANGE_VOUCHER, map));
                 break;
             case 4:
                 map.put("type", Voucher.VoucherType.UPDATE_VOUCHER_STATE);
-                map.put("id", voucher.getId());
-                map.put("state", voucher.getCheckOutStateId());
+                map.put("id", params.get("id"));
+                map.put("state", params.get("state"));
                 EventExecutor.fireEvent(new EventContent(getUserId().toString(), EventType.CHANGE_VOUCHER, map));
                 break;
         }
