@@ -69,7 +69,7 @@ public class Voucher extends BasePojo {
     }
 
     public static enum VoucherType {
-        UPDATE_VOUCHER_STATE(0, "foo"), UPDATE_RESULT_STATE(1, "bar");
+        UPDATE_VOUCHER_STATE(0, "update voucher state"), UPDATE_RESULT_STATE(1, "update result state");
 
         VoucherType(int code, String message) {
             this.message = message;
