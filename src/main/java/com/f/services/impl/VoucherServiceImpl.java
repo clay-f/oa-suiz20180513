@@ -18,15 +18,7 @@ import java.util.Map;
 
 @Service("voucherService")
 public class VoucherServiceImpl extends AbstractGenericService<Voucher, Integer> implements VoucherService {
-    @Autowired
-    public VoucherServiceImpl(@Qualifier("voucherDao") GenericMapper mapper) {
-        super(mapper);
-        this.voucherDao = (VoucherDao) mapper;
-    }
-
     private VoucherDao voucherDao;
-
-    private OutputJsonHelper outputJsonHelper = OutputJsonHelper.getJsonOutputInstance();
 
     @Autowired
     private VoucherCheckResultDao voucherCheckResultDao;
@@ -35,12 +27,16 @@ public class VoucherServiceImpl extends AbstractGenericService<Voucher, Integer>
     @Qualifier(value = "voucherDetailDao")
     private VoucherDetailDao voucherDetailDao;
 
+    @Autowired
+    public VoucherServiceImpl(@Qualifier("voucherDao") GenericMapper mapper) {
+        super(mapper);
+        this.voucherDao = (VoucherDao) mapper;
+    }
 
     @Override
     public Integer size() {
         return mapper.getAll().size();
     }
-
 
     @Transactional(readOnly = true)
     @Override
@@ -77,8 +73,10 @@ public class VoucherServiceImpl extends AbstractGenericService<Voucher, Integer>
         synchronized (userId) {
             switch (voucherType) {
                 case UPDATE_VOUCHER_STATE:
+                    voucherDao.updateVoucherState(eventContent.getValue("id"), eventContent.getValue("state"));
                     break;
                 case UPDATE_RESULT_STATE:
+                    voucherDao.updateVoucherCheckResultState(eventContent.getValue("id"), eventContent.getValue("state"));
                     break;
                 default:
                     break;

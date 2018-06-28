@@ -41,17 +41,17 @@
 
     <select id="getVoucherAndDetailByConditions" parameterType="map" resultMap="getAllVouchersResult">
         select
-          v.id, item, account, check_out_state_id,
-          vcr.state_id, vcr.who_check_id
+        v.id, item, account, check_out_state_id,
+        vcr.state_id, vcr.who_check_id
         from
-          voucher v
+        voucher v
         inner join employee e on v.employee_id = e.id
         left join voucher_check_result vcr on v.id = vcr.voucher_id
         left join voucher_detail vd on v.id = vd.voucher_id
         <where>
             <choose>
                 <when test="userId != null">
-                  e.id = #{userId}
+                    e.id = #{userId}
                 </when>
                 <when test="chargeId != null">
                     vcr.state_id = 2 and v.account > 5000
@@ -103,4 +103,15 @@
         where id = #{id}
     </update>
 
+    <update id="updateVoucherState">
+        update voucher set state = #{state} where id = #{id};
+    </update>
+
+    <update id="updateVoucherCheckResultState">
+        update
+          voucher_check_result
+        set
+          state_id = #{state}
+        where voucher_id = #{id}
+    </update>
 </mapper>
