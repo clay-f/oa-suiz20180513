@@ -8,7 +8,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
@@ -34,6 +33,7 @@ public abstract class AbstractEventListener implements EventListener, Initializi
     }
 
     private void doSyncExecute(final EventContent eventContent) {
+        assert syncHandlers.size() > 0;
         for (EventHandler eventHandler
                 : syncHandlers) {
             try {
@@ -45,7 +45,7 @@ public abstract class AbstractEventListener implements EventListener, Initializi
     }
 
     private void doAsyncExecute(final EventContent eventContent) {
-        assert asyncHandlers != null;
+        assert asyncHandlers.size() > 0;
         executorService.submit(new Runnable() {
             @Override
             public void run() {

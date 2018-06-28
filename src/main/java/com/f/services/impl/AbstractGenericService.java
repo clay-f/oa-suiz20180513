@@ -2,17 +2,18 @@ package com.f.services.impl;
 
 import com.f.dao.GenericMapper;
 import com.f.helper.RedisHelper;
-import com.f.pojo.Employee;
 import com.f.services.GenericService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.io.Serializable;
 import java.util.List;
 
 public abstract class AbstractGenericService<T, ID extends Serializable> implements GenericService<T, ID>, Serializable {
+    protected static final Logger logger = LogManager.getLogger();
     private static final long serialVersionUID = 1L;
 
     protected GenericMapper mapper;

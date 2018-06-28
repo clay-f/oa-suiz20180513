@@ -1,5 +1,6 @@
 package com.f.services.impl;
 
+import com.f.core.event.EventContent;
 import com.f.dao.GenericMapper;
 import com.f.dao.VoucherCheckResultDao;
 import com.f.dao.VoucherDao;
@@ -67,5 +68,21 @@ public class VoucherServiceImpl extends AbstractGenericService<Voucher, Integer>
         voucherDetailDao.insert(voucher.getVoucherDetail());
         voucher.getCheckResult().setVoucherId(id);
         voucherCheckResultDao.insert(voucher.getCheckResult());
+    }
+
+    @Transactional
+    @Override
+    public void updateVoucherState(String userId, EventContent eventContent, Voucher.VoucherType voucherType) {
+        userId = userId.intern();
+        synchronized (userId) {
+            switch (voucherType) {
+                case UPDATE_VOUCHER_STATE:
+                    break;
+                case UPDATE_RESULT_STATE:
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

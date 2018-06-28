@@ -1,5 +1,6 @@
 package com.f.services;
 
+import com.f.core.event.EventContent;
 import com.f.pojo.Voucher;
 
 import java.util.List;
@@ -10,4 +11,6 @@ public interface VoucherService extends GenericService<Voucher, Integer> {
     List<Voucher> getVoucherByCondition(Map<String, Object> map);
 
     Integer size();
+
+    void updateVoucherState(String userId, EventContent eventContent, Voucher.VoucherType voucherType);
 }
