@@ -14,8 +14,8 @@ public class VoucherListener extends AbstractEventHandler {
     @Resource(name = "voucherService")
     private VoucherService voucherService;
 
-    public VoucherListener(EventType eventTypes) {
-        super(eventTypes);
+    public VoucherListener() {
+        super(EventType.CHANGE_VOUCHER);
     }
 
     @Override
