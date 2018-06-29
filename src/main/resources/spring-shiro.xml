@@ -13,7 +13,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
                 /login = authc
                 /logout = logout
                 /register = anon
-                /api/** = authc
+                /api/** = anon
             </value>
         </property>
     </bean>
