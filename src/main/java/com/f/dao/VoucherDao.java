@@ -14,4 +14,5 @@ public interface VoucherDao extends GenericMapper<Voucher, Integer> {
     void updateVoucherState(@Param("id") String voucherId, @Param("state") Integer state);
 
     void updateVoucherCheckResultState(@Param("id") String voucherId, @Param("state") Integer state);
+
 }

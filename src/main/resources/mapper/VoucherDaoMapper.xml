@@ -88,7 +88,7 @@
 
     <insert id="insert" parameterType="Voucher" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into voucher(employee_id, item, account)
-        values (#{employeeId}, #{item}, #{account})
+        values (#{employee.id}, #{item}, #{account})
     </insert>
 
     <update id="update" parameterType="Voucher">

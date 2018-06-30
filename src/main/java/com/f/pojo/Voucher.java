@@ -9,6 +9,7 @@ public class Voucher extends BasePojo {
     private Integer checkOutStateId;
     private VoucherDetail voucherDetail = new VoucherDetail();
     private VoucherCheckResult checkResult = new VoucherCheckResult();
+    private Employee employee = new Employee();
 
     public Voucher() {
 
@@ -66,6 +67,14 @@ public class Voucher extends BasePojo {
 
     public void setCheckResult(VoucherCheckResult checkResult) {
         this.checkResult = checkResult;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public static enum VoucherType {
