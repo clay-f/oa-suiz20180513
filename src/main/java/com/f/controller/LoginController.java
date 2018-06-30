@@ -52,7 +52,8 @@ public class LoginController {
 
     @RequestMapping(value = "/register", method = {RequestMethod.POST})
     public JResult doRegister(@RequestBody Map<String, String> params) {
-        userService.save(params.get("name"), params.get("passwd"), Integer.parseInt(params.get("oaPositionId")), Integer.parseInt(params.get("departmentId")));
+        String sha2Passwd = new Sha256Hash(params.get("name"), params.get("passwd")).toHex();
+        userService.save(params.get("name"), sha2Passwd, Integer.parseInt(params.get("oaPositionId")), Integer.parseInt(params.get("departmentId")));
         return JResult.success("login success");
     }
 }
