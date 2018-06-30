@@ -39,10 +39,10 @@ public class UserServiceImpl extends AbstractGenericService<Employee, Integer> i
         return userDao.getUserByCondition(map).size() > 0;
     }
 
+    @Transactional
     @Override
-    public void save(Employee employee) {
-        String passwd = new Sha256Hash(employee.getPasswd(), employee.getName()).toHex();
-        employee.setPasswd(passwd);
-        super.save(employee);
+    public void save(String name, String passwd, Integer oaPositionId, Integer departmentId) {
+        String shaPasswd = new Sha256Hash(passwd, name).toHex();
+        userDao.save(name, passwd, oaPositionId, departmentId);
     }
 }

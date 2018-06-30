@@ -63,4 +63,5 @@ dependencies {
     compile group: 'org.apache.poi', name: 'poi', version: '3.17'
     compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
     compile group: 'cglib', name: 'cglib', version: '3.2.6'
+    compile group: 'javax.el', name: 'javax.el-api', version: '3.0.1-b06'
 }

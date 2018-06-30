@@ -20,7 +20,7 @@ public class OutputJsonHelper {
     /*
        生成格式化 json 数据
      */
-    public Object outputJsonVal(Object obj) throws JsonProcessingException {
+    public  Object outputJsonVal(Object obj) throws JsonProcessingException {
         return objectMapper.writeValueAsString(obj);
     }
 }

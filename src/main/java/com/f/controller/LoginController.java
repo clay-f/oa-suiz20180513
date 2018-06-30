@@ -1,7 +1,9 @@
 package com.f.controller;
 
 import com.f.common.JResult;
+import com.f.pojo.Department;
 import com.f.pojo.Employee;
+import com.f.pojo.OaPosition;
 import com.f.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -49,8 +51,8 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/register", method = {RequestMethod.POST})
-    public JResult doRegister(@ModelAttribute("user") Employee user, Model model) {
-        userService.save(user);
+    public JResult doRegister(@RequestBody Map<String, String> params) {
+        userService.save(params.get("name"), params.get("passwd"), Integer.parseInt(params.get("oaPositionId")), Integer.parseInt(params.get("departmentId")));
         return JResult.success("login success");
     }
 }

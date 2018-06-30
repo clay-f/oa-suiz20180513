@@ -16,7 +16,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class RedisTest {
     @Autowired
-    @Qualifier("redissonClient")
     private RedissonClient redissonClient;
     @Test
     void say() {

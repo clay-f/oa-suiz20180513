@@ -8,6 +8,7 @@ public class OaPosition extends BasePojo {
     public OaPosition() {
     }
 
+
     public OaPosition(String name) {
         this.name = name;
     }

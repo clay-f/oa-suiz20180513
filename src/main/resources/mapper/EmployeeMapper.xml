@@ -45,7 +45,7 @@
         </choose>
     </select>
 
-    <insert id="insert" parameterType="Employee">
+    <insert id="save">
         insert into employee(name, passwd, department_id, oa_position_id)
         values (
         #{name}, #{passwd},
@@ -58,7 +58,7 @@
         </if>
         );
     </insert>
-    
+
     <select id="get" parameterType="Integer" resultMap="getEmployeeResult">
         select
           e.id, e.name, e.passwd, e.created_at, e.updated_at,
