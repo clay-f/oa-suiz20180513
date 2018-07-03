@@ -1,14 +1,12 @@
 package com.f.controller;
 
 import com.f.common.JResult;
-import com.f.pojo.Employee;
 import com.f.pojo.Voucher;
 import com.f.services.impl.AbstractGenericService;
 import com.google.common.collect.Maps;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;

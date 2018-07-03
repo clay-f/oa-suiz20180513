@@ -7,7 +7,6 @@ import com.f.core.event.EventContent;
 import com.f.core.event.EventExecutor;
 import com.f.pojo.Employee;
 import com.f.pojo.Voucher;
-import com.f.services.VoucherService;
 import com.f.services.impl.AbstractGenericService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RequestMapping(value = "/api/vouchers")
-@RestController
+@RestController(value = "voucherController")
 public class VoucherController extends BaseController<Voucher, Integer> {
     @Autowired
     public VoucherController(@Qualifier("voucherService") AbstractGenericService abstractGenericService) {
@@ -51,5 +50,13 @@ public class VoucherController extends BaseController<Voucher, Integer> {
         }
         getAbstractGenericService().update(previousVoucher);
         return JResult.success("ok");
+    }
+
+    @RequestMapping(value = "/save", method = {RequestMethod.POST}, consumes = "application/json")
+    public void save(@RequestBody Map<String, String> map) {
+        Voucher voucher = new Voucher(map.get("item"),Float.parseFloat(map.get("account")));
+        voucher.getVoucherDetail().setDes(map.get("des"));
+        voucher.getEmployee().setId(19);
+        getAbstractGenericService().save(voucher);
     }
 }
