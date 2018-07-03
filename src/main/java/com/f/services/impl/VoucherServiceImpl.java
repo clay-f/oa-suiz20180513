@@ -33,6 +33,7 @@ public class VoucherServiceImpl extends AbstractGenericService<Voucher, Integer>
         this.voucherDao = (VoucherDao) mapper;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Integer size() {
         return mapper.getAll().size();
