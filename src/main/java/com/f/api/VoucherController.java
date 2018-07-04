@@ -1,12 +1,12 @@
 package com.f.api;
 
-import com.f.common.JResult;
+import com.f.core.common.JResult;
 import com.f.controller.BaseController;
 import com.f.core.enums.EventType;
 import com.f.core.event.EventContent;
 import com.f.core.event.EventExecutor;
-import com.f.pojo.Employee;
-import com.f.pojo.Voucher;
+import com.f.core.pojo.Employee;
+import com.f.core.pojo.Voucher;
 import com.f.services.impl.AbstractGenericService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;

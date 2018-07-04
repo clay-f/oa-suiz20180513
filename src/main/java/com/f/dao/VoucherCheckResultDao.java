@@ -1,6 +1,6 @@
 package com.f.dao;
 
-import com.f.pojo.VoucherCheckResult;
+import com.f.core.pojo.VoucherCheckResult;
 
 import java.util.List;
 import java.util.Map;

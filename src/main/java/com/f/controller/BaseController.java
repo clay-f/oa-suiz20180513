@@ -1,7 +1,7 @@
 package com.f.controller;
 
-import com.f.common.JResult;
-import com.f.pojo.Voucher;
+import com.f.core.common.JResult;
+import com.f.core.pojo.Voucher;
 import com.f.services.impl.AbstractGenericService;
 import com.google.common.collect.Maps;
 import org.apache.shiro.SecurityUtils;

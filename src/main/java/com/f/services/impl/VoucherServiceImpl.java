@@ -5,13 +5,10 @@ import com.f.dao.GenericMapper;
 import com.f.dao.VoucherCheckResultDao;
 import com.f.dao.VoucherDao;
 import com.f.dao.VoucherDetailDao;
-import com.f.helper.OutputJsonHelper;
-import com.f.helper.SpringContextHolder;
-import com.f.pojo.Voucher;
+import com.f.core.pojo.Voucher;
 import com.f.services.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

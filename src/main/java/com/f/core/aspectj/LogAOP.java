@@ -1,4 +1,4 @@
-package com.f.aspectj;
+package com.f.core.aspectj;
 
 import com.f.helper.OutputJsonHelper;
 import org.apache.logging.log4j.LogManager;

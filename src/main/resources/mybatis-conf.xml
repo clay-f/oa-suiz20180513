@@ -11,6 +11,6 @@
         <setting name="defaultStatementTimeout" value="25"/>
     </settings>
     <typeAliases>
-        <package name="com.f.pojo"/>
+        <package name="com.f.core.pojo"/>
     </typeAliases>
 </configuration>

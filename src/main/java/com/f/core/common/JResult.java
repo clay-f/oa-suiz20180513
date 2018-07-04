@@ -1,4 +1,4 @@
-package com.f.common;
+package com.f.core.common;
 
 public class JResult {
     private Object result;

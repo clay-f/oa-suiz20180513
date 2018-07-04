@@ -1,8 +1,6 @@
 package com.f.services;
 
-import com.f.pojo.OaPosition;
-
-import java.util.List;
+import com.f.core.pojo.OaPosition;
 
 public interface OaPositionService extends GenericService<OaPosition, Integer>  {
 }

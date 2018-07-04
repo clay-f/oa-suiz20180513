@@ -1,7 +1,7 @@
 package com.f.services.impl;
 
 import com.f.dao.GenericMapper;
-import com.f.pojo.Department;
+import com.f.core.pojo.Department;
 import com.f.services.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

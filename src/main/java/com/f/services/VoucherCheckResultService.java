@@ -1,6 +1,6 @@
 package com.f.services;
 
-import com.f.pojo.VoucherCheckResult;
+import com.f.core.pojo.VoucherCheckResult;
 
 public interface VoucherCheckResultService {
     boolean deleteVoucherCheckResult(Integer id);

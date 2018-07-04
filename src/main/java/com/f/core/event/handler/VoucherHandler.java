@@ -2,7 +2,7 @@ package com.f.core.event.handler;
 
 import com.f.core.enums.EventType;
 import com.f.core.event.EventContent;
-import com.f.pojo.Voucher;
+import com.f.core.pojo.Voucher;
 import com.f.services.VoucherService;
 import org.springframework.stereotype.Component;
 

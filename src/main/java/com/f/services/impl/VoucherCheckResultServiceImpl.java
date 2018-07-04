@@ -1,10 +1,9 @@
 package com.f.services.impl;
 
 import com.f.dao.VoucherCheckResultDao;
-import com.f.pojo.VoucherCheckResult;
+import com.f.core.pojo.VoucherCheckResult;
 import com.f.services.VoucherCheckResultService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;

@@ -1,9 +1,6 @@
 package com.f.controller;
 
-import com.f.common.JResult;
-import com.f.pojo.Department;
-import com.f.pojo.Employee;
-import com.f.pojo.OaPosition;
+import com.f.core.common.JResult;
 import com.f.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +10,6 @@ import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;

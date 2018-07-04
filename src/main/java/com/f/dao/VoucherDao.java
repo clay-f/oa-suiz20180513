@@ -1,6 +1,6 @@
 package com.f.dao;
 
-import com.f.pojo.Voucher;
+import com.f.core.pojo.Voucher;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

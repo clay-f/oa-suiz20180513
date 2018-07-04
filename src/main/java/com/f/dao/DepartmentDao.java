@@ -1,6 +1,6 @@
 package com.f.dao;
 
-import com.f.pojo.Department;
+import com.f.core.pojo.Department;
 
 public interface DepartmentDao extends GenericMapper<Department, Integer> {
 }

@@ -1,7 +1,7 @@
 package com.f.test.service;
 
-import com.f.pojo.Voucher;
-import com.f.pojo.VoucherDetail;
+import com.f.core.pojo.Voucher;
+import com.f.core.pojo.VoucherDetail;
 import com.f.services.VoucherDetailService;
 import com.f.services.VoucherService;
 import com.f.test.TestHelper;

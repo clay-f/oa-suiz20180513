@@ -7,7 +7,7 @@
     <import resource="classpath:mybatis-spring.xml"/>
     <import resource="classpath:spring-shiro.xml"/>
     <context:component-scan
-            base-package="com.f.services, com.f.aspectj, com.f.core, com.f.helper"/>
+            base-package="com.f.services, com.f.core.aspectj, com.f.core, com.f.helper"/>
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <redission:client>
         <redission:single-server address="redis://127.0.0.1:6379"/>

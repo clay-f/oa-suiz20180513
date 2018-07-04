@@ -2,7 +2,7 @@ package com.f.services.impl;
 
 import com.f.dao.GenericMapper;
 import com.f.dao.VoucherDetailDao;
-import com.f.pojo.VoucherDetail;
+import com.f.core.pojo.VoucherDetail;
 import com.f.services.VoucherDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

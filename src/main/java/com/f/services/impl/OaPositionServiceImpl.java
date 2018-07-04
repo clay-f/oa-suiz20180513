@@ -1,7 +1,7 @@
 package com.f.services.impl;
 
 import com.f.dao.GenericMapper;
-import com.f.pojo.OaPosition;
+import com.f.core.pojo.OaPosition;
 import com.f.services.OaPositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

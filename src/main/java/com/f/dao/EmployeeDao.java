@@ -1,6 +1,6 @@
 package com.f.dao;
 
-import com.f.pojo.Employee;
+import com.f.core.pojo.Employee;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.context.annotation.Scope;
 

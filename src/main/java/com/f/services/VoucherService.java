@@ -1,7 +1,7 @@
 package com.f.services;
 
 import com.f.core.event.EventContent;
-import com.f.pojo.Voucher;
+import com.f.core.pojo.Voucher;
 
 import java.util.List;
 import java.util.Map;

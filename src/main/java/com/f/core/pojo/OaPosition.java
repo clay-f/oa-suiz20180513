@@ -1,4 +1,4 @@
-package com.f.pojo;
+package com.f.core.pojo;
 
 import com.fasterxml.jackson.annotation.JsonView;
 

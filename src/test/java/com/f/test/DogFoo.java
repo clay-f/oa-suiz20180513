@@ -1,6 +1,6 @@
 package com.f.test;
 
-import com.f.pojo.Employee;
+import com.f.core.pojo.Employee;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,6 @@
 package com.f.services;
 
-import com.f.pojo.Department;
-
-import java.util.List;
+import com.f.core.pojo.Department;
 
 public interface DepartmentService extends GenericService<Department, Integer> {
 }
