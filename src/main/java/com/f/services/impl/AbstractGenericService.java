@@ -10,6 +10,7 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.List;
 
 public abstract class AbstractGenericService<T, ID extends Serializable> implements GenericService<T, ID>, Serializable {
@@ -28,6 +29,7 @@ public abstract class AbstractGenericService<T, ID extends Serializable> impleme
     public <T> List<T> getAll() {
         String listName = this.getClass().getSimpleName().toLowerCase() + "_list";
         RMap<String, Object> rMap = RedisHelper.getRMap(redissonClient, "mapMap");
+        rMap.expireAt(Instant.now().toEpochMilli() + 6000);
         List<T> list = (List<T>) rMap.get(listName);
         if (list == null) {
             rMap.put(listName, mapper.getAll());
