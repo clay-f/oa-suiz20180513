@@ -1,6 +1,6 @@
 package com.f.controller;
 
-import com.f.core.common.JResult;
+import com.f.core.common.ResponseJsonResult;
 import com.f.core.pojo.Voucher;
 import com.f.services.impl.AbstractGenericService;
 import com.google.common.collect.Maps;
@@ -23,24 +23,24 @@ public abstract class BaseController<T, ID extends Serializable> {
     }
 
     @RequestMapping("/{id}")
-    public JResult get(@PathVariable("id") ID id) {
-        return JResult.success(abstractGenericService.get(id));
+    public ResponseJsonResult get(@PathVariable("id") ID id) {
+        return ResponseJsonResult.successResponse(abstractGenericService.get(id));
     }
 
     @RequestMapping("/list")
-    public JResult getAll() {
-        return JResult.success(abstractGenericService.getAll());
+    public ResponseJsonResult getAll() {
+        return ResponseJsonResult.successResponse(abstractGenericService.getAll());
     }
 
     @RequestMapping("/{id}/delete")
-    public JResult delete(@PathVariable("id") ID id) {
+    public ResponseJsonResult delete(@PathVariable("id") ID id) {
         abstractGenericService.delete(id);
-        return JResult.success("ok");
+        return ResponseJsonResult.successResponse("ok");
     }
 
     @RequestMapping("/index")
-    public JResult index() {
-        return JResult.success(abstractGenericService.getAll());
+    public ResponseJsonResult index() {
+        return ResponseJsonResult.successResponse(abstractGenericService.getAll());
     }
 
     @GetMapping("/report")

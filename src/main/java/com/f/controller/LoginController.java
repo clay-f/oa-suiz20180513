@@ -1,6 +1,7 @@
 package com.f.controller;
 
-import com.f.core.common.JResult;
+import com.f.core.common.ResponseJsonResult;
+import com.f.core.exceptions.NotFoundException;
 import com.f.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,7 +24,7 @@ public class LoginController {
     private Logger logger = LogManager.getLogger(getClass());
 
     @PostMapping(value = "/login", consumes = "application/json")
-    public JResult doLogin(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+    public ResponseJsonResult doLogin(HttpServletRequest request, @RequestBody Map<String, Object> map) {
         Subject currentUser = SecurityUtils.getSubject();
         String name = map.get("name").toString();
         String passwd = map.get("passwd").toString();
@@ -34,7 +35,7 @@ public class LoginController {
             try {
                 currentUser.login(token);
                 logger.info("user: " + currentUser.getPrincipal() + " logged in successfully.");
-                return JResult.success("ok");
+                return ResponseJsonResult.successResponse("ok");
             } catch (UnknownAccountException uae) {
                 uae.printStackTrace();
             } catch (IncorrectCredentialsException ice) {
@@ -43,13 +44,13 @@ public class LoginController {
                 lae.printStackTrace();
             }
         }
-        return JResult.unauthorized();
+        throw new NotFoundException();
     }
 
     @RequestMapping(value = "/register", method = {RequestMethod.POST})
-    public JResult doRegister(@RequestBody Map<String, String> params) {
+    public ResponseJsonResult doRegister(@RequestBody Map<String, String> params) {
         String sha2Passwd = new Sha256Hash(params.get("name"), params.get("passwd")).toHex();
         userService.save(params.get("name"), sha2Passwd, Integer.parseInt(params.get("oaPositionId")), Integer.parseInt(params.get("departmentId")));
-        return JResult.success("login success");
+        return ResponseJsonResult.successResponse("login success");
     }
 }

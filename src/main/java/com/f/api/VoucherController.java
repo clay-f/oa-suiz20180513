@@ -1,6 +1,6 @@
 package com.f.api;
 
-import com.f.core.common.JResult;
+import com.f.core.common.ResponseJsonResult;
 import com.f.controller.BaseController;
 import com.f.core.enums.EventType;
 import com.f.core.event.EventContent;
@@ -25,7 +25,7 @@ public class VoucherController extends BaseController<Voucher, Integer> {
     }
 
     @RequestMapping(value = "/{id}", method = {RequestMethod.PUT})
-    public JResult update(@PathVariable(value = "id") Integer id, @RequestBody Map<String, String> params, @SessionAttribute(required = true) Employee currentUser) throws JsonProcessingException {
+    public ResponseJsonResult update(@PathVariable(value = "id") Integer id, @RequestBody Map<String, String> params, @SessionAttribute(required = true) Employee currentUser) throws JsonProcessingException {
         Voucher previousVoucher = (Voucher) getAbstractGenericService().get(params.get("id").toString());
         Map<String, Object> map = Maps.newHashMap();
         switch (currentUser.getOaPosition().getId()) {
@@ -49,7 +49,7 @@ public class VoucherController extends BaseController<Voucher, Integer> {
                 break;
         }
         getAbstractGenericService().update(previousVoucher);
-        return JResult.success("ok");
+        return ResponseJsonResult.success("ok");
     }
 
     @RequestMapping(value = "/save", method = {RequestMethod.POST}, consumes = "application/json")
