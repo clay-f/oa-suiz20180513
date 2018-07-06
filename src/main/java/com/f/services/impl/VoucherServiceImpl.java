@@ -34,7 +34,7 @@ public class VoucherServiceImpl extends AbstractGenericService<Voucher, Integer>
 
     @Override
     public Integer size() {
-        return mapper.getAll().size();
+        return mapper.size();
     }
 
     @Transactional(readOnly = true)

@@ -13,4 +13,6 @@ public interface GenericMapper<T, ID extends Serializable> {
     void update(T o);
 
     void delete(ID id);
+
+    Integer size();
 }

@@ -3,8 +3,22 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.f.dao.EmployeeDao">
+    <insert id="save">
+        insert into employee(name, passwd, department_id, oa_position_id)
+        values (
+        #{name}, #{passwd},
+        <if test="departmentId != null">
+            #{departmentId}
+        </if>
+        ,
+        <if test="oaPositionId != null">
+            #{oaPositionId}
+        </if>
+        );
+    </insert>
+
     <select id="getAll" resultMap="getUserByConditionResult">
-        select * from employee
+        select * from employee limit 30
     </select>
 
     <resultMap type="Employee" id="getUserByConditionResult">
@@ -45,20 +59,6 @@
         </choose>
     </select>
 
-    <insert id="save">
-        insert into employee(name, passwd, department_id, oa_position_id)
-        values (
-        #{name}, #{passwd},
-        <if test="departmentId != null">
-            #{departmentId}
-        </if>
-        ,
-        <if test="oaPositionId != null">
-            #{oaPositionId}
-        </if>
-        );
-    </insert>
-
     <select id="get" parameterType="Integer" resultMap="getEmployeeResult">
         select
           e.id, e.name, e.passwd, e.created_at, e.updated_at,
@@ -85,4 +85,8 @@
             <result property="name" column="o_name"/>
         </association>
     </resultMap>
+
+    <select id="size" resultType="Integer">
+        select count(1) from employee;
+    </select>
 </mapper>

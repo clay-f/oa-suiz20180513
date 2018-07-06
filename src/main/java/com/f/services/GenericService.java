@@ -13,4 +13,6 @@ public interface GenericService<T, ID extends Serializable> {
     void delete(ID id);
 
     void update(T t);
+
+    Integer size();
 }

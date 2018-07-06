@@ -39,6 +39,10 @@ public abstract class AbstractGenericService<T, ID extends Serializable> impleme
     }
 
     @Transactional
+    public Integer size() {
+       return mapper.size();
+    }
+    @Transactional
     public void save(T t) {
         mapper.insert(t);
     }
