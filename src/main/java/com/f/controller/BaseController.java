@@ -52,6 +52,10 @@ public abstract class BaseController<T, ID extends Serializable> {
         return abstractGenericService;
     }
 
+    public void setAbstractGenericService(AbstractGenericService abstractGenericService) {
+        this.abstractGenericService = abstractGenericService;
+    }
+
     protected Map<String, Object> getRequestParams() {
         return getRequestParams(request);
     }

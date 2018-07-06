@@ -21,11 +21,11 @@ public class ResponseJsonResult {
     }
 
     @JsonView
-    public String getStatus() throws JsonProcessingException {
+    public Object getStatus() throws JsonProcessingException {
         Map<String, Object> map = Maps.newHashMap();
         map.put("code", status.value());
         map.put("message", status.getReasonPhrase());
-        return new ObjectMapper().writeValueAsString(map);
+        return map;
     }
 
     public void setStatus(HttpStatus status) {
