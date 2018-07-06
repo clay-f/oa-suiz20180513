@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class LogAOP {
     private static Logger logger = LogManager.getLogger(LogAOP.class);
-    private static OutputJsonHelper outputJsonHelper = OutputJsonHelper.getJsonOutputInstance();
 
     @Pointcut("execution(* com.f.services.*.*(..))")
     public void pointcut() {}
@@ -33,7 +32,7 @@ public class LogAOP {
         Object obj = null;
         try {
             obj =  proceedingJoinPoint.proceed();
-            logger.info("around method catch val: " + outputJsonHelper.outputJsonVal(obj));
+            logger.info("around method catch val: " + OutputJsonHelper.outputJsonVal(obj));
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
