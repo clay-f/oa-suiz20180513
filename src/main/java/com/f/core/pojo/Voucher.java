@@ -14,6 +14,11 @@ public class Voucher extends BasePojo {
     public Voucher() {
 
     }
+    public Voucher(Integer id, String item, Float account) {
+        setId(id);
+        this.item = item;
+        this.account = account;
+    }
 
     public Voucher(String item, Float account) {
         this.item = item;

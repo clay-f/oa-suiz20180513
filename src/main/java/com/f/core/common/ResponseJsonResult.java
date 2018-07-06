@@ -10,26 +10,26 @@ import java.util.Map;
 
 public class ResponseJsonResult {
     private Object result;
-    private HttpStatus httpStatus;
+    private HttpStatus status;
 
     public ResponseJsonResult() {
     }
 
-    public ResponseJsonResult( HttpStatus httpStatus, Object result) {
+    public ResponseJsonResult(HttpStatus status, Object result) {
         this.result = result;
-        this.httpStatus = httpStatus;
+        this.status = status;
     }
 
     @JsonView
-    public String getHttpStatus() throws JsonProcessingException {
+    public String getStatus() throws JsonProcessingException {
         Map<String, Object> map = Maps.newHashMap();
-        map.put("code", httpStatus.value());
-        map.put("message", httpStatus.getReasonPhrase());
+        map.put("code", status.value());
+        map.put("message", status.getReasonPhrase());
         return new ObjectMapper().writeValueAsString(map);
     }
 
-    public void setHttpStatus(HttpStatus httpStatus) {
-        this.httpStatus = httpStatus;
+    public void setStatus(HttpStatus status) {
+        this.status = status;
     }
 
     @JsonView

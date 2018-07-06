@@ -49,14 +49,15 @@ public class VoucherController extends BaseController<Voucher, Integer> {
                 break;
         }
         getAbstractGenericService().update(previousVoucher);
-        return ResponseJsonResult.success("ok");
+        return ResponseJsonResult.successResponse("ok");
     }
 
     @RequestMapping(value = "/save", method = {RequestMethod.POST}, consumes = "application/json")
-    public void save(@RequestBody Map<String, String> map) {
+    public ResponseJsonResult save(@RequestBody Map<String, String> map) {
         Voucher voucher = new Voucher(map.get("item"),Float.parseFloat(map.get("account")));
         voucher.getVoucherDetail().setDes(map.get("des"));
         voucher.getEmployee().setId(19);
         getAbstractGenericService().save(voucher);
+        return ResponseJsonResult.successResponse("create voucher success");
     }
 }
