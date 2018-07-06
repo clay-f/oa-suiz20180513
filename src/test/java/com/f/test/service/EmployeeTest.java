@@ -21,7 +21,6 @@ import java.util.Map;
 public class EmployeeTest {
     private TestHelper testHelper = TestHelper.getInstance();
     private UserService userService = (UserService) testHelper.getBean("userService");
-    private OutputJsonHelper outputJsonHelper = OutputJsonHelper.getJsonOutputInstance();
 
     @Test
     public void getEmployeeById() {
@@ -35,6 +34,6 @@ public class EmployeeTest {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("name", "foo");
         map.put("passwd", "123456");
-        assertNotNull(outputJsonHelper.outputJsonVal(userService.login(map)));
+        assertNotNull(OutputJsonHelper.outputJsonVal(userService.login(map)));
     }
 }

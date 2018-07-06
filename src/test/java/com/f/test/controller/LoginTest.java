@@ -28,8 +28,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml","classpath:springmvc-servlet.xml"})
 public class LoginTest {
-    OutputJsonHelper objectMapper = OutputJsonHelper.getJsonOutputInstance();
-
     @Autowired
     @Qualifier(value = "userController")
     private UserController userController;

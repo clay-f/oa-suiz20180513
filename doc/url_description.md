@@ -1,4 +1,4 @@
-jboa url
+/url specify
 
 * index
 * new
