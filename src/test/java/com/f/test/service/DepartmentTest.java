@@ -1,24 +1,54 @@
 package com.f.test.service;
 
+import com.f.core.pojo.Department;
+import com.f.dao.DepartmentDao;
+import com.f.helper.OutputJsonHelper;
+import com.f.helper.RedisHelper;
 import com.f.services.DepartmentService;
-import com.f.test.TestHelper;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.f.services.impl.AbstractGenericService;
+import com.f.services.impl.DepartmentServiceImpl;
+import org.assertj.core.util.Lists;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.redisson.api.RedissonClient;
+import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
+import static org.mockito.Mockito.*;
+
+import java.util.Collections;
+import java.util.List;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@SpringJUnitWebConfig(locations = {"classpath:applicationContext.xml"})
 public class DepartmentTest {
-    private DepartmentService departmentService = (DepartmentService) TestHelper.getInstance().getBean("departmentServiceImpl");
-    ObjectMapper mapper = new ObjectMapper();
+    @Mock
+    private DepartmentDao departmentDao;
+
+    @Mock
+    private AbstractGenericService abstractGenericService;
+
+    @InjectMocks
+    private DepartmentServiceImpl departmentService;
+
+    @Mock
+    private RedissonClient redisHelper;
+
+    @BeforeAll
+    void setup() {
+        MockitoAnnotations.initMocks(this);
+        departmentService.setMapper(departmentDao);
+        departmentService.setRedissonClient(redisHelper);
+    }
 
     @Test
     public void getDepartmentList() {
-        assert departmentService.getAll().size() > 0;
+        List<Department> list = Lists.newArrayList(new Department("foo"), new Department("bar"));
+        when(abstractGenericService.getAll()).thenReturn(Collections.singletonList(list));
+        assert abstractGenericService.getAll().size() > 0;
+        verify(abstractGenericService, times(1)).getAll();
+        verifyNoMoreInteractions(abstractGenericService);
     }
 }

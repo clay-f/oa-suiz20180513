@@ -5,7 +5,12 @@ import com.f.core.pojo.VoucherDetail;
 import com.f.services.VoucherDetailService;
 import com.f.services.VoucherService;
 import com.f.test.TestHelper;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,9 +18,17 @@ import java.util.Map;
 import java.util.Objects;
 
 
+import static org.mockito.Mockito.*;
+
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@SpringJUnitWebConfig(locations = {"classpath:applicationContext.xml"})
 public class VoucherTest {
-    private VoucherService voucherService = (VoucherService) TestHelper.getInstance().getBean("voucherService");
-    private VoucherDetailService voucherDetailService = (VoucherDetailService) TestHelper.getInstance().getBean("voucherDetailServiceImpl");
+    @Mock
+    private VoucherService voucherService;
+    @BeforeAll
+    void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void getVouchersList() {

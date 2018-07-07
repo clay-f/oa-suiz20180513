@@ -25,6 +25,18 @@ public abstract class AbstractGenericService<T, ID extends Serializable> impleme
         this.mapper = mapper;
     }
 
+    public void setMapper(GenericMapper mapper) {
+        this.mapper = mapper;
+    }
+
+    public RedissonClient getRedissonClient() {
+        return redissonClient;
+    }
+
+    public void setRedissonClient(RedissonClient redissonClient) {
+        this.redissonClient = redissonClient;
+    }
+
     @Transactional(readOnly = true)
     public <T> List<T> getAll() {
         String listName = this.getClass().getSimpleName().toLowerCase() + "_list";

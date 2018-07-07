@@ -1,39 +1,55 @@
 package com.f.test.service;
 
+import com.f.core.common.ResponseJsonResult;
+import com.f.core.pojo.Employee;
 import com.f.helper.OutputJsonHelper;
+import com.f.services.GenericService;
 import com.f.services.UserService;
 import com.f.test.TestHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import static org.junit.jupiter.api.Assertions.*;
-
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.mockito.Mockito.*;
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@SpringJUnitWebConfig(locations = {"classpath:applicationContext.xml"})
 public class EmployeeTest {
-    private TestHelper testHelper = TestHelper.getInstance();
-    private UserService userService = (UserService) testHelper.getBean("userService");
+    @Mock
+    private GenericService genericService;
+
+    @Mock
+    private UserService userService;
+
+    @BeforeAll
+    void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void getEmployeeById() {
-        assert testHelper != null;
-        assertNotNull(userService.get(19));
-
+        Employee employee = new Employee(1, "foo", "123456");
+        when(genericService.get(1)).thenReturn(ResponseJsonResult.successResponse(employee));
+        genericService.get(1);
+        verify(genericService, times(1)).get(1);
     }
+
 
     @Test
     public void testLogin() throws JsonProcessingException, IllegalAccessException {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("name", "foo");
         map.put("passwd", "123456");
-        assertNotNull(OutputJsonHelper.outputJsonVal(userService.login(map)));
+        when(userService.login(map)).thenReturn(new Employee(1, "foo", "123456"));
+        assert userService.login(map).getName().equals("foo");
+        verify(userService, times(1)).login(map);
     }
 }
