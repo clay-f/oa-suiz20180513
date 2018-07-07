@@ -65,7 +65,7 @@ public class UserAPITest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/users/{id}", 1).contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$.result[0].id", is(1)));
+                .andExpect(jsonPath("$.result.id", is(1)));
         verify(userController, times(1)).get(1);
     }
 
