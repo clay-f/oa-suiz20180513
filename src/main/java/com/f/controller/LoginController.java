@@ -28,7 +28,7 @@ public class LoginController {
     private Logger logger = LogManager.getLogger(getClass());
 
     @PostMapping(value = "/login", consumes = "application/json")
-    public ResponseJsonResult doLogin(HttpServletRequest request, @RequestBody Map<String, Object> map) {
+    public ResponseJsonResult doLogin(@RequestBody Map<String, Object> map) {
         Subject currentUser = SecurityUtils.getSubject();
         String name = map.get("name").toString();
         String passwd = map.get("passwd").toString();
