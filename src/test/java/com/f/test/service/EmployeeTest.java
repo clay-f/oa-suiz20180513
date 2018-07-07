@@ -2,16 +2,12 @@ package com.f.test.service;
 
 import com.f.core.common.ResponseJsonResult;
 import com.f.core.pojo.Employee;
-import com.f.helper.OutputJsonHelper;
 import com.f.services.GenericService;
 import com.f.services.UserService;
-import com.f.test.TestHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
