@@ -22,12 +22,12 @@ public abstract class BaseController<T, ID extends Serializable> {
         this.abstractGenericService = abstractGenericService;
     }
 
-    @RequestMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseJsonResult get(@PathVariable("id") ID id) {
         return ResponseJsonResult.successResponse(abstractGenericService.get(id));
     }
 
-    @RequestMapping(value = {"/list", "/index"})
+    @GetMapping(value = {"/list", "/index"})
     public ResponseJsonResult getAll() {
         return ResponseJsonResult.successResponse(abstractGenericService.getAll());
     }

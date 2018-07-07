@@ -24,7 +24,7 @@ public class VoucherController extends BaseController<Voucher, Integer> {
         super(abstractGenericService);
     }
 
-    @RequestMapping(value = "/{id}", method = {RequestMethod.PUT})
+    @PutMapping(value = "/{id}")
     public ResponseJsonResult update(@PathVariable(value = "id") Integer id, @RequestBody Map<String, String> params, @SessionAttribute(required = true) Employee currentUser) throws JsonProcessingException {
         Voucher previousVoucher = (Voucher) getAbstractGenericService().get(params.get("id").toString());
         Map<String, Object> map = Maps.newHashMap();
@@ -52,9 +52,9 @@ public class VoucherController extends BaseController<Voucher, Integer> {
         return ResponseJsonResult.successResponse("ok");
     }
 
-    @RequestMapping(value = "/save", method = {RequestMethod.POST}, consumes = "application/json")
+    @PostMapping(value = "/save", consumes = "application/json")
     public ResponseJsonResult save(@RequestBody Map<String, String> map) {
-        Voucher voucher = new Voucher(map.get("item"),Float.parseFloat(map.get("account")));
+        Voucher voucher = new Voucher(map.get("item"), Float.parseFloat(map.get("account")));
         voucher.getVoucherDetail().setDes(map.get("des"));
         voucher.getEmployee().setId(19);
         getAbstractGenericService().save(voucher);
