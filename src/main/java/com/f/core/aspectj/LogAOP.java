@@ -32,7 +32,7 @@ public class LogAOP {
     @Around("pointcut()")
     public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         Object obj = null;
-        obj = proceed;
+        obj = proceedingJoinPoint.proceed();
         logger.info("around method catch val: " + OutputJsonHelper.outputJsonVal(obj));
         return obj;
     }
