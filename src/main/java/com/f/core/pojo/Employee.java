@@ -14,6 +14,11 @@ public class Employee extends BasePojo {
     public Employee() {
     }
 
+    public Employee(Integer id, String name, String passwd) {
+        setId(id);
+        this.name = name;
+        this.passwd = passwd;
+    }
     public Employee(String name, String passwd) {
         this.name = name;
         this.passwd = passwd;

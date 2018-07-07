@@ -27,20 +27,15 @@ public abstract class BaseController<T, ID extends Serializable> {
         return ResponseJsonResult.successResponse(abstractGenericService.get(id));
     }
 
-    @RequestMapping("/list")
+    @RequestMapping(value = {"/list", "/index"})
     public ResponseJsonResult getAll() {
         return ResponseJsonResult.successResponse(abstractGenericService.getAll());
     }
 
-    @RequestMapping("/{id}/delete")
+    @DeleteMapping("/{id}/delete")
     public ResponseJsonResult delete(@PathVariable("id") ID id) {
         abstractGenericService.delete(id);
         return ResponseJsonResult.successResponse("ok");
-    }
-
-    @RequestMapping("/index")
-    public ResponseJsonResult index() {
-        return ResponseJsonResult.successResponse(abstractGenericService.getAll());
     }
 
     @GetMapping("/report")
