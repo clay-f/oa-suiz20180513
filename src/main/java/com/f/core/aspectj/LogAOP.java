@@ -13,29 +13,27 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class LogAOP {
     private static Logger logger = LogManager.getLogger(LogAOP.class);
+    private Object proceed;
 
     @Pointcut("execution(* com.f.services.*.*(..))")
-    public void pointcut() {}
+    public void pointcut() {
+    }
 
     @Before("pointcut()")
     public void before(JoinPoint jp) {
-        logger.info("catch before method, method name: " + jp.getSignature() + "\t params: " +  jp.getArgs());
+        logger.info("catch before method, method name: " + jp.getSignature() + "\t params: " + jp.getArgs());
     }
 
     @After("pointcut()")
     public void after(JoinPoint jp) {
-       logger.info("catch after method, after invoked " + jp.getSignature() + " method");
+        logger.info("catch after method, after invoked " + jp.getSignature() + " method");
     }
 
     @Around("pointcut()")
-    public Object around(ProceedingJoinPoint proceedingJoinPoint) {
+    public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         Object obj = null;
-        try {
-            obj =  proceedingJoinPoint.proceed();
-            logger.info("around method catch val: " + OutputJsonHelper.outputJsonVal(obj));
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
+        obj = proceed;
+        logger.info("around method catch val: " + OutputJsonHelper.outputJsonVal(obj));
         return obj;
     }
 }
