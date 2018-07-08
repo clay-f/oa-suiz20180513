@@ -1,5 +1,6 @@
 package com.f.api;
 
+import com.f.core.common.Constants;
 import com.f.core.common.ResponseJsonResult;
 import com.f.controller.BaseController;
 import com.f.core.enums.EventType;
@@ -10,6 +11,8 @@ import com.f.core.pojo.Voucher;
 import com.f.services.impl.AbstractGenericService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
+import org.apache.shiro.SecurityUtils;
+import org.redisson.api.RMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +27,10 @@ public class VoucherController extends BaseController<Voucher, Integer> {
         super(abstractGenericService);
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseJsonResult update(@PathVariable(value = "id") Integer id, @RequestBody Map<String, String> params, @SessionAttribute(required = true) Employee currentUser) throws JsonProcessingException {
-        Voucher previousVoucher = (Voucher) getAbstractGenericService().get(params.get("id").toString());
+    @PatchMapping(value = "/{id}")
+    public ResponseJsonResult update(@PathVariable(value = "id") Integer id, @RequestBody Map<String, String> params) {
+        Voucher previousVoucher = (Voucher) getAbstractGenericService().get(id.toString());
+        Employee currentUser = (Employee) getRedissonClient().getMapCache(Constants.RMAP_CACHE_NAME).get(Constants.CURRENT_USER);
         Map<String, Object> map = Maps.newHashMap();
         switch (currentUser.getOaPosition().getId()) {
             case 1:

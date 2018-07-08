@@ -1,10 +1,12 @@
 package com.f.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import java.io.Serializable;
 import java.util.List;
 
 public interface GenericMapper<T, ID extends Serializable> {
-    <T> T get(ID id);
+    <T> T get(@Param("id") ID id);
 
     <T> List<T> getAll();
 

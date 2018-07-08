@@ -1,5 +1,6 @@
 package com.f.services.impl;
 
+import com.f.core.common.Constants;
 import com.f.dao.GenericMapper;
 import com.f.helper.RedisHelper;
 import com.f.services.GenericService;
@@ -24,7 +25,7 @@ public abstract class AbstractGenericService<T, ID extends Serializable> impleme
     private RedissonClient redissonClient;
 
     public AbstractGenericService(GenericMapper mapper) {
-        this.mapper = mapper;
+         this.mapper = mapper;
     }
 
     public void setMapper(GenericMapper mapper) {
@@ -42,7 +43,7 @@ public abstract class AbstractGenericService<T, ID extends Serializable> impleme
     @Transactional(readOnly = true)
     public <T> List<T> getAll() {
         String listName = this.getClass().getSimpleName().toLowerCase() + "_list";
-        RMapCache<String, Object> rMapCache = redissonClient.getMapCache("rMapCache");
+        RMapCache<String, Object> rMapCache = redissonClient.getMapCache(Constants.RMAP_CACHE_NAME);
         rMapCache.expireAt(Instant.now().toEpochMilli() + 100000);
         List<T> list = (List<T>) rMapCache.get(listName);
         if (list == null) {

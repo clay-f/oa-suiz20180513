@@ -6,6 +6,8 @@ import com.f.services.impl.AbstractGenericService;
 import com.google.common.collect.Maps;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +23,9 @@ public abstract class BaseController<T, ID extends Serializable> {
     public BaseController(AbstractGenericService abstractGenericService) {
         this.abstractGenericService = abstractGenericService;
     }
+
+    @Autowired
+    private RedissonClient redissonClient;
 
     @GetMapping("/{id}")
     public ResponseJsonResult get(@PathVariable("id") ID id) {
@@ -75,6 +80,10 @@ public abstract class BaseController<T, ID extends Serializable> {
             obj = vals;
         }
         return obj;
+    }
+
+    public RedissonClient getRedissonClient() {
+        return redissonClient;
     }
 
     protected Integer getUserId() {

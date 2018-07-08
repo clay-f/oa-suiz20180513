@@ -20,6 +20,7 @@ public class RMapCheSchedule implements Job {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         RMapCache<String, Object> rMapCache = redissonClient.getMapCache("rMapCache");
         logger.debug("rmapcache clean schedule start...");
+        System.out.println("rmapcache clean schedule start...");
         rMapCache.clear();
     }
 }

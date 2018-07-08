@@ -1,5 +1,6 @@
 package com.f.controller;
 
+import com.f.core.common.Constants;
 import com.f.core.common.ResponseJsonResult;
 import com.f.core.exceptions.NotFoundException;
 import com.f.services.UserService;
@@ -10,6 +11,8 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.subject.Subject;
+import org.redisson.api.RMapCache;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -27,8 +30,11 @@ public class LoginController {
     private UserService userService;
     private Logger logger = LogManager.getLogger(getClass());
 
+    @Autowired
+    private RedissonClient redissonClient;
+
     @PostMapping(value = "/login", consumes = "application/json")
-    public ResponseJsonResult doLogin(@RequestBody Map<String, Object> map) {
+    public ResponseJsonResult doLogin(@RequestBody Map<String, Object> map, HttpServletRequest request) {
         Subject currentUser = SecurityUtils.getSubject();
         String name = map.get("name").toString();
         String passwd = map.get("passwd").toString();
@@ -38,6 +44,8 @@ public class LoginController {
             token.setRememberMe(true);
             try {
                 currentUser.login(token);
+                RMapCache<String, Object> rMapCache = redissonClient.getMapCache(Constants.RMAP_CACHE_NAME);
+                rMapCache.put(Constants.CURRENT_USER, currentUser.getPrincipal());
                 logger.info("user: " + currentUser.getPrincipal() + " logged in successfully.");
                 return ResponseJsonResult.successResponse("ok");
             } catch (UnknownAccountException uae) {

@@ -17,8 +17,6 @@
         <set>
             <if test="item != null">item = #{item},</if>
             <if test="account != null">account = #{account},</if>
-            <if test="employeeId != null">employee_id = #{employeeId},</if>
-            <if test="updatedAt != null">updated_at = #{updatedAt},</if>
             <if test="checkOutStateId != null">check_out_state_id = #{checkOutStateId}</if>
         </set>
         where id = #{id}
@@ -99,7 +97,7 @@
         </where>
     </select>
 
-    <select id="get" resultMap="getAllVouchersResult" parameterType="Integer">
+    <select id="get" resultMap="getAllVouchersResult">
         select
           v.id, v.item, v.account, v.check_out_state_id, v.employee_id, v.created_at, v.updated_at,
           vd.id v_id, vd.des, vd.voucher_id,
