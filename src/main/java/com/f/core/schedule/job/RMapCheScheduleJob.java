@@ -1,4 +1,4 @@
-package com.f.core.schedule;
+package com.f.core.schedule.job;
 
 import com.f.core.common.Constants;
 import org.apache.logging.log4j.LogManager;
@@ -12,13 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RMapCheSchedule implements Job {
+public class RMapCheScheduleJob implements Job {
     private Logger logger = LogManager.getLogger();
     @Autowired
     private RedissonClient redissonClient;
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
+        System.out.println("rmap clean cache");
         RMapCache<String, Object> rMapCache = redissonClient.getMapCache(Constants.RMAP_CACHE_NAME);
         rMapCache.clear();
     }

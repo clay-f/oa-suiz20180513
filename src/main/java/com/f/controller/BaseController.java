@@ -34,10 +34,7 @@ public abstract class BaseController<T, ID extends Serializable> {
     }
 
     @GetMapping(value = {"/list", "/index"})
-    public ResponseJsonResult getAll(HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Content-Type", "application/json;charset=utf-8");
+    public ResponseJsonResult getAll() {
         return ResponseJsonResult.successResponse(abstractGenericService.getAll());
     }
 
