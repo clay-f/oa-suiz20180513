@@ -24,4 +24,9 @@ public class AppConfigExceptionHandler {
     public ResponseJsonResult duplicateKeyHandler() {
         return ResponseJsonResult.customResponse(HttpStatus.INTERNAL_SERVER_ERROR, "duplicate key error");
     }
+
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseJsonResult nullPointerHanlder() {
+        return ResponseJsonResult.customResponse(HttpStatus.INTERNAL_SERVER_ERROR, "NullPointerException error");
+    }
 }
