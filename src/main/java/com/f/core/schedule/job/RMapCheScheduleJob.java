@@ -19,7 +19,6 @@ public class RMapCheScheduleJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        System.out.println("rmap clean cache");
         RMapCache<String, Object> rMapCache = redissonClient.getMapCache(Constants.RMAP_CACHE_NAME);
         rMapCache.clear();
     }
