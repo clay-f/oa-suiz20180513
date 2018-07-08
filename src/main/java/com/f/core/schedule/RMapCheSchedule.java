@@ -1,5 +1,6 @@
 package com.f.core.schedule;
 
+import com.f.core.common.Constants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.quartz.Job;
@@ -18,9 +19,7 @@ public class RMapCheSchedule implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        RMapCache<String, Object> rMapCache = redissonClient.getMapCache("rMapCache");
-        logger.debug("rmapcache clean schedule start...");
-        System.out.println("rmapcache clean schedule start...");
+        RMapCache<String, Object> rMapCache = redissonClient.getMapCache(Constants.RMAP_CACHE_NAME);
         rMapCache.clear();
     }
 }

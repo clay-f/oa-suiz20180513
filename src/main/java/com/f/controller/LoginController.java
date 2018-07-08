@@ -15,11 +15,7 @@ import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @CrossOrigin
@@ -34,7 +30,7 @@ public class LoginController {
     private RedissonClient redissonClient;
 
     @PostMapping(value = "/login", consumes = "application/json")
-    public ResponseJsonResult doLogin(@RequestBody Map<String, Object> map, HttpServletRequest request) {
+    public ResponseJsonResult doLogin(@RequestBody Map<String, Object> map) {
         Subject currentUser = SecurityUtils.getSubject();
         String name = map.get("name").toString();
         String passwd = map.get("passwd").toString();

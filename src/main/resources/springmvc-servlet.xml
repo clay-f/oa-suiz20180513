@@ -7,6 +7,6 @@
     <context:component-scan base-package="com.f.api, com.f.controller"/>
     <mvc:annotation-driven/>
     <mvc:cors>
-        <mvc:mapping path="/**"/>
+        <mvc:mapping path="/**" allow-credentials="true" allowed-origins="http://localhost:3000" allowed-methods="*"/>
     </mvc:cors>
 </beans>

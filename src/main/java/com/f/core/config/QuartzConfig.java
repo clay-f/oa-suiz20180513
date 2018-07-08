@@ -32,8 +32,15 @@ public class QuartzConfig implements InitializingBean {
         Trigger trigger = newTrigger()
                 .withIdentity("triggerCleanRedissonCache", "cleanRedissonCache")
                 .startNow()
-                .withSchedule(simpleSchedule().withIntervalInSeconds(2)).build();
+                .withSchedule(simpleSchedule().withIntervalInSeconds(120)).build();
+        JobDetail dogJob = newJob(DogSay.class)
+                .withIdentity("dogSay", "dog").build();
+        Trigger dogsay = newTrigger()
+                .withIdentity("dogsay", "dogsay")
+                .startNow()
+                .withSchedule(simpleSchedule().withIntervalInSeconds(10)).build();
         scheduler.scheduleJob(jobDetail, trigger);
+        scheduler.scheduleJob(dogJob, dogsay);
     }
 
     @PreDestroy

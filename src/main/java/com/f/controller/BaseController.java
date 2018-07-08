@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map;
@@ -33,7 +34,10 @@ public abstract class BaseController<T, ID extends Serializable> {
     }
 
     @GetMapping(value = {"/list", "/index"})
-    public ResponseJsonResult getAll() {
+    public ResponseJsonResult getAll(HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Content-Type", "application/json;charset=utf-8");
         return ResponseJsonResult.successResponse(abstractGenericService.getAll());
     }
 
