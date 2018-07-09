@@ -2,9 +2,6 @@ package com.f.test.service;
 
 import com.f.core.pojo.Department;
 import com.f.dao.DepartmentDao;
-import com.f.helper.OutputJsonHelper;
-import com.f.helper.RedisHelper;
-import com.f.services.DepartmentService;
 import com.f.services.impl.AbstractGenericService;
 import com.f.services.impl.DepartmentServiceImpl;
 import org.assertj.core.util.Lists;
