@@ -26,7 +26,7 @@ public class RMapCacheSchedule implements InitializingBean {
         Trigger trigger = newTrigger()
                 .withIdentity("cleanCacheTrigger", "group2")
                 .startNow()
-                .withSchedule(simpleSchedule().withIntervalInSeconds(60).repeatForever())
+                .withSchedule(simpleSchedule().withIntervalInSeconds(300).repeatForever())
                 .build();
         sched.scheduleJob(jobDetail, trigger);
     }

@@ -16,7 +16,9 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @CrossOrigin
 @Scope("prototype")
@@ -40,8 +42,8 @@ public class LoginController {
             token.setRememberMe(true);
             try {
                 currentUser.login(token);
-                RMapCache<String, Object> rMapCache = redissonClient.getMapCache(Constants.RMAP_CACHE_NAME);
-                rMapCache.put(Constants.CURRENT_USER, currentUser.getPrincipal());
+                RMapCache<String, Object> rMapCache = redissonClient.getMapCache(Constants.USER_CACHE_NAME);
+                rMapCache.put(Constants.CURRENT_USER, currentUser.getPrincipal(), (long) 30, TimeUnit.MINUTES);
                 logger.info("user: " + currentUser.getPrincipal() + " logged in successfully.");
                 return ResponseJsonResult.successResponse("ok");
             } catch (UnknownAccountException uae) {
@@ -56,7 +58,7 @@ public class LoginController {
     }
 
     @PostMapping(value = "/register")
-    public ResponseJsonResult doRegister(@RequestBody Map<String, String> params)  {
+    public ResponseJsonResult doRegister(@RequestBody Map<String, String> params) {
         String sha2Passwd = new Sha256Hash(params.get("name"), params.get("passwd")).toHex();
         userService.save(params.get("name"), sha2Passwd, Integer.parseInt(params.get("oaPositionId")), Integer.parseInt(params.get("departmentId")));
         return ResponseJsonResult.successResponse("register success");

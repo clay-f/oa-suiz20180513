@@ -1,14 +1,18 @@
 package com.f.controller;
 
+import com.f.core.common.Constants;
 import com.f.core.common.ResponseJsonResult;
+import com.f.core.pojo.Employee;
 import com.f.core.pojo.Voucher;
 import com.f.services.impl.AbstractGenericService;
 import com.google.common.collect.Maps;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -87,10 +91,12 @@ public abstract class BaseController<T, ID extends Serializable> {
         return redissonClient;
     }
 
-    protected Integer getUserId() {
-        Subject subject = SecurityUtils.getSubject();
-        Voucher user = (Voucher) subject.getPrincipal();
-        assert user != null;
-        return user.getId();
+    protected Employee getUser() {
+        RMapCache<String, Object> rMapCache = redissonClient.getMapCache(Constants.USER_CACHE_NAME);
+        Employee user = (Employee) rMapCache.get(Constants.CURRENT_USER);
+        if (user != null) {
+            return user;
+        }
+        throw new NullPointerException("please do login before operate");
     }
 }

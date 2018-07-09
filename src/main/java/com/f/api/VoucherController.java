@@ -30,7 +30,9 @@ public class VoucherController extends BaseController<Voucher, Integer> {
     @PatchMapping(value = "/{id}")
     public ResponseJsonResult update(@PathVariable(value = "id") Integer id, @RequestBody Map<String, String> params) {
         Voucher previousVoucher = (Voucher) getAbstractGenericService().get(id.toString());
-        Employee currentUser = (Employee) getRedissonClient().getMapCache(Constants.RMAP_CACHE_NAME).get(Constants.CURRENT_USER);
+        Employee currentUser = getUser();
+        if (currentUser == null)
+            throw new NullPointerException("user not found");
         Map<String, Object> map = Maps.newHashMap();
         switch (currentUser.getOaPosition().getId()) {
             case 1:
@@ -43,13 +45,13 @@ public class VoucherController extends BaseController<Voucher, Integer> {
                 map.put("type", Voucher.VoucherType.UPDATE_RESULT_STATE);
                 map.put("id", params.get("id"));
                 map.put("state", params.get("state"));
-                EventExecutor.fireEvent(new EventContent(getUserId().toString(), EventType.CHANGE_VOUCHER, map));
+                EventExecutor.fireEvent(new EventContent(getUser().getId().toString(), EventType.CHANGE_VOUCHER, map));
                 break;
             case 4:
                 map.put("type", Voucher.VoucherType.UPDATE_VOUCHER_STATE);
                 map.put("id", params.get("id"));
                 map.put("state", params.get("state"));
-                EventExecutor.fireEvent(new EventContent(getUserId().toString(), EventType.CHANGE_VOUCHER, map));
+                EventExecutor.fireEvent(new EventContent(getUser().getId().toString().toString(), EventType.CHANGE_VOUCHER, map));
                 break;
         }
         getAbstractGenericService().update(previousVoucher);
