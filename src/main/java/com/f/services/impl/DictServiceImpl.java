@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Map;
-
 @Service("dictService")
 public class DictServiceImpl extends AbstractGenericService<Dict, Long> implements DictService {
     private DictDao dictDao;
