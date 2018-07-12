@@ -1,7 +1,7 @@
 package com.f.services.impl;
 
 import com.f.core.event.EventContent;
-import com.f.dao.GenericMapper;
+import com.f.dao.GenericDao;
 import com.f.dao.VoucherCheckResultDao;
 import com.f.dao.VoucherDao;
 import com.f.dao.VoucherDetailDao;
@@ -27,7 +27,7 @@ public class VoucherServiceImpl extends AbstractGenericService<Voucher, Integer>
     private VoucherDetailDao voucherDetailDao;
 
     @Autowired
-    public VoucherServiceImpl(@Qualifier("voucherDao") GenericMapper mapper) {
+    public VoucherServiceImpl(@Qualifier("voucherDao") GenericDao mapper) {
         super(mapper);
         this.voucherDao = (VoucherDao) mapper;
     }

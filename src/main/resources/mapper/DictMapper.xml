@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.f.dao.DictDao">
-    <insert id="save" parameterType="map">
+    <insert id="save">
         insert into dict(dict_name, dict_type_id, val)
         values (#{dict.dictName}, #{dict.value}, #{dictTypeId})
     </insert>

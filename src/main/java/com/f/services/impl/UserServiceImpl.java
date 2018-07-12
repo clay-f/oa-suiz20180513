@@ -1,7 +1,7 @@
 package com.f.services.impl;
 
 import com.f.dao.EmployeeDao;
-import com.f.dao.GenericMapper;
+import com.f.dao.GenericDao;
 import com.f.core.pojo.Employee;
 import com.f.services.UserService;
 import org.apache.shiro.crypto.hash.Sha256Hash;
@@ -17,7 +17,7 @@ import java.util.Map;
 @Service(value = "userService")
 public class UserServiceImpl extends AbstractGenericService<Employee, Integer> implements UserService {
     @Autowired
-    public UserServiceImpl(@Qualifier("employeeDao") GenericMapper mapper) {
+    public UserServiceImpl(@Qualifier("employeeDao") GenericDao mapper) {
         super(mapper);
         userDao = (EmployeeDao) mapper;
     }

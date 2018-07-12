@@ -1,7 +1,7 @@
 package com.f.services.impl;
 
 import com.f.core.common.Constants;
-import com.f.dao.GenericMapper;
+import com.f.dao.GenericDao;
 import com.f.services.GenericService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,15 +17,15 @@ public abstract class AbstractGenericService<T, ID extends Serializable> impleme
     protected static final Logger logger = LogManager.getLogger();
     private static final long serialVersionUID = 1L;
 
-    protected GenericMapper mapper;
+    protected GenericDao mapper;
     @Autowired
     private RedissonClient redissonClient;
 
-    public AbstractGenericService(GenericMapper mapper) {
+    public AbstractGenericService(GenericDao mapper) {
          this.mapper = mapper;
     }
 
-    public void setMapper(GenericMapper mapper) {
+    public void setMapper(GenericDao mapper) {
         this.mapper = mapper;
     }
 

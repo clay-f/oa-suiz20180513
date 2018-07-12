@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringJUnitWebConfig(locations = {"classpath:applicationContext.xml"})
 public class DictTest {
@@ -21,11 +18,8 @@ public class DictTest {
     @Test
     void save() {
         Dict dict = new Dict();
-        dict.setDictName("审批测试");
-        dict.setValue(0);
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("dict", dict);
-        map.put("dictTypeId", 1);
-        dictService.save(map);
+        dict.setDictName("审批测试2");
+        dict.setValue(9);
+        dictService.save(dict, (long)1);
     }
 }
