@@ -28,8 +28,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.List;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringJUnitWebConfig(locations = {"classpath:applicationContext.xml"})
 public class UserAPITest {

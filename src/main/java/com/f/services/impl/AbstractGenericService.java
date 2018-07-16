@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 
 public abstract class AbstractGenericService<T, ID extends Serializable> implements GenericService<T, ID>, Serializable {
     protected static final Logger logger = LogManager.getLogger();

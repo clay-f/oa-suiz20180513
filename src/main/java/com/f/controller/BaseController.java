@@ -1,10 +1,12 @@
 package com.f.controller;
 
 import com.f.core.common.Constants;
+import com.f.core.common.PageRequest;
 import com.f.core.common.ResponseJsonResult;
 import com.f.core.pojo.Employee;
 import com.f.core.pojo.Voucher;
 import com.f.services.impl.AbstractGenericService;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -17,6 +19,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -98,5 +102,16 @@ public abstract class BaseController<T, ID extends Serializable> {
             return user;
         }
         throw new NullPointerException("please do login before operate");
+    }
+
+    protected Map<String, String> toMap(Object obj) throws IllegalAccessException {
+        Class clazz = obj.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+        Map<String, String> map = Maps.newLinkedHashMap();
+        for (Field field
+                : fields) {
+
+        }
+        return map;
     }
 }

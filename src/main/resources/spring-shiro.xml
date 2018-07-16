@@ -14,6 +14,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
                 /logout = logout
                 /register = anon
                 /api/** = anon
+                /** = authc
             </value>
         </property>
     </bean>
