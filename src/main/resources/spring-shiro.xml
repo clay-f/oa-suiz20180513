@@ -6,11 +6,10 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login"/>
-        <property name="successUrl" value="/api/vouchers/index"/>
         <property name="unauthorizedUrl" value="/login"/>
         <property name="filterChainDefinitions">
             <value>
-                /login = authc
+                /login = anon
                 /logout = logout
                 /register = anon
                 /api/** = anon

@@ -15,6 +15,8 @@ import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -28,8 +30,10 @@ public class LoginController {
     private UserService userService;
     private Logger logger = LogManager.getLogger(getClass());
 
-    @Autowired
-    private RedissonClient redissonClient;
+    @GetMapping(value = "/login")
+    public ResponseJsonResult login() {
+        return ResponseJsonResult.customResponse(HttpStatus.FORBIDDEN, "must login before access");
+    }
 
     @PostMapping(value = "/login", consumes = "application/json")
     public ResponseJsonResult doLogin(@RequestBody Map<String, Object> map) {
@@ -42,8 +46,6 @@ public class LoginController {
             token.setRememberMe(true);
             try {
                 currentUser.login(token);
-                RMapCache<String, Object> rMapCache = redissonClient.getMapCache(Constants.USER_CACHE_NAME);
-                rMapCache.put(Constants.CURRENT_USER, currentUser.getPrincipal(), (long) 30, TimeUnit.MINUTES);
                 logger.info("user: " + currentUser.getPrincipal() + " logged in successfully.");
                 return ResponseJsonResult.successResponse("ok");
             } catch (UnknownAccountException uae) {
