@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.f.dao.OaPositionDao">
-    <resultMap id="getAllOaPositionResult" type="OaPosition">
+    <resultMap id="getAllOaPositionResult" type="hashmap">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
     </resultMap>

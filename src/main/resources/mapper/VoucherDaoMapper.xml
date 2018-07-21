@@ -44,7 +44,7 @@
         left join voucher_detail vd on v.id = vd.voucher_id
         inner join voucher_check_result vcr on vcr.voucher_id = v.id
     </select>
-    <resultMap id="getAllVouchersResult" type="Voucher">
+    <resultMap id="getAllVouchersResult" type="hashmap">
         <id property="id" column="id"/>
         <result property="item" column="item"/>
         <result property="account" column="account"/>

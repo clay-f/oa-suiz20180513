@@ -19,4 +19,16 @@ public class TestPersonDao {
             System.out.println(field.getName() + "\t"   + field.get(personDao));
         }
     }
+
+    @Test
+    void hello() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("hello")
+                .append(help(" world"));
+        System.out.println(stringBuilder.toString());
+    }
+
+    String help(String s) {
+        return s;
+    }
 }

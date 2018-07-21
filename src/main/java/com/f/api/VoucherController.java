@@ -1,18 +1,14 @@
 package com.f.api;
 
-import com.f.core.common.Constants;
 import com.f.core.common.ResponseJsonResult;
-import com.f.controller.BaseController;
+import com.f.controller.AbstractController;
 import com.f.core.enums.EventType;
 import com.f.core.event.EventContent;
 import com.f.core.event.EventExecutor;
 import com.f.core.pojo.Employee;
 import com.f.core.pojo.Voucher;
 import com.f.services.impl.AbstractGenericService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
-import org.apache.shiro.SecurityUtils;
-import org.redisson.api.RMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +17,7 @@ import java.util.Map;
 
 @RequestMapping(value = "/api/vouchers")
 @RestController(value = "voucherController")
-public class VoucherController extends BaseController<Voucher, Integer> {
+public class VoucherController extends AbstractController<Voucher, Integer> {
     @Autowired
     public VoucherController(@Qualifier("voucherService") AbstractGenericService abstractGenericService) {
         super(abstractGenericService);

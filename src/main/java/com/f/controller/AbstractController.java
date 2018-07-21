@@ -1,15 +1,11 @@
 package com.f.controller;
 
 import com.f.core.common.Constants;
-import com.f.core.common.PageRequest;
+import com.f.core.common.Page;
 import com.f.core.common.ResponseJsonResult;
 import com.f.core.pojo.Employee;
-import com.f.core.pojo.Voucher;
 import com.f.services.impl.AbstractGenericService;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +13,16 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public abstract class BaseController<T, ID extends Serializable> {
+public abstract class AbstractController<T, ID extends Serializable> {
     private AbstractGenericService abstractGenericService;
     @Resource
     private HttpServletRequest request;
 
-    public BaseController(AbstractGenericService abstractGenericService) {
+    public AbstractController(AbstractGenericService abstractGenericService) {
         this.abstractGenericService = abstractGenericService;
     }
 
@@ -43,7 +36,7 @@ public abstract class BaseController<T, ID extends Serializable> {
 
     @GetMapping(value = {"/list", "/index"})
     public ResponseJsonResult getAll() {
-        return ResponseJsonResult.successResponse(abstractGenericService.getAll());
+        return ResponseJsonResult.successResponse(abstractGenericService.findOnPage(getRequestParams()));
     }
 
     @DeleteMapping("/{id}/delete")
@@ -102,16 +95,5 @@ public abstract class BaseController<T, ID extends Serializable> {
             return user;
         }
         throw new NullPointerException("please do login before operate");
-    }
-
-    protected Map<String, String> toMap(Object obj) throws IllegalAccessException {
-        Class clazz = obj.getClass();
-        Field[] fields = clazz.getDeclaredFields();
-        Map<String, String> map = Maps.newLinkedHashMap();
-        for (Field field
-                : fields) {
-
-        }
-        return map;
     }
 }
