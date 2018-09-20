@@ -1,19 +1,28 @@
-# j-b
+# oa 办公管理
 
-update 2018-06-08 21:44
+更新 2018-06-08 21:44
 
-in order to adapter new struct so MVC will change in to back/front, release v0.2 reserve mvc
+为了适配新模式使用前后分离， mvc 将被拆解。版本 0.2 仍然保留 mvc
 
 ----
-update 2018-06-14 17:27
 
-### bill-part of jb workflow:
+更新 2018-06-14 17:27
 
-#### description
-according to current user role display or edit relative item after user login
+### 发票工作流程:
 
-#### responsibility
-* woker: worker add bill item with detail and waiting for charge checkout
-* manager: view all of bill permit bill or not(worker need edit bill)
+#### 描述
+根据当前用户角色，对发票有不同的管理功能
+
+#### 功能
+* 普通员工: 创建发票、修改发票、每一次提交发票信息后都要等上级审批
+
+> 若上级拒绝审批通过，则需重新修改发票信息，以便再次提交发票
+
+* 经理: 查看所有发票，审核发票或拒绝
+
 * charge: view bill thant price great than 5000 same as manager have right checkout bill state
-* accountancy: review bill that have been checked by manager or charge permited and agree bill be pay off
+
+* 管理: 查看所有金额大于 5000 的发票；拥有对订单审批的权限
+
+* 财务: 查看已经审批通过的订单并支付金额
+
