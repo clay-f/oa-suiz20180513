@@ -20,9 +20,8 @@
 
 * 经理: 查看所有发票，审核发票或拒绝
 
-* charge: view bill thant price great than 5000 same as manager have right checkout bill state
-
 * 管理: 查看所有金额大于 5000 的发票；拥有对订单审批的权限
 
 * 财务: 查看已经审批通过的订单并支付金额
 
+* 员工: 发起审批
